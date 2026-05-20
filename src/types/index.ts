@@ -9,7 +9,7 @@ export interface BaseRecord {
   status: "Open" | "Pending" | "Closed";
   notes: string;
   attachments: Attachment[];
-  type: "accident" | "inspection";
+  type: "accident" | "inspection" | "ticket";
 }
 
 // Sub-entity: Individual violation
