@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  background-color: #0f172a;
+  color: #e2e8f0;
+  font-family: "Inter", system-ui, sans-serif;
+  line-height: 1.5;
+}
+
+@layer components {
+  .text-code {
+    @apply font-mono text-sm tracking-tight;
+  }
+
+  .card-dark {
+    @apply bg-slate-900 border border-slate-800 rounded-lg;
+  }
+
+  .card-interactive {
+    @apply bg-slate-800 hover:bg-slate-700 transition-colors duration-200;
+  }
+
+  .glow-cyan {
+    @apply shadow-glow;
+  }
+
+  .glow-red {
+    @apply shadow-glow-red;
+  }
+
+  .glow-amber {
+    @apply shadow-glow-amber;
+  }
+
+  .highlight-match {
+    @apply bg-amber-500 text-slate-950 font-semibold rounded px-1;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+    color: #000;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+}
