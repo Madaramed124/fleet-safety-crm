@@ -2,6 +2,7 @@
 
 import type { IncidentRecord, OperationalMonth } from "../types";
 import { supabase } from "./supabaseClient";
+import logError from '../utils/logger';
 
 const STORAGE_KEYS = {
   MONTHS: "fleet_crm_months",
@@ -16,7 +17,7 @@ const parseJson = <T>(value: string | null, fallback: T): T => {
   try {
     return JSON.parse(value) as T;
   } catch (error) {
-    console.error("Failed to parse stored JSON", error);
+    logError(error, 'Failed to parse stored JSON');
     return fallback;
   }
 };
@@ -160,6 +161,54 @@ const remoteApiService: DataService = {
   },
 };
 
+const syncRecordRelations = async (record: IncidentRecord) => {
+  if (!record.driverName) return null;
+
+  console.log("[syncRecordRelations] record driverName:", record.driverName);
+
+  const { data: driverData, error: driverError } = await supabase
+    .from("drivers")
+    .upsert({ name: record.driverName }, { onConflict: "name" })
+    .select("id")
+    .maybeSingle();
+
+  if (driverError) {
+    console.error("[syncRecordRelations] driver upsert error:", driverError);
+    throw driverError;
+  }
+
+  const driverId = driverData?.id as string | null;
+  console.log("[syncRecordRelations] resolved driverId:", driverId);
+  if (!driverId) return null;
+
+  const violations = (record as any).violations as Array<any> | undefined;
+  if (!violations || violations.length === 0) return driverId;
+
+  const violationRows = violations.map((violation) => ({
+    id: violation.id,
+    driver_id: driverId,
+    code: violation.code,
+    description: violation.description || null,
+    severity: violation.severity || "Medium",
+    date: record.date,
+    accounting_status: "pending",
+  }));
+
+  console.log("[syncRecordRelations] upserting violationRows:", violationRows);
+  const { data: violationData, error: violationError } = await supabase
+    .from("violations")
+    .upsert(violationRows, { onConflict: "id" })
+    .select("id,driver_id,code,severity,date,accounting_status");
+
+  if (violationError) {
+    console.error("[syncRecordRelations] violations upsert error:", violationError);
+    throw violationError;
+  }
+
+  console.log("[syncRecordRelations] violations upsert result:", violationData);
+  return driverId;
+};
+
 const supabaseService: DataService = {
   fetchMonths: async () => {
     const { data, error } = await supabase.from("months").select("*");
@@ -169,13 +218,19 @@ const supabaseService: DataService = {
   fetchRecords: async () => {
     const { data, error } = await supabase.from("records").select("id, monthId, payload");
     if (error) throw error;
-    return (
-      (data ?? []).map((row) => ({
-        ...row.payload,
-        id: row.id,
-        monthId: row.monthId,
-      })) as IncidentRecord[]
-    );
+
+    const records = (data ?? []).map((row) => ({
+      ...row.payload,
+      id: row.id,
+      monthId: row.monthId,
+    })) as IncidentRecord[];
+
+    await Promise.all(records.map((record) => syncRecordRelations(record).catch((err) => {
+      // Keep the app healthy even if sync is not perfect on load.
+      logError(err, `Failed to sync driver/violation for record ${record.id}`);
+    })));
+
+    return records;
   },
   storeMonths: async (months) => {
     const { error } = await supabase.from("months").upsert(months);
@@ -200,6 +255,7 @@ const supabaseService: DataService = {
     if (error) throw error;
   },
   createRecord: async (record) => {
+    await syncRecordRelations(record);
     const { data, error } = await supabase
       .from("records")
       .insert({ id: record.id, monthId: record.monthId, payload: record })
@@ -208,6 +264,7 @@ const supabaseService: DataService = {
     return data?.[0]?.payload ?? record;
   },
   updateRecord: async (record) => {
+    await syncRecordRelations(record);
     const { data, error } = await supabase
       .from("records")
       .update({ payload: record })

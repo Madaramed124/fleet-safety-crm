@@ -117,3 +117,26 @@ export interface KPIData {
   totalViolations: number;
   totalFines: number;
 }
+
+// Accounting / charges types
+export interface Charge {
+  id: string;
+  violation_id: string;
+  driver_id: string;
+  charge_type: string;
+  description: string;
+  amount?: number | null;
+  document_url?: string | null;
+  created_by?: string | null;
+  created_at?: string;
+  status?: string; // draft | posted
+}
+
+export interface ChargeDocument {
+  id: string;
+  charge_id: string;
+  file_name: string;
+  file_url: string;
+  file_type?: string;
+  uploaded_at?: string;
+}

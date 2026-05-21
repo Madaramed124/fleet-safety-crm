@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IncidentRecord, Accident, Inspection } from "../types";
+import { IncidentRecord, Accident, Inspection, Ticket, Fine, Violation } from "../types";
 import { useApp } from "../context/AppContext";
 import {
   formatDate,
@@ -10,7 +10,6 @@ import {
 import {
   Edit2,
   Trash2,
-  Printer,
   ChevronDown,
   ChevronUp,
   AlertTriangle,
@@ -34,18 +33,19 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
     deleteRecord,
     deleteConfirmId,
     closeDeleteConfirm,
-    setPrintingRecord,
   } = useApp();
 
   const isDeleting = deleteConfirmId === record.id;
 
-  const isTicket = record.type === "inspection" && (record as Inspection).hasAssociatedTicket;
+  const isTicket =
+    record.type === "ticket" ||
+    (record.type === "inspection" && (record as Inspection).hasAssociatedTicket);
   const isAccident = record.type === "accident";
   const isInspection = record.type === "inspection";
-  const ticket = isTicket ? (record as Inspection) : null;
+  const ticket = isTicket ? (record as Ticket | Inspection) : null;
   const accident = isAccident ? (record as Accident) : null;
   const inspection = isInspection ? (record as Inspection) : null;
-  const inspectionViolations = inspection?.violations || [];
+  const inspectionViolations = (ticket?.violations || inspection?.violations || []) as Violation[];
 
   return (
     <div className="card-dark p-5 mb-4 hover:border-slate-700 transition-all duration-200">
@@ -174,7 +174,7 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
             </div>
           )}
 
-          {inspection && (
+          {(inspection || isTicket) && (
             <div className="bg-slate-800/50 p-4 rounded border border-slate-700">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
@@ -230,7 +230,7 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
                     Fines ({ticket?.fines?.length || 0})
                   </p>
                   <div className="space-y-2">
-                    {(ticket?.fines || []).map((f) => (
+                    {(ticket?.fines || []).map((f: Fine) => (
                       <div
                         key={f.id}
                         className="bg-slate-800/50 p-2 rounded text-xs flex justify-between items-center"
@@ -244,7 +244,7 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
                   </div>
                   <div className="mt-2 text-sm font-bold text-code text-green-400 text-right">
                     Total Fines: {formatCurrency(
-                      (ticket?.fines || []).reduce((sum, f) => sum + f.amount, 0)
+                      (ticket?.fines || []).reduce((sum: number, f: Fine) => sum + f.amount, 0)
                     )}
                   </div>
                 </div>
@@ -357,15 +357,21 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
           {/* Action Buttons */}
           <div className="flex gap-2 pt-2 border-t border-slate-800 mt-4">
             <button
-              onClick={() => setPrintingRecord(record.id)}
-              className="flex-1 flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-slate-300 py-2 px-3 rounded text-sm font-medium transition-colors duration-200"
+              onClick={(e) => {
+                e.stopPropagation();
+                openEditModal(record.id);
+              }}
+              className="flex-1 flex items-center justify-center gap-2 bg-cyan-500/20 hover:bg-cyan-500/30 text-cyan-400 py-2 px-3 rounded text-sm font-medium transition-colors duration-200"
             >
-              <Printer size={14} /> Print
+              <Edit2 size={14} /> Edit
             </button>
 
             {!isDeleting ? (
               <button
-                onClick={() => openDeleteConfirm(record.id)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  openDeleteConfirm(record.id);
+                }}
                 className="flex-1 flex items-center justify-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 py-2 px-3 rounded text-sm font-medium transition-colors duration-200"
               >
                 <Trash2 size={14} /> Delete
@@ -373,13 +379,19 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
             ) : (
               <div className="flex-1 flex gap-1">
                 <button
-                  onClick={() => deleteRecord(record.id)}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    deleteRecord(record.id);
+                  }}
                   className="flex-1 bg-red-600 hover:bg-red-700 text-white py-2 px-2 rounded text-xs font-bold transition-colors duration-200"
                 >
                   Confirm
                 </button>
                 <button
-                  onClick={closeDeleteConfirm}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    closeDeleteConfirm();
+                  }}
                   className="flex-1 bg-slate-700 hover:bg-slate-600 text-slate-300 py-2 px-2 rounded text-xs font-medium transition-colors duration-200"
                 >
                   Cancel

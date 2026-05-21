@@ -62,11 +62,11 @@ export const IncidentListView: React.FC = () => {
     return (
       <div className="flex-1 flex items-center justify-center">
         <div className="text-center">
-          <p className="text-slate-400 text-lg mb-2">No incidents found</p>
+          <p className="text-slate-400 text-lg mb-2">No violations found</p>
           <p className="text-slate-500 text-sm">
             {searchQuery.trim()
               ? "Try adjusting your search filters"
-              : "Click the Add button to create a new incident"}
+              : "Click the Add button to create a new violation"}
           </p>
         </div>
       </div>

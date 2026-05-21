@@ -1,14 +1,14 @@
 import React, { useState } from "react";
+import notify from '../utils/notify';
 import { useApp } from "../context/AppContext";
-import { Plus, Trash2 } from "lucide-react";
+import { Plus } from "lucide-react";
 
-export const Sidebar: React.FC = () => {
+export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "accounting" }> = ({ activeTab = "dashboard" }) => {
   const {
     months,
     selectedMonthId,
     records,
     addMonth,
-    deleteMonth,
     selectMonth,
   } = useApp();
 
@@ -34,12 +34,12 @@ export const Sidebar: React.FC = () => {
   const handleAddMonth = () => {
     const monthNum = parseInt(monthInput, 10);
     if (!monthNum || monthNum < 1 || monthNum > 12) {
-      alert("Select a valid month");
+      notify.error("Select a valid month");
       return;
     }
 
     if (months.some((item) => item.month === monthNum && item.year === yearInput)) {
-      alert("That month and year already exist. Please choose a different month or year.");
+      notify.error("That month and year already exist. Please choose a different month or year.");
       return;
     }
 
@@ -54,162 +54,163 @@ export const Sidebar: React.FC = () => {
   };
 
   return (
-    <div className="w-72 bg-slate-900 border-r border-slate-800 flex flex-col h-screen no-print">
-      {/* Header */}
-      <div className="p-6 border-b border-slate-800">
-        <h1 className="text-xl font-bold text-cyan-400 mb-1">Fleet Safety CRM</h1>
-        <p className="text-xs text-slate-400">Ticket & Incident Tracker</p>
-      </div>
-
-      {/* Add Month Section */}
-      <div className="p-4 border-b border-slate-800">
-        {!showAddForm ? (
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="w-full flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-cyan-400 py-2 px-3 rounded text-sm font-medium transition-colors duration-200"
-          >
-            <Plus size={16} /> Add Month
-          </button>
-        ) : (
-          <div className="space-y-2">
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">
-                Month
-              </label>
-              <select
-                value={monthInput}
-                onChange={(e) => setMonthInput(e.target.value)}
-                className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-sm text-cyan-400 focus:outline-none focus:border-cyan-500"
-              >
-                {monthOptions.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">
-                Year
-              </label>
-              <input
-                type="number"
-                min="2020"
-                max="2030"
-                value={yearInput}
-                onChange={(e) => setYearInput(parseInt(e.target.value, 10) || new Date().getFullYear())}
-                className="w-full bg-slate-800 border border-slate-700 rounded px-3 py-2 text-sm text-cyan-400 placeholder-slate-500 focus:outline-none focus:border-cyan-500"
-              />
-            </div>
-            <div className="flex gap-2">
-              <button
-                onClick={handleAddMonth}
-                className="flex-1 bg-cyan-500 hover:bg-cyan-600 text-slate-950 py-1 px-2 rounded text-xs font-bold transition-colors"
-              >
-                Add
-              </button>
-              <button
-                onClick={() => setShowAddForm(false)}
-                className="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 py-1 px-2 rounded text-xs font-medium transition-colors"
-              >
-                Cancel
-              </button>
-            </div>
+    <aside className="w-80 min-w-[280px] bg-slate-950/95 backdrop-blur-xl border-r border-slate-800 shadow-[0_0_80px_-30px_rgba(15,23,42,0.8)] flex flex-col h-screen no-print">
+      <div className="sticky top-0 z-20 bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 px-6 py-5">
+        <div className="flex items-center justify-between gap-4">
+          <div>
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-[0.35em] uppercase text-cyan-300/80">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400" /> Meder Production
+            </span>
+            <h1 className="mt-3 text-2xl font-bold text-white leading-tight">CRM Dashboard</h1>
           </div>
-        )}
+        </div>
       </div>
 
-      <div className="p-4 border-b border-slate-800">
-        <button
-          onClick={() => selectMonth(null)}
-          className={`w-full text-left p-3 rounded border transition-all duration-200 ${
-            selectedMonthId === null
-              ? "bg-cyan-500/20 border-cyan-500 text-cyan-300"
-              : "bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-600"
-          }`}
-        >
-          <div className="flex items-center justify-between">
-            <div>
-              <div className="font-semibold text-sm">All incidents</div>
-              <div className="text-xs text-slate-400 mt-1">
-                {records.length} incident{records.length !== 1 ? "s" : ""}
+      <div className="p-5 space-y-4 border-b border-slate-800">
+        {activeTab === "incidents" ? (
+          !showAddForm ? (
+            <button
+              onClick={() => setShowAddForm(true)}
+              className="w-full inline-flex items-center justify-center gap-2 rounded-3xl border border-cyan-500/20 bg-gradient-to-r from-cyan-500/10 to-slate-800 px-4 py-3 text-sm font-semibold text-cyan-200 shadow-sm shadow-cyan-500/5 transition hover:bg-slate-900"
+            >
+              <Plus size={16} /> Add Month
+            </button>
+          ) : (
+            <div className="space-y-3 rounded-3xl border border-slate-800 bg-slate-900/95 p-4 shadow-inner shadow-slate-950/20">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Month</label>
+                <select
+                  value={monthInput}
+                  onChange={(e) => setMonthInput(e.target.value)}
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-cyan-200 outline-none transition focus:border-cyan-500"
+                >
+                  {monthOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Year</label>
+                <input
+                  type="number"
+                  min="2020"
+                  max="2030"
+                  value={yearInput}
+                  onChange={(e) => setYearInput(parseInt(e.target.value, 10) || new Date().getFullYear())}
+                  className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-cyan-200 outline-none transition focus:border-cyan-500"
+                />
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={handleAddMonth}
+                  className="flex-1 rounded-2xl bg-cyan-500 px-4 py-2 text-xs font-bold text-slate-950 transition hover:bg-cyan-400"
+                >
+                  Add
+                </button>
+                <button
+                  onClick={() => setShowAddForm(false)}
+                  className="flex-1 rounded-2xl border border-slate-700 bg-slate-900 px-4 py-2 text-xs font-medium text-slate-300 transition hover:bg-slate-800"
+                >
+                  Cancel
+                </button>
               </div>
             </div>
-            <div
-              className={`flex items-center justify-center w-6 h-6 rounded text-xs font-bold ${
-                selectedMonthId === null
-                  ? "bg-cyan-500 text-slate-950"
-                  : "bg-slate-700 text-cyan-400"
-              }`}
-            >
-              {records.length}
-            </div>
-          </div>
-        </button>
-      </div>
-
-      {/* Months List */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-2">
-        {months.length === 0 ? (
-          <p className="text-slate-500 text-xs text-center py-8">
-            No months added yet
-          </p>
+          )
         ) : (
-          months.map((month) => {
-            const count = getIncidentCount(month.id);
-            const isSelected = selectedMonthId === month.id;
-            return (
-              <button
-                key={month.id}
-                onClick={() => selectMonth(month.id)}
-                className={`w-full text-left p-3 rounded border transition-all duration-200 ${
-                  isSelected
-                    ? "bg-cyan-500/20 border-cyan-500 text-cyan-300"
-                    : "bg-slate-800 border-slate-700 text-slate-300 hover:bg-slate-700 hover:border-slate-600"
-                }`}
-              >
-                <div className="flex items-start justify-between">
-                  <div>
-                    <div className="font-semibold text-sm">{month.monthLabel}</div>
-                    <div className="text-xs text-slate-400 mt-1">
-                      {count} incident{count !== 1 ? "s" : ""}
-                    </div>
-                  </div>
-                  <div
-                    className={`flex items-center justify-center w-6 h-6 rounded text-xs font-bold ${
-                      isSelected
-                        ? "bg-cyan-500 text-slate-950"
-                        : "bg-slate-700 text-cyan-400"
-                    }`}
-                  >
-                    {count}
-                  </div>
-                </div>
-              </button>
-            );
-          })
+          <div className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 shadow-inner shadow-slate-950/20">
+            <div className="text-sm font-semibold text-slate-100">Reminders</div>
+            <p className="mt-2 text-xs text-slate-400">Unclosed violations and alerts will appear here.</p>
+          </div>
         )}
       </div>
 
-      {/* Delete Month Button */}
-      {selectedMonthId && (
-        <div className="p-4 border-t border-slate-800">
+      {activeTab === "incidents" ? (
+        <div className="p-5 border-b border-slate-800">
           <button
-            onClick={() => {
-              if (
-                window.confirm(
-                  "Delete this month and all associated incidents?"
-                )
-              ) {
-                deleteMonth(selectedMonthId);
-              }
-            }}
-            className="w-full flex items-center justify-center gap-2 bg-red-500/20 hover:bg-red-500/30 text-red-400 py-2 px-3 rounded text-sm font-medium transition-colors duration-200 border border-red-500/30"
+            onClick={() => selectMonth(null)}
+            className={`w-full text-left rounded-3xl border px-4 py-4 transition duration-200 ${
+              selectedMonthId === null
+                ? "border-cyan-500 bg-cyan-500/15 text-cyan-100 shadow-sm shadow-cyan-500/10"
+                : "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600 hover:bg-slate-800"
+            }`}
           >
-            <Trash2 size={16} /> Delete Month
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <div className="font-semibold text-sm">All violations</div>
+                <div className="mt-1 text-xs text-slate-400">{records.length} violation{records.length !== 1 ? "s" : ""}</div>
+              </div>
+              <div className={`flex h-8 w-8 items-center justify-center rounded-2xl text-xs font-bold ${
+                selectedMonthId === null ? "bg-cyan-500 text-slate-950" : "bg-slate-700 text-cyan-300"
+              }`}>
+                {records.length}
+              </div>
+            </div>
           </button>
         </div>
-      )}
-    </div>
+      ) : null}
+
+      <div className="flex-1 overflow-y-auto p-5 space-y-3 scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-950">
+        {activeTab === "incidents" ? (
+          months.length === 0 ? (
+            <div className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/80 p-6 text-center text-sm text-slate-500">No months added yet</div>
+          ) : (
+            months.map((month) => {
+              const count = getIncidentCount(month.id);
+              const isSelected = selectedMonthId === month.id;
+              return (
+                <button
+                  key={month.id}
+                  onClick={() => selectMonth(month.id)}
+                  className={`w-full text-left rounded-3xl border px-4 py-4 transition duration-200 ${
+                    isSelected
+                      ? "border-cyan-500 bg-cyan-500/10 text-cyan-100 shadow-sm shadow-cyan-500/10"
+                      : "border-slate-700 bg-slate-900 text-slate-300 hover:border-slate-600 hover:bg-slate-800"
+                  }`}
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <div className="font-semibold text-sm">{month.monthLabel}</div>
+                      <div className="mt-1 text-xs text-slate-400">{count} violation{count !== 1 ? "s" : ""}</div>
+                    </div>
+                    <div className={`flex h-8 w-8 items-center justify-center rounded-2xl text-xs font-bold ${
+                      isSelected ? "bg-cyan-500 text-slate-950" : "bg-slate-800 text-cyan-300"
+                    }`}>
+                      {count}
+                    </div>
+                  </div>
+                </button>
+              );
+            })
+          )
+        ) : (
+          (() => {
+            const uniqueUnclosed = Array.from(
+              records
+                .filter((r) => r.status !== "Closed")
+                .reduce((map, record) => {
+                  const key = `${record.driverName}|${new Date(record.date).toISOString()}|${record.type}|${record.status}|${record.caseCode}`;
+                  if (!map.has(key)) map.set(key, record);
+                  return map;
+                }, new Map<string, typeof records[number]>() )
+              .values()
+            );
+
+            return uniqueUnclosed.length === 0 ? (
+              <div className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/80 p-6 text-center text-sm text-slate-500">No reminders</div>
+            ) : (
+              uniqueUnclosed.slice(0, 10).map((r) => (
+                <div key={`${r.id}-${r.type}-${new Date(r.date).getTime()}`} className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 shadow-sm shadow-slate-950/20">
+                  <div className="font-semibold text-sm text-white">{r.driverName}</div>
+                  <div className="mt-1 text-xs text-slate-400">{new Date(r.date).toLocaleDateString()}</div>
+                  <div className="mt-3 text-xs text-slate-300">{r.type}</div>
+                </div>
+              ))
+            );
+          })()
+        )}
+      </div>
+    </aside>
   );
 };

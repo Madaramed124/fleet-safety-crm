@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback, useMemo, ReactNode } from "react";
 import { IncidentRecord, OperationalMonth, KPIData } from "../types";
+import logError from '../utils/logger';
 import { generateId } from "../utils/helpers";
 import { getDataService } from "../services/dataService";
 
@@ -15,7 +16,6 @@ interface AppContextType {
   isAddModalOpen: boolean;
   isEditModalOpen: boolean;
   editingRecordId: string | null;
-  printingRecordId: string | null;
   deleteConfirmId: string | null;
 
   // Actions
@@ -36,7 +36,6 @@ interface AppContextType {
   closeEditModal: () => void;
   openDeleteConfirm: (recordId: string) => void;
   closeDeleteConfirm: () => void;
-  setPrintingRecord: (recordId: string | null) => void;
 
   // KPI calculation
   calculateKPI: () => KPIData;
@@ -60,7 +59,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [editingRecordId, setEditingRecordId] = useState<string | null>(null);
-  const [printingRecordId, setPrintingRecordId] = useState<string | null>(null);
   const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -81,7 +79,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
           }))
         );
       } catch (error) {
-        console.error("Failed to initialize app data", error);
+        logError(error, 'Failed to initialize app data');
       } finally {
         setIsLoading(false);
       }
@@ -105,7 +103,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       try {
         await dataService.createMonth(newMonth);
       } catch (error) {
-        console.error("Failed to create month", error);
+        logError(error, 'Failed to create month');
       }
     },
     [dataService]
@@ -123,7 +121,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
         await dataService.deleteMonth(monthId);
         await dataService.storeRecords(nextRecords);
       } catch (error) {
-        console.error("Failed to delete month", error);
+        logError(error, 'Failed to delete month');
       }
     },
     [dataService, months, records]
@@ -141,7 +139,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       try {
         await dataService.createRecord(recordWithId);
       } catch (error) {
-        console.error("Failed to create record", error);
+        logError(error, 'Failed to create record');
       }
     },
     [dataService]
@@ -154,7 +152,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       try {
         await dataService.updateRecord(record);
       } catch (error) {
-        console.error("Failed to update record", error);
+        logError(error, 'Failed to update record');
       }
     },
     [dataService]
@@ -167,7 +165,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
       try {
         await dataService.deleteRecord(recordId);
       } catch (error) {
-        console.error("Failed to delete record", error);
+        logError(error, 'Failed to delete record');
       }
     },
     [dataService]
@@ -214,7 +212,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     isAddModalOpen,
     isEditModalOpen,
     editingRecordId,
-    printingRecordId,
     deleteConfirmId,
 
     addMonth,
@@ -238,7 +235,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     },
     openDeleteConfirm: (id) => setDeleteConfirmId(id),
     closeDeleteConfirm: () => setDeleteConfirmId(null),
-    setPrintingRecord: (id) => setPrintingRecordId(id),
 
     calculateKPI,
   };

@@ -50,6 +50,30 @@ body {
   .highlight-match {
     @apply bg-amber-500 text-slate-950 font-semibold rounded px-1;
   }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(56,189,248,0.35) transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(56,189,248,0.35);
+    border-radius: 9999px;
+    border: 2px solid rgba(15,23,42,0.95);
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(56,189,248,0.5);
+  }
 }
 
 @media print {
