@@ -24,8 +24,8 @@ const SummaryPanel: React.FC<{
   const [saving, setSaving] = useState(false);
   const [posting, setPosting] = useState(false);
   const [reason, setReason] = useState("");
-  const [severity, setSeverity] = useState<number>(0);
-  const [weight, setWeight] = useState<number>(0);
+  const [severity, setSeverity] = useState<number | "">(0);
+  const [weight, setWeight] = useState<number | "">(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const csaPoints = Math.max(0, Number(severity) + Number(weight));
@@ -157,8 +157,10 @@ const SummaryPanel: React.FC<{
 
     const violationGroup = (selectedViolation as any).group || '';
     const violationOos = (selectedViolation as any).oos != null ? ((selectedViolation as any).oos ? 'Yes' : 'No') : '';
-    const violationSeverity = severity > 0 ? String(severity) : String(selectedViolation.severity || '');
-    const violationWeight = weight > 0 ? String(weight) : ((selectedViolation as any).weight != null ? String((selectedViolation as any).weight) : '');
+    const numericSeverity = typeof severity === 'number' ? severity : Number(severity);
+    const numericWeight = typeof weight === 'number' ? weight : Number(weight);
+    const violationSeverity = numericSeverity > 0 ? String(numericSeverity) : String(selectedViolation.severity || '');
+    const violationWeight = numericWeight > 0 ? String(numericWeight) : ((selectedViolation as any).weight != null ? String((selectedViolation as any).weight) : '');
     const violationCsaPoints = String(csaPoints);
 
     doc.setTextColor(darkBlue);
@@ -336,55 +338,86 @@ const SummaryPanel: React.FC<{
   );
 
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900 p-4">
-      <div className="text-sm font-semibold mb-3">Summary</div>
-      <div className="text-xs text-slate-400 mb-4">Totals: {rows.reduce((s, r) => s + (parseFloat(r.amount || 0) || 0), 0)}</div>
-      <div className="space-y-3 mb-4">
-        <div>
-          <label className="block text-xs font-semibold text-slate-400 mb-1">Reason for disciplinary action</label>
-          <textarea
-            value={reason}
-            onChange={(e) => setReason(e.target.value)}
-            placeholder="Describe why this warning letter is being issued"
-            className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none resize-none h-24"
-          />
-        </div>
-        <div className="grid grid-cols-2 gap-3">
+    <div className="h-full rounded-3xl border-l-2 border-[#1D9E75] bg-slate-950 p-5 flex flex-col justify-between">
+      <div>
+        <div className="text-sm font-semibold mb-3 text-slate-100">Summary</div>
+        <div className="text-xs text-slate-400 mb-4">Totals: ${rows.reduce((s, r) => s + (parseFloat(r.amount || 0) || 0), 0).toFixed(2)}</div>
+        <div className="space-y-4 mb-4">
           <div>
-            <label className="block text-xs font-semibold text-slate-400 mb-1">Severity</label>
-            <input
-              type="number"
-              min={0}
-              value={severity}
-              onChange={(e) => setSeverity(Number(e.target.value) || 0)}
-              className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none"
-              placeholder="0"
+            <label className="block text-xs font-semibold text-slate-400 mb-2">Reason</label>
+            <textarea
+              value={reason}
+              onChange={(e) => setReason(e.target.value)}
+              placeholder="Describe why this warning letter is being issued..."
+              className="w-full rounded-3xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-slate-100 outline-none resize-none min-h-[110px]"
             />
           </div>
-          <div>
-            <label className="block text-xs font-semibold text-slate-400 mb-1">Weight</label>
-            <input
-              type="number"
-              min={0}
-              value={weight}
-              onChange={(e) => setWeight(Number(e.target.value) || 0)}
-              className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none"
-              placeholder="0"
-            />
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 mb-2">Severity</label>
+              <input
+                type="number"
+                min={0}
+                value={severity}
+                onFocus={() => {
+                  if (severity === 0) setSeverity("");
+                }}
+                onBlur={(e) => {
+                  if (e.target.value.trim() === "") setSeverity(0);
+                }}
+                onChange={(e) => setSeverity(e.target.value === "" ? "" : parseInt(e.target.value, 10) || 0)}
+                className="w-full rounded-3xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-slate-100 outline-none"
+                placeholder="0"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-400 mb-2">Weight</label>
+              <input
+                type="number"
+                min={0}
+                value={weight}
+                onFocus={() => {
+                  if (weight === 0) setWeight("");
+                }}
+                onBlur={(e) => {
+                  if (e.target.value.trim() === "") setWeight(0);
+                }}
+                onChange={(e) => setWeight(e.target.value === "" ? "" : parseInt(e.target.value, 10) || 0)}
+                className="w-full rounded-3xl border border-slate-700 bg-slate-950 px-3 py-3 text-sm text-slate-100 outline-none"
+                placeholder="0"
+              />
+            </div>
           </div>
         </div>
       </div>
-      <div className="flex flex-col gap-2">
-        <button onClick={saveDraft} disabled={saving || posting} className="px-3 py-2 bg-slate-800 rounded disabled:opacity-60 flex items-center justify-center" style={{ minWidth: 160 }}>
+
+      <div className="mt-6 flex flex-col gap-3">
+        <button
+          onClick={saveDraft}
+          disabled={saving || posting}
+          className="w-full rounded-3xl border border-slate-700 bg-transparent px-3 py-3 text-sm text-slate-100 hover:bg-slate-900 disabled:opacity-60"
+        >
           {saving && <Spinner />}
           <span>{saving ? 'Saving...' : 'Save draft'}</span>
         </button>
-        <button onClick={previewLetter} disabled={saving || posting} className="px-3 py-2 bg-slate-800 rounded disabled:opacity-60" style={{ minWidth: 160 }}>Preview letter</button>
-        <button onClick={postToRecord} disabled={posting || saving} className="px-3 py-2 bg-cyan-500 rounded text-slate-950 disabled:opacity-60 flex items-center justify-center" style={{ minWidth: 160 }}>
+        <button
+          onClick={previewLetter}
+          disabled={saving || posting}
+          className="w-full rounded-3xl border border-slate-700 bg-transparent px-3 py-3 text-sm text-slate-100 hover:bg-slate-900 disabled:opacity-60"
+        >
+          Preview letter
+        </button>
+        <button
+          onClick={postToRecord}
+          disabled={posting || saving}
+          className="w-full rounded-3xl bg-[#1D9E75] px-3 py-3 text-sm font-semibold text-slate-950 hover:bg-emerald-500 disabled:opacity-60"
+        >
           {posting && <Spinner />}
           <span>{posting ? 'Posting...' : 'Post to record'}</span>
         </button>
       </div>
+
+      {errorMessage && <div className="mt-4 text-sm text-red-400">{errorMessage}</div>}
 
       {errorMessage && <div className="mt-3 text-red-400 text-sm">{errorMessage}</div>}
 
@@ -398,7 +431,9 @@ const SummaryPanel: React.FC<{
                 <button onClick={() => { setShowPreview(false); URL.revokeObjectURL(previewUrl); setPreviewUrl(null); }} className="px-2 py-1 bg-slate-700 text-white rounded">Close</button>
               </div>
             </div>
-            <iframe src={previewUrl} className="w-full h-full" />
+            <object data={previewUrl} type="application/pdf" className="w-full h-full" aria-label="Warning letter preview">
+              <p className="text-sm text-slate-900">Preview not available. <a href={previewUrl} target="_blank" rel="noreferrer" className="text-cyan-600">Open in a new tab</a>.</p>
+            </object>
           </div>
         </div>
       )}

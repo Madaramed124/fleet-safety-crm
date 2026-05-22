@@ -3,6 +3,7 @@ import { useApp } from "../context/AppContext";
 import { Sidebar } from "./Sidebar";
 import { KPIDashboard } from "./KPIDashboard";
 import AccountingPage from "./accounting/AccountingPage";
+import AccountingLedger from "./accounting/AccountingLedger";
 import ChargesPage from "./accounting/ChargesPage";
 // Inline DriversView to avoid cross-module resolution issues in this environment
 const InlineDriversView: React.FC<{ onClose?: () => void }> = () => {
@@ -106,8 +107,29 @@ import { Plus } from "lucide-react";
 
 export const AppLayout: React.FC = () => {
   const { selectedMonthId, openAddModal, isLoading, months } = useApp();
-  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "accounting" | "charges">("dashboard");
+  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "accounting" | "accountingLedger" | "charges">(() => {
+    const hash = window.location.hash.slice(1);
+    if (hash === "dashboard" || hash === "incidents" || hash === "drivers" || hash === "accounting" || hash === "accountingLedger" || hash === "charges") {
+      return hash;
+    }
+    return "dashboard";
+  });
   const canAddIncident = months.length > 0;
+
+  React.useEffect(() => {
+    const onHashChange = () => {
+      const hash = window.location.hash.slice(1);
+      if (hash === "dashboard" || hash === "incidents" || hash === "drivers" || hash === "accounting" || hash === "accountingLedger" || hash === "charges") {
+        setTab(hash);
+      }
+    };
+    window.addEventListener("hashchange", onHashChange);
+    return () => window.removeEventListener("hashchange", onHashChange);
+  }, []);
+
+  React.useEffect(() => {
+    window.history.replaceState(null, "", `#${tab}`);
+  }, [tab]);
 
   return (
     <div className="relative flex h-screen bg-slate-950 text-slate-100">
@@ -117,7 +139,7 @@ export const AppLayout: React.FC = () => {
         </div>
       )}
       {/* Left Sidebar */}
-      <Sidebar activeTab={tab} />
+      <Sidebar activeTab={tab === "accountingLedger" ? "accounting" : tab} />
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
@@ -152,6 +174,12 @@ export const AppLayout: React.FC = () => {
             className={`px-3 py-2 rounded text-sm font-semibold ${tab === "charges" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
           >
             Charges
+          </button>
+          <button
+            onClick={() => setTab("accountingLedger")}
+            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accountingLedger" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
+          >
+            Accounting
           </button>
         </div>
 
@@ -190,6 +218,7 @@ export const AppLayout: React.FC = () => {
           {tab === "incidents" && <IncidentListView />}
           {tab === "drivers" && <InlineDriversView />}
           {tab === "accounting" && <AccountingPage />}
+          {tab === "accountingLedger" && <AccountingLedger />}
           {tab === "charges" && <ChargesPage />}
         </div>
       </div>

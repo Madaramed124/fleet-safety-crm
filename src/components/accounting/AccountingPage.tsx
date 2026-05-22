@@ -47,6 +47,7 @@ const AccountingPage: React.FC = () => {
       if (driverError) {
         console.error("[AccountingPage] driver query error for driverId", driverId, driverError);
         logError(driverError, 'Failed to load driver');
+        try { const notify = (await import('../utils/notify')).default; notify.error('Failed to load driver information'); } catch (e) {}
       }
       setDriverInfo(drv || null);
       setLoadingRecords(false);
@@ -76,49 +77,90 @@ const AccountingPage: React.FC = () => {
   const driverRecords = driverInfo?.name ? records.filter((record) => record.driverName === driverInfo.name) : [];
 
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-4 gap-6">
-        <div className="col-span-1">
-          <DriverSelect onSelect={(id) => setDriverId(id)} />
-        </div>
-        <div className="col-span-2">
-            <InspectionList
-              records={driverRecords}
-              selectedRecordId={selectedRecord?.id}
-              loading={loadingRecords}
-              onSelect={handleSelectRecord}
-            />
-        </div>
-        <div className="col-span-1">
-          <SummaryPanel
-            driverId={driverId}
-            driverInfo={driverInfo}
-            record={selectedRecord}
-            dirty={dirty}
-            setDirty={setDirty}
-            rows={rows}
-            setRows={setRows}
-            setValidationErrors={setValidationErrors}
-              setBusy={setBusy}
-              setNotes={setNotes}
-              onPosted={() => violationListRef.current?.scrollToTop?.()}
-              refresh={async () => {
-                // refresh is not needed for record-based selection; app records update from context
-              }}
-          />
+    <div className="flex gap-4 h-[calc(100vh-60px)] p-4">
+      <div className="w-[200px] flex-shrink-0 h-full">
+        <div className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-950 p-4">
+          <DriverSelect onSelect={(id) => setDriverId(id)} selectedDriverId={driverId} />
         </div>
       </div>
 
-      <div className="mt-6">
-        <ChargeBuilder
+      <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+        {!driverId ? (
+          <div className="flex h-full min-h-[200px] items-center justify-center rounded-3xl border border-slate-800 bg-slate-900 p-6 text-center text-slate-500">
+            Select a driver to begin
+          </div>
+        ) : (
+          <>
+            <div className="rounded-3xl border border-slate-800 bg-slate-900 p-4">
+              {selectedRecord ? (
+                <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4">
+                  <div className="text-xs uppercase tracking-[0.24em] text-slate-500 mb-3">Violation</div>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div>
+                      <div className="text-sm text-slate-400">Report</div>
+                      <div className="text-lg font-semibold text-slate-100">{selectedRecord.caseCode || selectedRecord.id}</div>
+                    </div>
+                    <div className="text-sm text-slate-400">
+                      <div>Date</div>
+                      <div className="text-slate-100">{new Date(selectedRecord.date).toLocaleDateString()}</div>
+                    </div>
+                    {('violations' in selectedRecord && selectedRecord.violations?.[0]?.code) ? (
+                      <div className="rounded-3xl bg-[#1D9E75] px-4 py-2 text-sm font-semibold text-slate-950">
+                        {selectedRecord.violations?.[0]?.code}
+                      </div>
+                    ) : null}
+                  </div>
+                </div>
+              ) : (
+                <div className="text-sm text-slate-400">Select an inspection record from the list below to begin building charges.</div>
+              )}
+            </div>
+
+            <div className="flex-1 overflow-hidden">
+              <div className="space-y-4 h-full overflow-hidden">
+                <div className="rounded-3xl border border-slate-800 bg-slate-950 p-4 overflow-y-auto custom-scrollbar max-h-[260px]">
+                  <div className="text-xs uppercase tracking-[0.24em] text-slate-500 mb-3">Inspection records</div>
+                  <InspectionList
+                    records={driverRecords}
+                    selectedRecordId={selectedRecord?.id}
+                    loading={loadingRecords}
+                    onSelect={handleSelectRecord}
+                  />
+                </div>
+                <div className="h-full overflow-hidden">
+                  <ChargeBuilder
+                    record={selectedRecord}
+                    rows={rows}
+                    setRows={setRows}
+                    validationErrors={validationErrors}
+                    disabled={busy}
+                    notes={notes}
+                    setNotes={setNotes}
+                    onDirty={(d) => setDirty(d)}
+                  />
+                </div>
+              </div>
+            </div>
+          </>
+        )}
+      </div>
+
+      <div className="w-[220px] flex-shrink-0 h-full">
+        <SummaryPanel
+          driverId={driverId}
+          driverInfo={driverInfo}
           record={selectedRecord}
+          dirty={dirty}
+          setDirty={setDirty}
           rows={rows}
           setRows={setRows}
-          validationErrors={validationErrors}
-          disabled={busy}
-          notes={notes}
+          setValidationErrors={setValidationErrors}
+          setBusy={setBusy}
           setNotes={setNotes}
-          onDirty={(d) => setDirty(d)}
+          onPosted={() => violationListRef.current?.scrollToTop?.()}
+          refresh={async () => {
+            // refresh is not needed for record-based selection; app records update from context
+          }}
         />
       </div>
       {confirmSwitch?.show && (

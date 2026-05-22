@@ -54,6 +54,8 @@ const getAttachmentIcon = (typeOption: Attachment["type"]) => {
   }
 };
 
+type EditableFine = Omit<Fine, "amount"> & { amount: number | "" };
+
 export const IncidentFormModal: React.FC = () => {
   const {
     isAddModalOpen,
@@ -116,7 +118,7 @@ export const IncidentFormModal: React.FC = () => {
   const [hasAttorney, setHasAttorney] = useState(false);
   const [isRecurring, setIsRecurring] = useState(false);
   const [violations, setViolations] = useState<Violation[]>([]);
-  const [fines, setFines] = useState<Fine[]>([]);
+  const [fines, setFines] = useState<EditableFine[]>([]);
   const [csaImpactScore, setCsaImpactScore] = useState("");
   const [companyImpactLevel, setCompanyImpactLevel] = useState<"Low" | "Medium" | "High">("Medium");
   const [companyImpactNotes, setCompanyImpactNotes] = useState("");
@@ -154,7 +156,7 @@ export const IncidentFormModal: React.FC = () => {
         setHasAttorney(ticket.hasAttorney ?? false);
         setIsRecurring(ticket.isRecurring ?? false);
         setViolations(ticket.violations ?? []);
-        setFines(ticket.fines ?? []);
+        setFines((ticket.fines ?? []).map((fine: Fine) => ({ ...fine })));
         setCsaImpactScore(ticket.csaImpactScore ?? "");
         setCompanyImpactLevel(ticket.companyImpactLevel ?? "Medium");
         setCompanyImpactNotes(ticket.companyImpactNotes ?? "");
@@ -179,7 +181,7 @@ export const IncidentFormModal: React.FC = () => {
         setInspectionHasTicketDetails(!!inspection.hasAssociatedTicket);
         setIsCleanInspection((inspection.violations?.length ?? 0) === 0);
         setViolations(inspection.violations ?? []);
-        setFines(inspection.fines ?? []);
+        setFines((inspection.fines ?? []).map((fine: Fine) => ({ ...fine })));
         setCsaImpactScore(inspection.csaImpactScore ?? "");
         setCompanyImpactLevel(inspection.companyImpactLevel ?? "Medium");
         setCompanyImpactNotes(inspection.companyImpactNotes ?? "");
@@ -286,6 +288,11 @@ export const IncidentFormModal: React.FC = () => {
       return;
     }
 
+    const normalizedFines: Fine[] = fines.map((fine) => ({
+      ...fine,
+      amount: typeof fine.amount === "string" ? Number(fine.amount || 0) : fine.amount,
+    }));
+
     const baseData = {
       id: editingRecord?.id || generateId(),
       monthId: formMonthId,
@@ -318,7 +325,7 @@ export const IncidentFormModal: React.FC = () => {
         hasAttorney,
         isRecurring,
         violations,
-        fines,
+        fines: normalizedFines,
         csaImpactScore,
         companyImpactLevel,
         companyImpactNotes,
@@ -343,7 +350,7 @@ export const IncidentFormModal: React.FC = () => {
           inspectionHasTicketDetails || receivedCitation ? isRecurring : undefined,
         violations,
         fines:
-          inspectionHasTicketDetails || receivedCitation ? fines : undefined,
+          inspectionHasTicketDetails || receivedCitation ? normalizedFines : undefined,
         csaImpactScore:
           inspectionHasTicketDetails || receivedCitation ? csaImpactScore : undefined,
         companyImpactLevel:
@@ -854,8 +861,8 @@ interface TicketsProps {
   setHasAttorney: (v: boolean) => void;
   isRecurring: boolean;
   setIsRecurring: (v: boolean) => void;
-  fines: Fine[];
-  setFines: (v: Fine[]) => void;
+  fines: EditableFine[];
+  setFines: (v: EditableFine[]) => void;
   csaImpactScore: string;
   setCsaImpactScore: (v: string) => void;
   companyImpactLevel: "Low" | "Medium" | "High";
@@ -967,10 +974,28 @@ const Tickets: React.FC<TicketsProps> = ({
               />
               <input
                 type="number"
-                value={f.amount}
+                value={f.amount === 0 ? "" : f.amount}
+                onFocus={() => {
+                  if (f.amount === 0) {
+                    const updated = [...fines];
+                    updated[i] = { ...updated[i], amount: "" };
+                    setFines(updated);
+                  }
+                }}
+                onBlur={(e) => {
+                  if (e.target.value.trim() === "") {
+                    const updated = [...fines];
+                    updated[i] = { ...updated[i], amount: 0 };
+                    setFines(updated);
+                  }
+                }}
                 onChange={(e) => {
                   const updated = [...fines];
-                  updated[i].amount = parseFloat(e.target.value) || 0;
+                  const value = e.target.value;
+                  updated[i] = {
+                    ...updated[i],
+                    amount: value === "" ? "" : parseFloat(value) || 0,
+                  };
                   setFines(updated);
                 }}
                 placeholder="Amount"
@@ -1115,8 +1140,8 @@ interface InspectionFieldsProps {
   setViolations: (v: Violation[]) => void;
   isCleanInspection: boolean;
   setIsCleanInspection: (v: boolean) => void;
-  fines: Fine[];
-  setFines: (v: Fine[]) => void;
+  fines: EditableFine[];
+  setFines: (v: EditableFine[]) => void;
   csaImpactScore: string;
   setCsaImpactScore: (v: string) => void;
   companyImpactLevel: "Low" | "Medium" | "High";

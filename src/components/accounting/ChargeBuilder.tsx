@@ -30,21 +30,42 @@ const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setR
   const addRow = () => { setRows([...(rows || []), emptyRow()]); onDirty && onDirty(true); };
 
   return (
-    <div className="rounded-3xl border border-slate-800 bg-slate-900 p-4">
-      <div className="text-sm font-semibold mb-3">Charge Builder</div>
+    <div className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900 p-5">
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <div className="text-sm font-semibold text-slate-100">Charge Builder</div>
+          <div className="text-xs text-slate-400">Build one or more charge lines for the selected inspection.</div>
+        </div>
+        <button
+          onClick={addRow}
+          disabled={disabled}
+          className="text-sm font-semibold text-[#1D9E75] transition hover:text-white disabled:opacity-50"
+        >
+          + Add another charge
+        </button>
+      </div>
+
       {!record ? (
-        <div className="text-xs text-slate-500">Select an inspection record to begin.</div>
+        <div className="flex h-full items-center justify-center rounded-3xl border border-slate-800 bg-slate-950 p-6 text-sm text-slate-500">
+          Select an inspection record to begin.
+        </div>
       ) : (
-        <div className="space-y-3">
-          {(rows || []).map((r, i) => (
-            <ChargeRow key={i} idx={i} row={r} onChange={updateRow} onRemove={removeRow} validationErrors={validationErrors?.[i]} disabled={disabled} />
-          ))}
-          <div>
-            <button onClick={addRow} disabled={disabled} className="mt-2 px-3 py-2 bg-slate-800 rounded disabled:opacity-60">+ Add another charge</button>
+        <div className="flex h-full flex-col overflow-hidden">
+          <div className="flex-1 space-y-3 overflow-y-auto custom-scrollbar pr-1">
+            {(rows || []).map((r, i) => (
+              <ChargeRow key={i} idx={i} row={r} onChange={updateRow} onRemove={removeRow} validationErrors={validationErrors?.[i]} disabled={disabled} />
+            ))}
           </div>
-          <div className="pt-3">
-            <label className="text-xs text-slate-400">Notes</label>
-            <textarea value={notes || ""} onChange={(e) => setNotes && setNotes(e.target.value)} disabled={disabled} className="w-full mt-1 p-2 bg-slate-900 border border-slate-700 rounded h-24" />
+
+          <div className="pt-4">
+            <label className="block text-xs font-semibold uppercase tracking-[0.24em] text-slate-500 mb-2">Notes</label>
+            <textarea
+              value={notes || ""}
+              onChange={(e) => setNotes && setNotes(e.target.value)}
+              disabled={disabled}
+              className="w-full min-h-[108px] rounded-3xl border border-slate-800 bg-slate-950 px-4 py-3 text-sm text-slate-100 outline-none focus:border-[#1D9E75]"
+              placeholder="Add notes for this charge batch"
+            />
           </div>
         </div>
       )}
