@@ -131,6 +131,8 @@ export const AppLayout: React.FC = () => {
     window.history.replaceState(null, "", `#${tab}`);
   }, [tab]);
 
+  const showSidebar = tab !== "accounting";
+
   return (
     <div className="relative flex h-screen bg-slate-950 text-slate-100">
       {isLoading && (
@@ -139,7 +141,7 @@ export const AppLayout: React.FC = () => {
         </div>
       )}
       {/* Left Sidebar */}
-      <Sidebar activeTab={tab === "accountingLedger" ? "accounting" : tab} />
+      {showSidebar && <Sidebar activeTab={tab === "accountingLedger" ? "accounting" : tab} />}
 
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col overflow-hidden">

@@ -79,14 +79,14 @@ const AccountingPage: React.FC = () => {
   const driverRecords = driverInfo?.name ? records.filter((record) => record.driverName === driverInfo.name) : [];
 
   return (
-    <div className="flex gap-4 h-[calc(100vh-60px)] p-4">
-      <div className="w-[200px] flex-shrink-0 h-full">
+    <div className="flex gap-4 h-[calc(100vh-60px)] p-4 min-h-0">
+      <div className="basis-1/4 min-w-[240px] h-full">
         <div className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-950 p-4">
           <DriverSelect onSelect={(id) => setDriverId(id)} selectedDriverId={driverId} />
         </div>
       </div>
 
-      <div className="flex-1 flex flex-col gap-4 overflow-hidden">
+      <div className="basis-1/2 min-w-0 flex flex-col gap-4 overflow-hidden">
         {!driverId ? (
           <div className="flex h-full min-h-[200px] items-center justify-center rounded-3xl border border-slate-800 bg-slate-900 p-6 text-center text-slate-500">
             Select a driver to begin
@@ -147,7 +147,7 @@ const AccountingPage: React.FC = () => {
         )}
       </div>
 
-      <div className="w-[220px] flex-shrink-0 h-full">
+      <div className="basis-1/4 min-w-[240px] h-full">
         <SummaryPanel
           driverId={driverId}
           driverInfo={driverInfo}

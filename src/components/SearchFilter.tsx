@@ -3,7 +3,15 @@ import { useApp } from "../context/AppContext";
 import { Search, X } from "lucide-react";
 
 export const SearchFilter: React.FC = () => {
-  const { searchQuery, setSearchQuery } = useApp();
+  const { searchQuery, setSearchQuery, records, companyFilter, setCompanyFilter } = useApp();
+
+  const companies = React.useMemo(() => {
+    const set = new Set<string>();
+    records.forEach((r) => {
+      if (r.carrierName && r.carrierName.trim()) set.add(r.carrierName.trim());
+    });
+    return Array.from(set).sort((a, b) => a.localeCompare(b));
+  }, [records]);
 
   return (
     <div className="px-6 py-4 bg-slate-950 border-b border-slate-800 no-print">
@@ -14,8 +22,20 @@ export const SearchFilter: React.FC = () => {
           placeholder="Search by driver name, case code, or carrier..."
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-sm"
+          className="flex-1 bg-transparent text-slate-100 placeholder-slate-500 focus:outline-none text-sm min-w-0"
         />
+
+        <select
+          value={companyFilter ?? ""}
+          onChange={(e) => setCompanyFilter(e.target.value || null)}
+          className="ml-2 rounded-md border border-slate-700 bg-slate-900 text-slate-200 px-3 py-1 text-sm"
+        >
+          <option value="">All companies</option>
+          {companies.map((c) => (
+            <option key={c} value={c}>{c}</option>
+          ))}
+        </select>
+
         {searchQuery && (
           <button
             onClick={() => setSearchQuery("")}
@@ -25,11 +45,18 @@ export const SearchFilter: React.FC = () => {
           </button>
         )}
       </div>
-      {searchQuery && (
-        <p className="text-xs text-slate-400 mt-2">
-          Filtering results for: <span className="text-cyan-400">{searchQuery}</span>
-        </p>
-      )}
+      <div className="flex items-center gap-3 mt-2">
+        {searchQuery && (
+          <p className="text-xs text-slate-400">
+            Filtering results for: <span className="text-cyan-400">{searchQuery}</span>
+          </p>
+        )}
+        {companyFilter && (
+          <p className="text-xs text-slate-400 ml-3">
+            Company: <span className="text-cyan-400">{companyFilter}</span>
+          </p>
+        )}
+      </div>
     </div>
   );
 };

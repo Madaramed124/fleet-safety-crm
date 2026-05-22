@@ -15,5 +15,14 @@
     "moduleResolution": "bundler"
   },
   "include": ["src"],
+  "exclude": [
+    "src/components/DocumentUploader.tsx",
+    "src/components/DocumentUploader.tsx.bak",
+    "src/components/DocumentUploader.tsx.delete",
+    "src/components/tmp-delete",
+    "src/server-utils/convertPdfFirstPageToBase64.ts",
+    "src/server-utils/convertPdfFirstPageToBase64.ts.bak",
+    "src/server-utils/convertPdfFirstPageToBase64.ts.delete"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

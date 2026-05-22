@@ -10,6 +10,7 @@ interface AppContextType {
   records: IncidentRecord[];
   selectedMonthId: string | null;
   searchQuery: string;
+  companyFilter: string | null;
   isLoading: boolean;
 
   // Modal/view states
@@ -23,6 +24,7 @@ interface AppContextType {
   deleteMonth: (monthId: string) => Promise<void>;
   selectMonth: (monthId: string | null) => void;
   setSearchQuery: (query: string) => void;
+  setCompanyFilter: (company: string | null) => void;
 
   // Record operations
   addRecord: (record: IncidentRecord) => Promise<void>;
@@ -52,6 +54,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [records, setRecords] = useState<IncidentRecord[]>([]);
   const [selectedMonthId, setSelectedMonthId] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  const [companyFilter, setCompanyFilter] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   const dataService = useMemo(() => getDataService(), []);
@@ -207,6 +210,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     records,
     selectedMonthId,
     searchQuery,
+    companyFilter,
     isLoading,
 
     isAddModalOpen,
@@ -218,6 +222,7 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     deleteMonth,
     selectMonth,
     setSearchQuery,
+    setCompanyFilter,
 
     addRecord,
     updateRecord,

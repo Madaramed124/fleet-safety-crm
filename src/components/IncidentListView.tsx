@@ -4,7 +4,7 @@ import { IncidentCard } from "./IncidentCard";
 import { IncidentRecord } from "../types";
 
 export const IncidentListView: React.FC = () => {
-  const { records, selectedMonthId, searchQuery } = useApp();
+  const { records, selectedMonthId, searchQuery, companyFilter } = useApp();
 
   const processedRecords = useMemo(() => {
     // Stage 1: Filter by selected month or show all incidents when none is selected
@@ -20,6 +20,12 @@ export const IncidentListView: React.FC = () => {
         r.caseCode.toLowerCase().includes(query) ||
         r.carrierName.toLowerCase().includes(query)
       );
+    }
+
+    // Stage 2.5: Apply company filter (if present)
+    if (companyFilter && companyFilter.trim()) {
+      const cf = companyFilter.toLowerCase();
+      filtered = filtered.filter((r) => (r.carrierName || "").toLowerCase() === cf);
     }
 
     // Stage 3: Group by date (descending)
@@ -56,7 +62,7 @@ export const IncidentListView: React.FC = () => {
     });
 
     return result;
-  }, [records, selectedMonthId, searchQuery]);
+  }, [records, selectedMonthId, searchQuery, companyFilter]);
 
   if (processedRecords.length === 0) {
     return (
