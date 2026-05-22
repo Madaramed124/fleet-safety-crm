@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import ChargeRow from "./ChargeRow";
-import { Violation } from "../../types";
+import { IncidentRecord } from "../../types";
 
 const emptyRow = () => ({ charge_type: "Warning Letter", description: "", amount: "", document_url: null });
 
-const ChargeBuilder: React.FC<{ violation: Violation | null; rows: any[]; setRows: (r: any[]) => void; onDirty?: (d: boolean) => void; validationErrors?: Record<number, { description?: string; amount?: string }>; disabled?: boolean; notes?: string; setNotes?: (s: string) => void }> = ({ violation, rows, setRows, onDirty, validationErrors, disabled, notes, setNotes }) => {
+const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setRows: (r: any[]) => void; onDirty?: (d: boolean) => void; validationErrors?: Record<number, { description?: string; amount?: string }>; disabled?: boolean; notes?: string; setNotes?: (s: string) => void }> = ({ record, rows, setRows, onDirty, validationErrors, disabled, notes, setNotes }) => {
   useEffect(() => {
-    // reset when violation changes
+    // reset when selected inspection changes
     setRows([emptyRow()]);
     onDirty && onDirty(false);
-  }, [violation]);
+  }, [record]);
 
   const updateRow = (idx: number, row: any) => {
     const copy = [...rows];
@@ -32,8 +32,8 @@ const ChargeBuilder: React.FC<{ violation: Violation | null; rows: any[]; setRow
   return (
     <div className="rounded-3xl border border-slate-800 bg-slate-900 p-4">
       <div className="text-sm font-semibold mb-3">Charge Builder</div>
-      {!violation ? (
-        <div className="text-xs text-slate-500">Select a violation to begin.</div>
+      {!record ? (
+        <div className="text-xs text-slate-500">Select an inspection record to begin.</div>
       ) : (
         <div className="space-y-3">
           {(rows || []).map((r, i) => (

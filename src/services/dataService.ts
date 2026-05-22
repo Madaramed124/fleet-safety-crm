@@ -168,7 +168,7 @@ const syncRecordRelations = async (record: IncidentRecord) => {
 
   const { data: driverData, error: driverError } = await supabase
     .from("drivers")
-    .upsert({ name: record.driverName }, { onConflict: "name" })
+    .upsert([{ name: record.driverName }], { onConflict: "name" })
     .select("id")
     .maybeSingle();
 
@@ -185,7 +185,6 @@ const syncRecordRelations = async (record: IncidentRecord) => {
   if (!violations || violations.length === 0) return driverId;
 
   const violationRows = violations.map((violation) => ({
-    id: violation.id,
     driver_id: driverId,
     code: violation.code,
     description: violation.description || null,
@@ -193,8 +192,18 @@ const syncRecordRelations = async (record: IncidentRecord) => {
     date: record.date,
     accounting_status: "pending",
   }));
+  // Ensure we don't send non-UUID values for the `id` column (DB expects uuid)
+  const isUuid = (val: any) => typeof val === 'string' && /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(val);
+  for (let i = 0; i < violations.length; i++) {
+    const v = violations[i];
+    if (isUuid(v.id)) {
+      // attach id only when it's a valid UUID
+      (violationRows[i] as any).id = v.id;
+    }
+  }
 
   console.log("[syncRecordRelations] upserting violationRows:", violationRows);
+  console.log('[syncRecordRelations] violationRows JSON:', JSON.stringify(violationRows, null, 2));
   const { data: violationData, error: violationError } = await supabase
     .from("violations")
     .upsert(violationRows, { onConflict: "id" })
@@ -202,6 +211,11 @@ const syncRecordRelations = async (record: IncidentRecord) => {
 
   if (violationError) {
     console.error("[syncRecordRelations] violations upsert error:", violationError);
+    try {
+      console.error('[syncRecordRelations] violationError full (string):', JSON.stringify(violationError, null, 2));
+    } catch (e) {
+      console.error('[syncRecordRelations] failed to stringify violationError', e);
+    }
     throw violationError;
   }
 

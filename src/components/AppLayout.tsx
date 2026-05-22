@@ -3,6 +3,7 @@ import { useApp } from "../context/AppContext";
 import { Sidebar } from "./Sidebar";
 import { KPIDashboard } from "./KPIDashboard";
 import AccountingPage from "./accounting/AccountingPage";
+import ChargesPage from "./accounting/ChargesPage";
 // Inline DriversView to avoid cross-module resolution issues in this environment
 const InlineDriversView: React.FC<{ onClose?: () => void }> = () => {
   const { records, openEditModal } = useApp();
@@ -105,7 +106,7 @@ import { Plus } from "lucide-react";
 
 export const AppLayout: React.FC = () => {
   const { selectedMonthId, openAddModal, isLoading, months } = useApp();
-  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "accounting">("dashboard");
+  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "accounting" | "charges">("dashboard");
   const canAddIncident = months.length > 0;
 
   return (
@@ -144,7 +145,13 @@ export const AppLayout: React.FC = () => {
             onClick={() => setTab("accounting")}
             className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accounting" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
           >
-            Accounting
+            Charge Builder
+          </button>
+          <button
+            onClick={() => setTab("charges")}
+            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "charges" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
+          >
+            Charges
           </button>
         </div>
 
@@ -178,11 +185,12 @@ export const AppLayout: React.FC = () => {
           </div>
         )}
 
-        {/* Main content: Incidents list, Drivers, or Accounting */}
+        {/* Main content: Incidents list, Drivers, or Charge Builder */}
         <div className="flex-1 overflow-auto">
           {tab === "incidents" && <IncidentListView />}
           {tab === "drivers" && <InlineDriversView />}
           {tab === "accounting" && <AccountingPage />}
+          {tab === "charges" && <ChargesPage />}
         </div>
       </div>
 

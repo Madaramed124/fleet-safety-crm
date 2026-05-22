@@ -2,24 +2,25 @@ import React, { useEffect, useState } from "react";
 import logError from '../../utils/logger';
 import { supabase } from "../../services/supabaseClient";
 import DriverSelect from "./DriverSelect";
-import ViolationList from "./ViolationList";
+import InspectionList from "./InspectionList";
 import ChargeBuilder from "./ChargeBuilder";
 import SummaryPanel from "./SummaryPanel";
-import { Violation, Charge } from "../../types";
+import { IncidentRecord } from "../../types";
+import { useApp } from "../../context/AppContext";
 
 const AccountingPage: React.FC = () => {
+  const { records } = useApp();
   const [driverId, setDriverId] = useState<string | null>(null);
-  const [violations, setViolations] = useState<Violation[]>([]);
-  const [selectedViolation, setSelectedViolation] = useState<Violation | null>(null);
+  const [selectedRecord, setSelectedRecord] = useState<IncidentRecord | null>(null);
   const [dirty, setDirty] = useState(false);
   const [rows, setRows] = useState<any[]>([]);
   const [validationErrors, setValidationErrors] = useState<Record<number, { description?: string; amount?: string }>>({});
   const [busy, setBusy] = useState(false);
   const [notes, setNotes] = useState<string>("");
-  const [loadingViolations, setLoadingViolations] = useState(false);
+  const [loadingRecords, setLoadingRecords] = useState(false);
   const violationListRef = React.useRef<any>(null);
   const [driverInfo, setDriverInfo] = useState<any | null>(null);
-  const [confirmSwitch, setConfirmSwitch] = useState<{ pending?: Violation | null; show: boolean } | null>(null);
+  const [confirmSwitch, setConfirmSwitch] = useState<{ pending?: IncidentRecord | null; show: boolean } | null>(null);
 
   useEffect(() => {
     const handler = (e: BeforeUnloadEvent) => {
@@ -35,50 +36,35 @@ const AccountingPage: React.FC = () => {
 
   useEffect(() => {
     if (!driverId) {
-      setViolations([]);
-      setSelectedViolation(null);
+      setSelectedRecord(null);
       setDriverInfo(null);
       return;
     }
-    // load violations for driver
-    (async () => {
-      console.log("[AccountingPage] loading violations for driverId", driverId);
-      setLoadingViolations(true);
-      const { data, error } = await supabase
-        .from("violations")
-        .select("*")
-        .eq("driver_id", driverId)
-        .order("date", { ascending: false });
-      setLoadingViolations(false);
-      if (error) {
-        console.error("[AccountingPage] violations query error for driverId", driverId, error);
-        logError(error, 'Failed to load violations');
-      } else {
-        console.log("[AccountingPage] violations query result:", data);
-        setViolations((data as Violation[]) || []);
-      }
 
-      // load driver info
+    (async () => {
+      setLoadingRecords(true);
       const { data: drv, error: driverError } = await supabase.from("drivers").select("*").eq("id", driverId).single();
       if (driverError) {
         console.error("[AccountingPage] driver query error for driverId", driverId, driverError);
+        logError(driverError, 'Failed to load driver');
       }
       setDriverInfo(drv || null);
+      setLoadingRecords(false);
     })();
   }, [driverId]);
 
-  const handleSelectViolation = (v: Violation) => {
+  const handleSelectRecord = (record: IncidentRecord) => {
     if (dirty) {
-      setConfirmSwitch({ pending: v, show: true });
+      setConfirmSwitch({ pending: record, show: true });
     } else {
-      setSelectedViolation(v);
+      setSelectedRecord(record);
       setRows([]);
     }
   };
 
   const confirmDiscardAndSwitch = () => {
     if (confirmSwitch?.pending) {
-      setSelectedViolation(confirmSwitch.pending || null);
+      setSelectedRecord(confirmSwitch.pending || null);
       setRows([]);
       setDirty(false);
     }
@@ -87,6 +73,8 @@ const AccountingPage: React.FC = () => {
 
   const cancelSwitch = () => setConfirmSwitch(null);
 
+  const driverRecords = driverInfo?.name ? records.filter((record) => record.driverName === driverInfo.name) : [];
+
   return (
     <div className="p-6">
       <div className="grid grid-cols-4 gap-6">
@@ -94,18 +82,18 @@ const AccountingPage: React.FC = () => {
           <DriverSelect onSelect={(id) => setDriverId(id)} />
         </div>
         <div className="col-span-2">
-            <ViolationList
-              ref={violationListRef}
-              violations={violations}
-              loading={loadingViolations}
-              onSelect={(v) => handleSelectViolation(v)}
+            <InspectionList
+              records={driverRecords}
+              selectedRecordId={selectedRecord?.id}
+              loading={loadingRecords}
+              onSelect={handleSelectRecord}
             />
         </div>
         <div className="col-span-1">
           <SummaryPanel
             driverId={driverId}
             driverInfo={driverInfo}
-            violation={selectedViolation}
+            record={selectedRecord}
             dirty={dirty}
             setDirty={setDirty}
             rows={rows}
@@ -114,19 +102,16 @@ const AccountingPage: React.FC = () => {
               setBusy={setBusy}
               setNotes={setNotes}
               onPosted={() => violationListRef.current?.scrollToTop?.()}
-              refresh={() => {
-              // reload violations
-              if (driverId) {
-                supabase.from("violations").select("*").eq("driver_id", driverId).order("date", { ascending: false }).then(({ data }) => setViolations((data as Violation[]) || []));
-              }
-            }}
+              refresh={async () => {
+                // refresh is not needed for record-based selection; app records update from context
+              }}
           />
         </div>
       </div>
 
       <div className="mt-6">
         <ChargeBuilder
-          violation={selectedViolation}
+          record={selectedRecord}
           rows={rows}
           setRows={setRows}
           validationErrors={validationErrors}

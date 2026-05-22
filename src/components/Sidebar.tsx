@@ -3,7 +3,7 @@ import notify from '../utils/notify';
 import { useApp } from "../context/AppContext";
 import { Plus } from "lucide-react";
 
-export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "accounting" }> = ({ activeTab = "dashboard" }) => {
+export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "accounting" | "charges" }> = ({ activeTab = "dashboard" }) => {
   const {
     months,
     selectedMonthId,

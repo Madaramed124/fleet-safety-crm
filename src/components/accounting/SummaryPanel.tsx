@@ -8,7 +8,7 @@ import autoTable from "jspdf-autotable";
 const SummaryPanel: React.FC<{
   driverId: string | null;
   driverInfo?: any | null;
-  violation: any | null;
+  record: any | null;
   dirty: boolean;
   setDirty: (d: boolean) => void;
   rows: any[];
@@ -18,23 +18,60 @@ const SummaryPanel: React.FC<{
   setNotes?: (s: string) => void;
   onPosted?: () => void;
   refresh: () => void;
-}> = ({ driverId, driverInfo, violation, dirty, setDirty, rows, setRows, setValidationErrors, setBusy, setNotes, onPosted, refresh }) => {
+}> = ({ driverId, driverInfo, record, dirty, setDirty, rows, setRows, setValidationErrors, setBusy, setNotes, onPosted, refresh }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [saving, setSaving] = useState(false);
   const [posting, setPosting] = useState(false);
+  const [reason, setReason] = useState("");
+  const [severity, setSeverity] = useState<number>(0);
+  const [weight, setWeight] = useState<number>(0);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
+  const csaPoints = Math.max(0, Number(severity) + Number(weight));
+
+  const resolveViolationId = async (localViolation: any, recordDate?: string): Promise<string> => {
+    const uuidPattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+    if (typeof localViolation?.id === 'string' && uuidPattern.test(localViolation.id)) {
+      return localViolation.id;
+    }
+
+    if (!driverId) {
+      throw new Error('Missing driver id');
+    }
+
+    const query = supabase
+      .from('violations')
+      .select('id')
+      .eq('driver_id', driverId)
+      .eq('code', localViolation.code);
+
+    const violationDate = localViolation.date || recordDate;
+    if (violationDate) {
+      query.eq('date', violationDate);
+    }
+
+    const { data, error } = await query.limit(1).maybeSingle();
+
+    if (error || !data) {
+      throw error || new Error('Unable to resolve violation id for selected inspection');
+    }
+
+    return data.id;
+  };
+
   const saveDraft = async () => {
-    if (!driverId || !violation) { notify.error('Select driver and violation first'); return; }
+    const selectedViolation = record?.violations?.[0];
+    if (!driverId || !record || !selectedViolation) { notify.error('Select an inspection with at least one violation first'); return; }
     setErrorMessage(null);
     setValidationErrors && setValidationErrors({});
     setSaving(true); setBusy && setBusy(true);
     try {
+      const violationId = await resolveViolationId(selectedViolation, record?.date);
       for (const r of rows) {
         const { data: charge, error: chargeErr } = await supabase
           .from('charges')
-          .insert([{ violation_id: violation.id, driver_id: driverId, charge_type: r.charge_type, description: r.description, amount: r.amount || null, document_url: r.document_url || null, status: 'draft' }])
+          .insert([{ violation_id: violationId, driver_id: driverId, charge_type: r.charge_type, description: r.description, amount: r.amount || null, document_url: r.document_url || null, status: 'draft' }])
           .select('id')
           .single();
         if (chargeErr) throw chargeErr;
@@ -57,7 +94,8 @@ const SummaryPanel: React.FC<{
   };
 
   const postToRecord = async () => {
-    if (!driverId || !violation) { notify.error('Select driver and violation first'); return; }
+    const selectedViolation = record?.violations?.[0];
+    if (!driverId || !record || !selectedViolation) { notify.error('Select an inspection with at least one violation first'); return; }
 
     const errors: Record<number, { description?: string; amount?: string }> = {};
     rows.forEach((r, idx) => {
@@ -73,9 +111,10 @@ const SummaryPanel: React.FC<{
       setErrorMessage(null);
       setPosting(true); setBusy && setBusy(true);
       const payload = rows.map(r => ({ charge_type: r.charge_type, description: r.description, amount: r.amount ? parseFloat(r.amount) : null, document_url: r.document_url || null, documents: r.document_url ? [{ file_name: r.file_name || '', file_url: r.document_url, file_type: r.file_type || '' }] : [] }));
-      const { data, error } = await supabase.rpc('post_charges', { p_driver_id: driverId, p_violation_id: violation.id, p_charges: JSON.stringify(payload), p_created_by: null });
+      const violationId = await resolveViolationId(selectedViolation, record?.date);
+      const { data, error } = await supabase.rpc('post_charges', { p_driver_id: driverId, p_violation_id: violationId, p_charges: payload, p_created_by: null });
       if (error) throw error;
-      notify.success(`Charges posted for ${driverInfo?.name || 'Driver'} — Violation #${violation.id}`);
+      notify.success(`Charges posted for ${driverInfo?.name || 'Driver'} — Inspection ${record.id}`);
       setRows([]);
       setNotes && setNotes('');
       setDirty(false);
@@ -92,22 +131,188 @@ const SummaryPanel: React.FC<{
   };
 
   const previewLetter = async () => {
-    // generate PDF client-side with jsPDF
-    const doc = new jsPDF();
-    doc.setFontSize(14);
-    doc.text('Warning Letter', 14, 20);
-    doc.setFontSize(10);
-    doc.text(`Driver: ${driverInfo?.name || ''}`, 14, 30);
-    doc.text(`License: ${driverInfo?.license || ''}`, 14, 36);
-    doc.text(`Violation: ${violation?.code || ''} — ${violation?.description || ''}`, 14, 44);
-    doc.text(`Date: ${violation ? new Date(violation.date).toLocaleDateString() : ''}`, 14, 50);
+    if (!record) {
+      notify.error('Select an inspection record first');
+      return;
+    }
+    if (!reason.trim()) {
+      notify.error('Enter a reason for disciplinary action before previewing the letter');
+      return;
+    }
 
-    const tableData = rows.map(r => [r.charge_type, r.description, r.amount ? `$${r.amount}` : '$0']);
-    autoTable(doc as any, { startY: 60, head: [['Type', 'Description', 'Amount']], body: tableData });
-    const total = rows.reduce((s, r) => s + (parseFloat(r.amount || 0) || 0), 0);
-    doc.text(`Total: $${total.toFixed(2)}`, 14, (doc as any).lastAutoTable?.finalY + 10 || 140);
-    doc.text(`Date: ${new Date().toLocaleDateString()}`, 14, (doc as any).lastAutoTable?.finalY + 20 || 150);
-    doc.text('Signature: ____________________________', 14, (doc as any).lastAutoTable?.finalY + 36 || 166);
+    const selectedViolation = record?.violations?.[0] || null;
+    if (!selectedViolation) {
+      notify.error('Select an inspection with at least one violation first');
+      return;
+    }
+
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
+    const pageWidth = doc.internal.pageSize.getWidth();
+    const darkBlue = '#1a3a5c';
+    const margin = 40;
+    const lineHeight = 18;
+    const today = new Date().toLocaleDateString();
+    const headX = margin;
+    const rightX = pageWidth / 2 + 10;
+
+    const violationGroup = (selectedViolation as any).group || '';
+    const violationOos = (selectedViolation as any).oos != null ? ((selectedViolation as any).oos ? 'Yes' : 'No') : '';
+    const violationSeverity = severity > 0 ? String(severity) : String(selectedViolation.severity || '');
+    const violationWeight = weight > 0 ? String(weight) : ((selectedViolation as any).weight != null ? String((selectedViolation as any).weight) : '');
+    const violationCsaPoints = String(csaPoints);
+
+    doc.setTextColor(darkBlue);
+    doc.setFontSize(22);
+    doc.setFont('helvetica', 'bold');
+    doc.text('FORMAL DRIVER WARNING', pageWidth / 2, 70, { align: 'center' });
+
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    const leftBlockStartY = 110;
+    const rightBlockStartY = leftBlockStartY;
+
+    doc.text('Employee Name:', headX, leftBlockStartY);
+    doc.text(driverInfo?.name || 'N/A', headX + 110, leftBlockStartY);
+    doc.text('Employee ID:', headX, leftBlockStartY + lineHeight);
+    doc.text(driverInfo?.license || 'N/A', headX + 110, leftBlockStartY + lineHeight);
+    doc.text('Job Title:', headX, leftBlockStartY + lineHeight * 2);
+    doc.text('Driver', headX + 110, leftBlockStartY + lineHeight * 2);
+
+    doc.text('Manager Name:', rightX, rightBlockStartY);
+    doc.text('Rustam Kencheshaov', rightX + 110, rightBlockStartY);
+    doc.text('Department:', rightX, rightBlockStartY + lineHeight);
+    doc.text('Safety', rightX + 110, rightBlockStartY + lineHeight);
+    doc.text('Date of Issue:', rightX, rightBlockStartY + lineHeight * 2);
+    doc.text(today, rightX + 110, rightBlockStartY + lineHeight * 2);
+
+    const underlineY = leftBlockStartY + lineHeight * 3 + 10;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text('WARNING LETTER', pageWidth / 2, underlineY, { align: 'center' });
+    const titleWidth = doc.getTextWidth('WARNING LETTER');
+    doc.setDrawColor(darkBlue);
+    doc.setLineWidth(1.5);
+    doc.line(pageWidth / 2 - titleWidth / 2, underlineY + 6, pageWidth / 2 + titleWidth / 2, underlineY + 6);
+
+    let contentY = underlineY + 25;
+    doc.setFontSize(12);
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(darkBlue);
+    doc.text('VIOLATION DETAILS', headX, contentY);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(20, 20, 20);
+    contentY += lineHeight;
+    doc.text(`Report number: ${selectedViolation.code || 'N/A'}`, headX, contentY);
+    contentY += lineHeight;
+    const violationDate = selectedViolation.date || record.date;
+    doc.text(`Date: ${violationDate ? new Date(violationDate).toLocaleDateString() : 'N/A'}`, headX, contentY);
+
+    contentY += lineHeight * 2;
+    autoTable(doc as any, {
+      startY: contentY,
+      theme: 'grid',
+      headStyles: { fillColor: '#1a3a5c', textColor: '#ffffff', halign: 'center' },
+      head: [[
+        'Section',
+        'Violation Description',
+        'Violation Group',
+        'OOS',
+        'Severity',
+        'Weight',
+        'CSA Points'
+      ]],
+      body: [[
+        selectedViolation.code || '',
+        selectedViolation.description || '',
+        violationGroup,
+        violationOos,
+        violationSeverity,
+        violationWeight,
+        violationCsaPoints
+      ]],
+      styles: { font: 'helvetica', fontSize: 10, overflow: 'linebreak' },
+      columnStyles: {
+        1: { cellWidth: 180 },
+        2: { cellWidth: 70 },
+        3: { cellWidth: 35 },
+        4: { cellWidth: 55 },
+        5: { cellWidth: 35 },
+        6: { cellWidth: 50 }
+      }
+    });
+
+    doc.addPage();
+    doc.setTextColor(darkBlue);
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    doc.text('COMPLIANCE REMINDER', headX, 70);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    const complianceText = 'Drivers are strictly required to maintain all necessary certifications, endorsements, and medical fitness standards. Failure to comply may result in disciplinary action, loss of operating privileges, and possible termination.';
+    doc.text(complianceText, headX, 90, { maxWidth: pageWidth - margin * 2, align: 'justify' });
+
+    let pageY = 140;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(darkBlue);
+    doc.text('REASON FOR DISCIPLINARY ACTION:', headX, pageY);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    pageY += lineHeight;
+    doc.text(reason || 'No reason provided.', headX, pageY, { maxWidth: pageWidth - margin * 2, align: 'justify' });
+
+    pageY += lineHeight * 4;
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(14);
+    doc.setTextColor(darkBlue);
+    doc.text('PENALTY STATEMENT', headX, pageY);
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    pageY += lineHeight;
+    const penaltyText = 'Company policy mandates a $400 penalty for any Out-of-Service (OOS) violation and a $40 per-point penalty for all non-OOS CSA violations.';
+    doc.text(penaltyText, headX, pageY, { maxWidth: pageWidth - margin * 2, align: 'justify' });
+
+    pageY += lineHeight * 3;
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(darkBlue);
+    doc.text('CALCULATIONS', headX, pageY);
+
+    const hasOos = violationOos === 'Yes';
+    const oosCount = hasOos ? 1 : 0;
+    const oosAmount = oosCount * 400;
+    const nonOosAmount = csaPoints * 40;
+    const totalPenalty = oosAmount + nonOosAmount;
+
+    pageY += lineHeight;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(20, 20, 20);
+    if (hasOos) {
+      doc.text(`OOS: ${oosCount} x $400 = $${oosAmount.toFixed(2)}`, headX, pageY);
+      pageY += lineHeight;
+    }
+    doc.text(`Non-OOS: ${csaPoints} x $40 = $${nonOosAmount.toFixed(2)}`, headX, pageY);
+
+    pageY += lineHeight * 2;
+    doc.setFont('helvetica', 'bold');
+    doc.setTextColor(darkBlue);
+    doc.text(`TOTAL PENALTY AMOUNT: $${totalPenalty.toFixed(2)}`, headX, pageY);
+
+    pageY += lineHeight * 3;
+    doc.setFont('helvetica', 'normal');
+    doc.setTextColor(20, 20, 20);
+    doc.text('Employee Signature:', headX, pageY);
+    doc.line(headX + 130, pageY + 2, headX + 330, pageY + 2);
+    doc.text('Manager Signature: Rustam Kencheshaov', rightX, pageY);
+    doc.line(rightX + 190, pageY + 2, rightX + 390, pageY + 2);
+
+    pageY += lineHeight * 2;
+    doc.text('Date:', headX, pageY);
+    doc.line(headX + 40, pageY + 2, headX + 200, pageY + 2);
+    doc.text(`Date: ${today}`, rightX, pageY);
 
     const blob = doc.output('blob');
     const url = URL.createObjectURL(blob);
@@ -119,7 +324,7 @@ const SummaryPanel: React.FC<{
     if (!previewUrl) return;
     const a = document.createElement('a');
     a.href = previewUrl;
-    a.download = `warning-letter-${violation?.id || 'preview'}.pdf`;
+    a.download = `warning-letter-${record?.id || 'preview'}.pdf`;
     a.click();
   };
 
@@ -134,6 +339,41 @@ const SummaryPanel: React.FC<{
     <div className="rounded-3xl border border-slate-800 bg-slate-900 p-4">
       <div className="text-sm font-semibold mb-3">Summary</div>
       <div className="text-xs text-slate-400 mb-4">Totals: {rows.reduce((s, r) => s + (parseFloat(r.amount || 0) || 0), 0)}</div>
+      <div className="space-y-3 mb-4">
+        <div>
+          <label className="block text-xs font-semibold text-slate-400 mb-1">Reason for disciplinary action</label>
+          <textarea
+            value={reason}
+            onChange={(e) => setReason(e.target.value)}
+            placeholder="Describe why this warning letter is being issued"
+            className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none resize-none h-24"
+          />
+        </div>
+        <div className="grid grid-cols-2 gap-3">
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 mb-1">Severity</label>
+            <input
+              type="number"
+              min={0}
+              value={severity}
+              onChange={(e) => setSeverity(Number(e.target.value) || 0)}
+              className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none"
+              placeholder="0"
+            />
+          </div>
+          <div>
+            <label className="block text-xs font-semibold text-slate-400 mb-1">Weight</label>
+            <input
+              type="number"
+              min={0}
+              value={weight}
+              onChange={(e) => setWeight(Number(e.target.value) || 0)}
+              className="w-full rounded-2xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-slate-100 outline-none"
+              placeholder="0"
+            />
+          </div>
+        </div>
+      </div>
       <div className="flex flex-col gap-2">
         <button onClick={saveDraft} disabled={saving || posting} className="px-3 py-2 bg-slate-800 rounded disabled:opacity-60 flex items-center justify-center" style={{ minWidth: 160 }}>
           {saving && <Spinner />}
