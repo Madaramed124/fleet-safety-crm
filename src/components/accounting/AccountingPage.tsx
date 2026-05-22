@@ -8,6 +8,8 @@ import SummaryPanel from "./SummaryPanel";
 import { IncidentRecord } from "../../types";
 import { useApp } from "../../context/AppContext";
 
+// HMR trigger: minor edit to force Vite to re-evaluate this module
+
 const AccountingPage: React.FC = () => {
   const { records } = useApp();
   const [driverId, setDriverId] = useState<string | null>(null);
@@ -47,7 +49,7 @@ const AccountingPage: React.FC = () => {
       if (driverError) {
         console.error("[AccountingPage] driver query error for driverId", driverId, driverError);
         logError(driverError, 'Failed to load driver');
-        try { const notify = (await import('../utils/notify')).default; notify.error('Failed to load driver information'); } catch (e) {}
+        try { const notify = (await import('../../utils/notify')).default; notify.error('Failed to load driver information'); } catch (e) {}
       }
       setDriverInfo(drv || null);
       setLoadingRecords(false);
