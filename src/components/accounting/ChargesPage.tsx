@@ -2,6 +2,9 @@ import React, { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../services/supabaseClient";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import { error as notifyError, success as notifySuccess } from "../../utils/notify";
+
+// ...existing code...
 
 type ChargeRow = {
   id: string;
@@ -30,6 +33,22 @@ const ChargesPage: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [generatedPreviewUrl, setGeneratedPreviewUrl] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
+  const handleDeleteCharge = async () => {
+    if (!selectedCharge) return;
+    setDeleting(true);
+    const { error } = await supabase.from("charges").delete().eq("id", selectedCharge.id);
+    setDeleting(false);
+    if (error) {
+      notifyError("Failed to delete charge: " + error.message);
+      return;
+    }
+    notifySuccess("Charge deleted successfully.");
+    setCharges((prev) => prev.filter((c) => c.id !== selectedCharge.id));
+    setSelectedCharge(null);
+    setPreviewUrl(null);
+    setPreviewOpen(false);
+  };
 
   const selectedChargeDocumentUrl = selectedCharge?.document_url || selectedCharge?.charge_documents?.[0]?.file_url || null;
   const canPreviewCharge = Boolean(selectedCharge);
@@ -92,7 +111,6 @@ const ChargesPage: React.FC = () => {
     const violationDate = selectedCharge.violations?.date ? new Date(selectedCharge.violations.date).toLocaleDateString() : 'N/A';
     const reasonText = selectedCharge.description || selectedCharge.violations?.description || 'No reason provided.';
     const amountValue = selectedCharge.amount != null ? Number(selectedCharge.amount) : 0;
-    const amountText = `$${amountValue.toFixed(2)}`;
     const csaPoints = Math.max(0, Math.round(amountValue / 40));
 
     doc.setTextColor(darkBlue);
@@ -371,6 +389,13 @@ const ChargesPage: React.FC = () => {
                 className={`rounded-full px-3 py-2 text-slate-950 transition ${canPreviewCharge ? 'bg-cyan-500 hover:bg-cyan-400' : 'bg-slate-700 cursor-not-allowed'}`}
               >
                 View
+              </button>
+              <button
+                onClick={handleDeleteCharge}
+                disabled={deleting}
+                className="rounded-full bg-red-600 px-3 py-2 text-slate-100 hover:bg-red-500 disabled:opacity-60"
+              >
+                {deleting ? 'Deleting...' : 'Delete'}
               </button>
               <button
                 onClick={handleCloseAll}

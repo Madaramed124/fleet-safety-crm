@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import ChargeRow from "./ChargeRow";
 import { IncidentRecord } from "../../types";
 
@@ -8,14 +8,18 @@ const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setR
   useEffect(() => {
     // reset when selected inspection changes
     setRows([emptyRow()]);
-    onDirty && onDirty(false);
-  }, [record]);
+    if (onDirty) {
+      onDirty(false);
+    }
+  }, [record, onDirty, setRows]);
 
   const updateRow = (idx: number, row: any) => {
     const copy = [...rows];
     copy[idx] = row;
     setRows(copy);
-    onDirty && onDirty(true);
+    if (onDirty) {
+      onDirty(true);
+    }
   };
 
   const removeRow = (idx: number) => {
@@ -24,10 +28,17 @@ const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setR
     } else {
       setRows(rows.filter((_, i) => i !== idx));
     }
-    onDirty && onDirty(true);
+    if (onDirty) {
+      onDirty(true);
+    }
   };
 
-  const addRow = () => { setRows([...(rows || []), emptyRow()]); onDirty && onDirty(true); };
+  const addRow = () => {
+    setRows([...(rows || []), emptyRow()]);
+    if (onDirty) {
+      onDirty(true);
+    }
+  };
 
   return (
     <div className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900 p-5">

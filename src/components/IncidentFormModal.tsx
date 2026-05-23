@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import notify from '../utils/notify';
 import { useApp } from "../context/AppContext";
 import {
@@ -97,11 +97,6 @@ export const IncidentFormModal: React.FC = () => {
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const ticketAttachmentTypes = [
-    "Inspection Report",
-    "Proof of Repair",
-    "Warning Letter",
-  ] as const;
   const accidentAttachmentTypes = ["Pictures", "Police Report"] as const;
 
   const companyNameSuggestions = [
@@ -138,6 +133,39 @@ export const IncidentFormModal: React.FC = () => {
   const [isCleanInspection, setIsCleanInspection] = useState(false);
   const currentAttachmentTypes =
     type === "accident" ? accidentAttachmentTypes : inspectionAttachmentTypes;
+
+  const resetForm = useCallback(() => {
+    setType("inspection");
+    setDate(new Date().toISOString().split("T")[0]);
+    setCaseCode("");
+    setDriverName("");
+    setCarrierName("");
+    setStatus("Open");
+    setNotes("");
+    setCsaSeverity("Medium");
+    setHasAttorney(false);
+    setIsRecurring(false);
+    setViolations([]);
+    setFines([]);
+    setCsaImpactScore("");
+    setCompanyImpactLevel("Medium");
+    setCompanyImpactNotes("");
+    setReferredToLawyers("No");
+    setTotalCost(0);
+    setLegalNotes("");
+    setResolutionNotes("");
+    setSeverity("Minor");
+    setIsFmcsaRecordable(false);
+    setVehicleTowed(false);
+    setInjuries([]);
+    setReceivedCitation(false);
+    setCitationNumber("");
+    setInspectionHasTicketDetails(false);
+    setIsCleanInspection(false);
+    setAttachments([]);
+    setNewAttachmentType("Inspection Report");
+    setFormMonthId(selectedMonthId ?? months[0]?.id ?? "");
+  }, [months, selectedMonthId]);
 
   // Initialize form with editing record if exists
   useEffect(() => {
@@ -194,40 +222,7 @@ export const IncidentFormModal: React.FC = () => {
       resetForm();
       setFormMonthId(selectedMonthId ?? months[0]?.id ?? "");
     }
-  }, [isOpen, editingRecord, isEditModalOpen, selectedMonthId, months]);
-
-  const resetForm = () => {
-    setType("inspection");
-    setDate(new Date().toISOString().split("T")[0]);
-    setCaseCode("");
-    setDriverName("");
-    setCarrierName("");
-    setStatus("Open");
-    setNotes("");
-    setCsaSeverity("Medium");
-    setHasAttorney(false);
-    setIsRecurring(false);
-    setViolations([]);
-    setFines([]);
-    setCsaImpactScore("");
-    setCompanyImpactLevel("Medium");
-    setCompanyImpactNotes("");
-    setReferredToLawyers("No");
-    setTotalCost(0);
-    setLegalNotes("");
-    setResolutionNotes("");
-    setSeverity("Minor");
-    setIsFmcsaRecordable(false);
-    setVehicleTowed(false);
-    setInjuries([]);
-    setReceivedCitation(false);
-    setCitationNumber("");
-    setInspectionHasTicketDetails(false);
-    setIsCleanInspection(false);
-    setAttachments([]);
-    setNewAttachmentType("Inspection Report");
-    setFormMonthId(selectedMonthId ?? months[0]?.id ?? "");
-  };
+  }, [isOpen, editingRecord, isEditModalOpen, selectedMonthId, months, resetForm]);
 
   const handleFileUpload = (file: File) => {
     if (file.size > 10 * 1024 * 1024) {
@@ -379,7 +374,11 @@ export const IncidentFormModal: React.FC = () => {
   };
 
   const handleClose = () => {
-    isAddModalOpen ? closeAddModal() : closeEditModal();
+    if (isAddModalOpen) {
+      closeAddModal();
+    } else {
+      closeEditModal();
+    }
     resetForm();
   };
 
@@ -798,7 +797,6 @@ export const IncidentFormModal: React.FC = () => {
               citationNumber={citationNumber}
               setCitationNumber={setCitationNumber}
               hasTicketDetails={inspectionHasTicketDetails}
-              setHasTicketDetails={setInspectionHasTicketDetails}
               hasAttorney={hasAttorney}
               setHasAttorney={setHasAttorney}
               isRecurring={isRecurring}
@@ -1129,7 +1127,6 @@ interface InspectionFieldsProps {
   citationNumber: string;
   setCitationNumber: (v: string) => void;
   hasTicketDetails: boolean;
-  setHasTicketDetails: (v: boolean) => void;
   hasAttorney: boolean;
   setHasAttorney: (v: boolean) => void;
   isRecurring: boolean;
@@ -1169,7 +1166,6 @@ const InspectionFields: React.FC<InspectionFieldsProps> = ({
   citationNumber,
   setCitationNumber,
   hasTicketDetails,
-  setHasTicketDetails,
   hasAttorney,
   setHasAttorney,
   isRecurring,

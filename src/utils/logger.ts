@@ -6,7 +6,7 @@ export function logError(err: any, userMessage?: string) {
   try {
     const msg = userMessage || (err && err.message) || String(err) || 'An error occurred';
     notify.error(msg);
-  } catch (e) {
+  } catch {
     // swallow
   }
 }

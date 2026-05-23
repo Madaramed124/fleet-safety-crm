@@ -5,6 +5,7 @@ import { KPIDashboard } from "./KPIDashboard";
 import AccountingPage from "./accounting/AccountingPage";
 import AccountingLedger from "./accounting/AccountingLedger";
 import ChargesPage from "./accounting/ChargesPage";
+import ReminderCalendar from "./calendar/ReminderCalendar";
 // Inline DriversView to avoid cross-module resolution issues in this environment
 const InlineDriversView: React.FC<{ onClose?: () => void }> = () => {
   const { records, openEditModal } = useApp();
@@ -107,9 +108,17 @@ import { Plus } from "lucide-react";
 
 export const AppLayout: React.FC = () => {
   const { selectedMonthId, openAddModal, isLoading, months } = useApp();
-  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "accounting" | "accountingLedger" | "charges">(() => {
+  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "calendar" | "accounting" | "accountingLedger" | "charges">(() => {
     const hash = window.location.hash.slice(1);
-    if (hash === "dashboard" || hash === "incidents" || hash === "drivers" || hash === "accounting" || hash === "accountingLedger" || hash === "charges") {
+    if (
+      hash === "dashboard" ||
+      hash === "incidents" ||
+      hash === "drivers" ||
+      hash === "calendar" ||
+      hash === "accounting" ||
+      hash === "accountingLedger" ||
+      hash === "charges"
+    ) {
       return hash;
     }
     return "dashboard";
@@ -119,7 +128,15 @@ export const AppLayout: React.FC = () => {
   React.useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash.slice(1);
-      if (hash === "dashboard" || hash === "incidents" || hash === "drivers" || hash === "accounting" || hash === "accountingLedger" || hash === "charges") {
+      if (
+        hash === "dashboard" ||
+        hash === "incidents" ||
+        hash === "drivers" ||
+        hash === "calendar" ||
+        hash === "accounting" ||
+        hash === "accountingLedger" ||
+        hash === "charges"
+      ) {
         setTab(hash);
       }
     };
@@ -166,12 +183,6 @@ export const AppLayout: React.FC = () => {
             Drivers
           </button>
           <button
-            onClick={() => setTab("accounting")}
-            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accounting" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
-          >
-            Charge Builder
-          </button>
-          <button
             onClick={() => setTab("charges")}
             className={`px-3 py-2 rounded text-sm font-semibold ${tab === "charges" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
           >
@@ -182,6 +193,12 @@ export const AppLayout: React.FC = () => {
             className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accountingLedger" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
           >
             Accounting
+          </button>
+          <button
+            onClick={() => setTab("calendar")}
+            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "calendar" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
+          >
+            Calendar
           </button>
         </div>
 
@@ -219,6 +236,7 @@ export const AppLayout: React.FC = () => {
         <div className="flex-1 overflow-auto">
           {tab === "incidents" && <IncidentListView />}
           {tab === "drivers" && <InlineDriversView />}
+          {tab === "calendar" && <ReminderCalendar />}
           {tab === "accounting" && <AccountingPage />}
           {tab === "accountingLedger" && <AccountingLedger />}
           {tab === "charges" && <ChargesPage />}

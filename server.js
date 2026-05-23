@@ -3,7 +3,9 @@ import cors from 'cors';
 import fs from 'fs/promises';
 import path from 'path';
 import { fromPath } from 'pdf2pic';
-import { Anthropic } from '@anthropic-ai/sdk';
+import AnthropicSDK from '@anthropic-ai/sdk';
+
+const { Client: Anthropic } = AnthropicSDK;
 
 const app = express();
 app.use(cors());
@@ -48,20 +50,13 @@ async function callClaudeVision(base64Image, mediaType) {
   const prompt = `You are given a single image of an inspection or accident report. Extract the following fields and return ONLY valid JSON, no markdown, no explanation, no backticks. The JSON keys must be: caseCode, date, driverName, carrierName, violationType, severity, status, notes. Use ISO date format (YYYY-MM-DD) for date, return null when a field is not found.`;
   const input = `${prompt}\n\nDATA_URI: data:${mediaType};base64,${base64Image}`;
 
-  const response = await client.responses.create({ model: CLAUDE_MODEL, input });
+  const response = await client.complete({
+    prompt: input,
+    model: CLAUDE_MODEL,
+    max_tokens_to_sample: 1024,
+  });
 
-  let text;
-  try {
-    if (response.output && Array.isArray(response.output) && response.output[0] && response.output[0].content) {
-      const content = response.output[0].content;
-      const first = content.find((c) => c.type === 'output_text' || c.type === 'text');
-      if (first) text = first.text || first.content || (typeof first === 'string' ? first : undefined);
-      if (!text && typeof content === 'string') text = content;
-    }
-  } catch (e) {}
-
-  if (!text && response.output_text) text = response.output_text;
-  if (!text && response.completion) text = response.completion;
+  const text = typeof response === 'string' ? response : response.completion || response.output_text;
   if (!text) throw new Error('No text output from Anthropic response');
 
   const cleaned = text.replace(/```[\s\S]*?```/g, '').replace(/`/g, '').trim();
@@ -86,6 +81,19 @@ app.post('/api/extract-inspection', async (req, res) => {
 });
 
 const port = process.env.PORT || 3001;
-app.listen(port, () => {
+
+const server = app.listen(port, () => {
   console.log(`Extraction server listening on port ${port}`);
+});
+
+server.on('error', (error) => {
+  if (error && typeof error === 'object' && 'code' in error && error.code === 'EADDRINUSE') {
+    console.warn(`Extraction server port ${port} is already in use. Assuming another instance is running.`);
+    server.close(() => {
+      process.exit(0);
+    });
+    return;
+  }
+
+  throw error;
 });

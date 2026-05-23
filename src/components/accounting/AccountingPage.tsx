@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import logError from '../../utils/logger';
+import notify from '../../utils/notify';
 import { supabase } from "../../services/supabaseClient";
 import DriverSelect from "./DriverSelect";
 import InspectionList from "./InspectionList";
@@ -20,7 +21,7 @@ const AccountingPage: React.FC = () => {
   const [busy, setBusy] = useState(false);
   const [notes, setNotes] = useState<string>("");
   const [loadingRecords, setLoadingRecords] = useState(false);
-  const violationListRef = React.useRef<any>(null);
+  const violationListRef = React.useRef<{ scrollToTop?: () => void } | null>(null);
   const [driverInfo, setDriverInfo] = useState<any | null>(null);
   const [confirmSwitch, setConfirmSwitch] = useState<{ pending?: IncidentRecord | null; show: boolean } | null>(null);
 
@@ -49,7 +50,7 @@ const AccountingPage: React.FC = () => {
       if (driverError) {
         console.error("[AccountingPage] driver query error for driverId", driverId, driverError);
         logError(driverError, 'Failed to load driver');
-        try { const notify = (await import('../../utils/notify')).default; notify.error('Failed to load driver information'); } catch (e) {}
+        notify.error('Failed to load driver information');
       }
       setDriverInfo(drv || null);
       setLoadingRecords(false);
@@ -152,7 +153,6 @@ const AccountingPage: React.FC = () => {
           driverId={driverId}
           driverInfo={driverInfo}
           record={selectedRecord}
-          dirty={dirty}
           setDirty={setDirty}
           rows={rows}
           setRows={setRows}

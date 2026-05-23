@@ -6,5 +6,24 @@ export default defineConfig({
   server: {
     port: 5173,
     open: true
+  },
+  build: {
+    sourcemap: false,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('jspdf')) return 'pdf'
+            if (id.includes('react')) return 'react'
+            if (id.includes('sonner')) return 'ui'
+            return 'vendor'
+          }
+
+          if (id.includes('/components/accounting/')) return 'accounting'
+
+          return undefined
+        }
+      }
+    }
   }
 })

@@ -9,7 +9,6 @@ const SummaryPanel: React.FC<{
   driverId: string | null;
   driverInfo?: any | null;
   record: any | null;
-  dirty: boolean;
   setDirty: (d: boolean) => void;
   rows: any[];
   setRows: (r: any[]) => void;
@@ -18,7 +17,7 @@ const SummaryPanel: React.FC<{
   setNotes?: (s: string) => void;
   onPosted?: () => void;
   refresh: () => void;
-}> = ({ driverId, driverInfo, record, dirty, setDirty, rows, setRows, setValidationErrors, setBusy, setNotes, onPosted, refresh }) => {
+}> = ({ driverId, driverInfo, record, setDirty, rows, setRows, setValidationErrors, setBusy, setNotes, onPosted, refresh }) => {
   const [previewUrl, setPreviewUrl] = useState<string | null>(null);
   const [showPreview, setShowPreview] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -64,8 +63,13 @@ const SummaryPanel: React.FC<{
     const selectedViolation = record?.violations?.[0];
     if (!driverId || !record || !selectedViolation) { notify.error('Select an inspection with at least one violation first'); return; }
     setErrorMessage(null);
-    setValidationErrors && setValidationErrors({});
-    setSaving(true); setBusy && setBusy(true);
+    if (setValidationErrors) {
+      setValidationErrors({});
+    }
+    setSaving(true);
+    if (setBusy) {
+      setBusy(true);
+    }
     try {
       const violationId = await resolveViolationId(selectedViolation, record?.date);
       for (const r of rows) {
@@ -83,13 +87,18 @@ const SummaryPanel: React.FC<{
       }
       notify.success('Draft saved');
       setDirty(false);
-      setValidationErrors && setValidationErrors({});
+      if (setValidationErrors) {
+        setValidationErrors({});
+      }
     } catch (err: any) {
       logError(err, 'Error saving draft');
       const msg = 'Error saving draft: ' + (err.message || String(err));
       setErrorMessage(msg);
     } finally {
-      setSaving(false); setBusy && setBusy(false);
+      setSaving(false);
+      if (setBusy) {
+        setBusy(false);
+      }
     }
   };
 
@@ -105,28 +114,46 @@ const SummaryPanel: React.FC<{
         if (!amt || amt <= 0) errors[idx] = { ...(errors[idx] || {}), amount: 'Amount must be > 0' };
       }
     });
-    if (Object.keys(errors).length > 0) { setValidationErrors && setValidationErrors(errors); notify.error('Fix validation errors before posting.'); return; }
+    if (Object.keys(errors).length > 0) {
+      if (setValidationErrors) {
+        setValidationErrors(errors);
+      }
+      notify.error('Fix validation errors before posting.');
+      return;
+    }
 
     try {
       setErrorMessage(null);
-      setPosting(true); setBusy && setBusy(true);
+      setPosting(true);
+      if (setBusy) {
+        setBusy(true);
+      }
       const payload = rows.map(r => ({ charge_type: r.charge_type, description: r.description, amount: r.amount ? parseFloat(r.amount) : null, document_url: r.document_url || null, documents: r.document_url ? [{ file_name: r.file_name || '', file_url: r.document_url, file_type: r.file_type || '' }] : [] }));
       const violationId = await resolveViolationId(selectedViolation, record?.date);
-      const { data, error } = await supabase.rpc('post_charges', { p_driver_id: driverId, p_violation_id: violationId, p_charges: payload, p_created_by: null });
+      const { error } = await supabase.rpc('post_charges', { p_driver_id: driverId, p_violation_id: violationId, p_charges: payload, p_created_by: null });
       if (error) throw error;
       notify.success(`Charges posted for ${driverInfo?.name || 'Driver'} — Inspection ${record.id}`);
       setRows([]);
-      setNotes && setNotes('');
+      if (setNotes) {
+        setNotes('');
+      }
       setDirty(false);
-      setValidationErrors && setValidationErrors({});
+      if (setValidationErrors) {
+        setValidationErrors({});
+      }
       refresh();
-      onPosted && onPosted();
+      if (onPosted) {
+        onPosted();
+      }
     } catch (err: any) {
       logError(err, 'Error posting charges');
       const msg = 'Error posting charges: ' + (err.message || String(err));
       setErrorMessage(msg);
     } finally {
-      setPosting(false); setBusy && setBusy(false);
+      setPosting(false);
+      if (setBusy) {
+        setBusy(false);
+      }
     }
   };
 
