@@ -189,10 +189,16 @@ export const AppLayout: React.FC = () => {
             Charges
           </button>
           <button
+            onClick={() => setTab("accounting")}
+            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accounting" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
+          >
+            Charge Builder
+          </button>
+          <button
             onClick={() => setTab("accountingLedger")}
             className={`px-3 py-2 rounded text-sm font-semibold ${tab === "accountingLedger" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
           >
-            Accounting
+            Accounting Ledger
           </button>
           <button
             onClick={() => setTab("calendar")}

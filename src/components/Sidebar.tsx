@@ -1,7 +1,19 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import notify from '../utils/notify';
 import { useApp } from "../context/AppContext";
 import { Plus } from "lucide-react";
+import { supabase } from "../services/supabaseClient";
+
+type ReminderType = "court" | "license" | "inspection" | "resolved";
+
+type ReminderRow = {
+  id: string;
+  date: string;
+  title: string;
+  driver_id: string;
+  type: ReminderType;
+  notes: string | null;
+};
 
 export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "calendar" | "accounting" | "charges" }> = ({ activeTab = "dashboard" }) => {
   const {
@@ -15,6 +27,7 @@ export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "driver
   const [showAddForm, setShowAddForm] = useState(false);
   const [monthInput, setMonthInput] = useState("1");
   const [yearInput, setYearInput] = useState(new Date().getFullYear());
+  const [reminders, setReminders] = useState<ReminderRow[]>([]);
 
   const monthOptions = [
     { label: "January", value: 1 },
@@ -52,6 +65,27 @@ export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "driver
   const getIncidentCount = (monthId: string): number => {
     return records.filter((r) => r.monthId === monthId).length;
   };
+
+  useEffect(() => {
+    let isActive = true;
+
+    const fetchReminders = async () => {
+      const { data, error } = await supabase
+        .from("reminders")
+        .select("id, date, title, driver_id, type, notes")
+        .order("date", { ascending: true });
+
+      if (!error && isActive) {
+        setReminders((data ?? []) as ReminderRow[]);
+      }
+    };
+
+    fetchReminders();
+
+    return () => {
+      isActive = false;
+    };
+  }, []);
 
   return (
     <aside className="w-80 min-w-[280px] bg-slate-950/95 backdrop-blur-xl border-r border-slate-800 shadow-[0_0_80px_-30px_rgba(15,23,42,0.8)] flex flex-col h-screen no-print">
@@ -184,31 +218,23 @@ export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "driver
               );
             })
           )
+        ) : reminders.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/80 p-6 text-center text-sm text-slate-500">No reminders</div>
         ) : (
-          (() => {
-            const uniqueUnclosed = Array.from(
-              records
-                .filter((r) => r.status !== "Closed")
-                .reduce((map, record) => {
-                  const key = `${record.driverName}|${new Date(record.date).toISOString()}|${record.type}|${record.status}|${record.caseCode}`;
-                  if (!map.has(key)) map.set(key, record);
-                  return map;
-                }, new Map<string, typeof records[number]>() )
-              .values()
-            );
-
-            return uniqueUnclosed.length === 0 ? (
-              <div className="rounded-3xl border border-dashed border-slate-800 bg-slate-900/80 p-6 text-center text-sm text-slate-500">No reminders</div>
-            ) : (
-              uniqueUnclosed.slice(0, 10).map((r) => (
-                <div key={`${r.id}-${r.type}-${new Date(r.date).getTime()}`} className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 shadow-sm shadow-slate-950/20">
-                  <div className="font-semibold text-sm text-white">{r.driverName}</div>
-                  <div className="mt-1 text-xs text-slate-400">{new Date(r.date).toLocaleDateString()}</div>
-                  <div className="mt-3 text-xs text-slate-300">{r.type}</div>
+          reminders.slice(0, 10).map((reminder) => (
+            <div key={reminder.id} className="rounded-3xl border border-slate-800 bg-slate-900/95 p-4 shadow-sm shadow-slate-950/20">
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <div className="font-semibold text-sm text-white">{reminder.title}</div>
+                  <div className="mt-1 text-xs text-slate-400">{new Date(reminder.date).toLocaleDateString()}</div>
                 </div>
-              ))
-            );
-          })()
+                <span className="rounded-full bg-slate-800 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.2em] text-cyan-300">
+                  {reminder.type}
+                </span>
+              </div>
+              {reminder.notes ? <p className="mt-3 text-xs text-slate-300">{reminder.notes}</p> : null}
+            </div>
+          ))
         )}
       </div>
     </aside>

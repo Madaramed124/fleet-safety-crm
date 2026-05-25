@@ -180,8 +180,11 @@ export const ReminderCalendar: React.FC = () => {
   };
 
   const deleteReminder = async (id: string) => {
-    await supabase.from("reminders").delete().eq("id", id);
-    await fetchReminders();
+    const { error } = await supabase.from("reminders").delete().eq("id", id);
+
+    if (!error) {
+      setReminders((prev) => prev.filter((reminder) => reminder.id !== id));
+    }
   };
 
   return (

@@ -25,7 +25,7 @@ export const KPIDashboard: React.FC = () => {
 
   const selectedMonthLabel = selectedRangeMonthId
     ? (() => {
-        const item = sortedMonths.find((m) => m.id === selectedRangeMonthId);
+        const item = sortedMonths.find((m: { id: string; month: number; year: number }) => m.id === selectedRangeMonthId);
         return item ? `${item.month}/${item.year}` : "Selected month";
       })()
     : "Selected month";
@@ -90,7 +90,7 @@ export const KPIDashboard: React.FC = () => {
       return [];
     }
 
-    const monthIndex = sortedMonths.findIndex((m) => m.id === selectedMonth);
+    const monthIndex = sortedMonths.findIndex((m: { id: string; month: number; year: number }) => m.id === selectedMonth);
     const prevMonthEntry = monthIndex >= 0 && monthIndex + 1 < sortedMonths.length ? sortedMonths[monthIndex + 1] : null;
     if (!prevMonthEntry) {
       return [];
@@ -104,7 +104,7 @@ export const KPIDashboard: React.FC = () => {
   const accidents = count(recordsInRange, "accident");
   const inspections = count(recordsInRange, "inspection");
   const tickets = count(recordsInRange, "ticket");
-  const totalFines = recordsInRange.reduce((sum, r: any) => sum + ((r.fines || []).reduce((s: number, f: any) => s + (f.amount || 0), 0) || 0), 0);
+  const totalFines = recordsInRange.reduce<number>((sum, r: any) => sum + ((r.fines || []).reduce((s: number, f: any) => s + (f.amount || 0), 0) || 0), 0);
 
   const prevTotal = recordsInPrevRange.length;
   const prevAccidents = count(recordsInPrevRange, "accident");
@@ -122,7 +122,7 @@ export const KPIDashboard: React.FC = () => {
   const estimatedCost = totalFines + accidents * avgAccidentCost;
 
   // total CSA score lost: sum severity mapping for current range
-  const csaScoreLost = recordsInRange.reduce((sum, r: any) => {
+  const csaScoreLost = recordsInRange.reduce<number>((sum, r: any) => {
     const sev = r.csaSeverity;
     if (!sev) return sum;
     if (sev === "High") return sum + 5;
@@ -169,7 +169,7 @@ export const KPIDashboard: React.FC = () => {
               onChange={(event) => setRangeMonthId(event.target.value)}
               className="bg-slate-900 border border-slate-700 rounded px-3 py-1 text-sm text-slate-200"
             >
-              {sortedMonths.map((month) => (
+              {sortedMonths.map((month: { id: string; month: number; year: number }) => (
                 <option key={month.id} value={month.id}>
                   {`${month.month}/${month.year}`}
                 </option>
@@ -199,6 +199,7 @@ export const KPIDashboard: React.FC = () => {
           <AtRiskDrivers drivers={atRiskDrivers} />
         </div>
       </div>
+
     </div>
   );
 };

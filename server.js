@@ -7,6 +7,54 @@ import AnthropicSDK from '@anthropic-ai/sdk';
 
 const { Client: Anthropic } = AnthropicSDK;
 
+const ENV_PATH = path.resolve(process.cwd(), '.env');
+
+const parseEnvFile = (contents) => {
+  const parsed = {};
+
+  contents.split(/\r?\n/).forEach((line) => {
+    const trimmed = line.trim();
+    if (!trimmed || trimmed.startsWith('#')) {
+      return;
+    }
+
+    const separatorIndex = trimmed.indexOf('=');
+    if (separatorIndex === -1) {
+      return;
+    }
+
+    const key = trimmed.slice(0, separatorIndex).trim();
+    let value = trimmed.slice(separatorIndex + 1).trim();
+
+    if ((value.startsWith('"') && value.endsWith('"')) || (value.startsWith("'") && value.endsWith("'"))) {
+      value = value.slice(1, -1);
+    }
+
+    parsed[key] = value;
+  });
+
+  return parsed;
+};
+
+const loadEnvFile = async () => {
+  try {
+    const contents = await fs.readFile(ENV_PATH, 'utf8');
+    const parsed = parseEnvFile(contents);
+    Object.entries(parsed).forEach(([key, value]) => {
+      if (process.env[key] === undefined) {
+        process.env[key] = value;
+      }
+    });
+    console.log('[env] Loaded .env values into process.env');
+  } catch (error) {
+    if (error.code !== 'ENOENT') {
+      console.warn('[env] Failed to read .env file:', error.message);
+    }
+  }
+};
+
+await loadEnvFile();
+
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: '30mb' }));
