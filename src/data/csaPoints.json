@@ -1,1 +1,4692 @@
-{}
+{
+  "177.800(d)": {
+    "description": "Unnecessary delay in HM transportation to destination",
+    "group": "HM Related",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "390.17dt": {
+    "description": "Operating a CMV while texting",
+    "group": "Texting",
+    "category": "Unsafe Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "390.20": {
+    "description": "Failing to properly secure parked vehicle",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.2c": {
+    "description": "Failure to obey traffic control device",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2dh": {
+    "description": "Headlamps - Failing to dim when required",
+    "group": "Misc Violations",
+    "category": "Unsafe Driving",
+    "severity": 3,
+    "weight": 3
+  },
+  "392.2fc": {
+    "description": "Following too close",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2lc": {
+    "description": "Improper lane change",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2lv": {
+    "description": "Lane Restriction violation",
+    "group": "Misc Violations",
+    "category": "Unsafe Driving",
+    "severity": 3,
+    "weight": 3
+  },
+  "392.2p": {
+    "description": "Improper passing",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2pk": {
+    "description": "Unlawfully parking and/or leaving vehicle in the roadway",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.2r": {
+    "description": "Reckless driving",
+    "group": "Reckless Driving",
+    "category": "Unsafe Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.2rr": {
+    "description": "Railroad Grade Crossing violation",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2s": {
+    "description": "Speeding",
+    "group": "Speeding Related",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2-slls1": {
+    "description": "State/Local Laws - Speeding 1-5 miles per hour over the speed limit",
+    "group": "Speeding 1",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.2-slls2": {
+    "description": "State/Local Laws - Speeding 6-10 miles per hour over the speed limit",
+    "group": "Speeding 2",
+    "category": "Unsafe Driving",
+    "severity": 4,
+    "weight": 3
+  },
+  "392.2-slls3": {
+    "description": "State/Local Laws - Speeding 11-14 miles per hour over the speed limit",
+    "group": "Speeding 3",
+    "category": "Unsafe Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.2-slls4": {
+    "description": "State/Local Laws - Speeding 15 or more miles per hour over the speed limit",
+    "group": "Speeding 4",
+    "category": "Unsafe Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.2-sllswz": {
+    "description": "State/Local Laws - Speeding work/construction zone",
+    "group": "Speeding 4",
+    "category": "Unsafe Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.2-sllt": {
+    "description": "State/Local Laws - Operating a CMV while texting",
+    "group": "Texting",
+    "category": "Unsafe Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.2t": {
+    "description": "Improper turns",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.2y": {
+    "description": "Failure to yield right of way",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.6": {
+    "description": "Scheduling run to necessitate speeding",
+    "group": "Speeding Related",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.10(a)(1)": {
+    "description": "Failing to stop at railroad crossing—bus",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.10(a)(2)": {
+    "description": "Failing to stop at railroad crossing—chlorine",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.10(a)(3)": {
+    "description": "Failing to stop at railroad crossing—placard",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.10(a)(4)": {
+    "description": "Failing to stop at railroad crossing—HM cargo",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.14": {
+    "description": "Failed to use caution for hazardous condition",
+    "group": "Dangerous Driving",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "392.16": {
+    "description": "Failing to use seat belt while operating CMV",
+    "group": "Seat Belt",
+    "category": "Unsafe Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.22(a)": {
+    "description": "Failing to use hazard warning flashers",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.60(a)": {
+    "description": "Unauthorized passenger on board CMV",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.62": {
+    "description": "Unsafe bus operations",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.62(a)": {
+    "description": "Bus—Standees forward of the standee line",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.71(a)": {
+    "description": "Using or equipping a CMV with radar detector",
+    "group": "Speeding Related",
+    "category": "Unsafe Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "397.3": {
+    "description": "State/local laws ordinances regulations",
+    "group": "HM Related",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "397.13": {
+    "description": "Smoking within 25 feet of HM vehicle",
+    "group": "HM Related",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "398.4": {
+    "description": "Driving of vehicle—migrant workers",
+    "group": "Other Driver Violations",
+    "category": "Unsafe Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "177.816": {
+    "description": "Driver training requirements",
+    "group": "General Driver Qualification",
+    "category": "Driver Fitness",
+    "severity": 4,
+    "weight": 3
+  },
+  "383.21": {
+    "description": "Operating a CMV with more than one driver's license",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.21(a)": {
+    "description": "Operating a CMV with more than one driver's license†",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.23(a)(2)": {
+    "description": "Operating a CMV without a CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.23(c)": {
+    "description": "Operating on learner's permit without CDL holder",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.23(c)(1)": {
+    "description": "Operating on learner's permit without CDL holder",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.23(c)(2)": {
+    "description": "Operating on learner's permit without valid driver’s license",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.51(a)": {
+    "description": "Driving a CMV (CDL) while disqualified",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.91(a)": {
+    "description": "Operating a CMV with improper CDL group",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93(b)(1)": {
+    "description": "No double/triple trailer endorsement on CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93(b)(2)": {
+    "description": "No passenger vehicle endorsement on CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93(b)(3)": {
+    "description": "No tank vehicle endorsement on CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93(b)(4)": {
+    "description": "No hazardous materials endorsement on CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93(b)(5)": {
+    "description": "No school bus endorsement on CDL",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.93b5lcdl": {
+    "description": "License (CDL) - Operating a school bus without a school bus endorsement as described in 383.93(b)(5)",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "383.95(a)": {
+    "description": "Violating airbrake restriction",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "386.72(b)": {
+    "description": "Failing to comply with Imminent Hazard OOS Order",
+    "group": "Fitness/ Jumping OOS",
+    "category": "Driver Fitness",
+    "severity": 10,
+    "weight": 3
+  },
+  "391.11": {
+    "description": "Unqualified driver",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "391.11(b)(1)": {
+    "description": "Interstate driver under 21 years of age",
+    "group": "General Driver Qualification",
+    "category": "Driver Fitness",
+    "severity": 4,
+    "weight": 3
+  },
+  "391.11(b)(2)": {
+    "description": "Non-English speaking driver",
+    "group": "General Driver Qualification",
+    "category": "Driver Fitness",
+    "severity": 4,
+    "weight": 3
+  },
+  "391.11b2s": {
+    "description": "Driver must be able to understand highway traffic signs and signals in the English language",
+    "group": "General Driver Qualification",
+    "category": "Driver Fitness",
+    "severity": 4,
+    "weight": 3
+  },
+  "391.11(b)(4)": {
+    "description": "Driver lacking physical qualification(s)",
+    "group": "Physical",
+    "category": "Driver Fitness",
+    "severity": 2,
+    "weight": 3
+  },
+  "391.11(b)(5)": {
+    "description": "Driver lacking valid license for type vehicle being operated",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "391.11(b)(7)": {
+    "description": "Driver disqualified from operating CMV",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "391.15(a)": {
+    "description": "Driving a CMV while disqualified",
+    "group": "License-related",
+    "category": "Driver Fitness",
+    "severity": 8,
+    "weight": 3
+  },
+  "391.41(a)": {
+    "description": "Driver not in possession of medical certificate",
+    "group": "Medical Certificate",
+    "category": "Driver Fitness",
+    "severity": 1,
+    "weight": 3
+  },
+  "391.43(h)": {
+    "description": "Improper medical examiners certificate form",
+    "group": "Medical Certificate",
+    "category": "Driver Fitness",
+    "severity": 1,
+    "weight": 3
+  },
+  "391.45(b)": {
+    "description": "Expired medical examiner's certificate",
+    "group": "Medical Certificate",
+    "category": "Driver Fitness",
+    "severity": 1,
+    "weight": 3
+  },
+  "391.49(j)": {
+    "description": "No valid medical waiver in driver's possession",
+    "group": "Medical Certificate",
+    "category": "Driver Fitness",
+    "severity": 1,
+    "weight": 3
+  },
+  "398.3(b)": {
+    "description": "Driver not physically qualified",
+    "group": "Physical",
+    "category": "Driver Fitness",
+    "severity": 2,
+    "weight": 3
+  },
+  "398.3(b)(8)": {
+    "description": "No doctor's certificate in possession",
+    "group": "Medical Certificate",
+    "category": "Driver Fitness",
+    "severity": 1,
+    "weight": 3
+  },
+  "365.511": {
+    "description": "Fail to display current CVSA Decal: Permanent Authority",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "374.313(a)": {
+    "description": "Failure to maintain a reasonable temperature",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "374.313(b)": {
+    "description": "Bus - Failure to maintain restroom",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "374.313(c)": {
+    "description": "Bus - Not maintained in clean working order",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "385.103(c)": {
+    "description": "Fail to display current CVSA decal- Provisional Authority",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "392.2wc": {
+    "description": "Wheel (Mud) Flaps missing or defective",
+    "group": "Windshield /Glass /Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.7": {
+    "description": "No pre-trip inspection",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "392.7(a)": {
+    "description": "Driver failing to conduct pre-trip inspection",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "392.7(b)": {
+    "description": "Driver failing to conduct a pre-trip inspection of Intermodal Equipment",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "392.8": {
+    "description": "Failing to inspect/use emergency equipment",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "392.22(b)": {
+    "description": "Failing/improper placement of warning devices",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "392.33": {
+    "description": "Operating CMV with lamps/reflectors obscured",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.9(a)": {
+    "description": "Inoperative required lamps",
+    "group": "Clearance Identification Lamps/Other",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.9h": {
+    "description": "Inoperative head lamps",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.9t": {
+    "description": "Inoperative tail lamp",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.9ts": {
+    "description": "Inoperative turn signal",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.11": {
+    "description": "No/defective lighting devices/reflective devices/projected",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11lr": {
+    "description": "Lower retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11n": {
+    "description": "No retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11rt": {
+    "description": "Retroreflective not affixed as required Trailer manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11s": {
+    "description": "Side retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11tl": {
+    "description": "Truck Tractor manufactured on or after 7/1/1997 with no retro reflective sheeting or reflex reflectors on mud flaps",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11tt": {
+    "description": "Truck Tractor no retroreflective sheeting/reflex reflectors manufactured on or after 7/1/1997",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11tu": {
+    "description": "Truck Tractor upper body corners retroreflective sheeting/reflex manufactured on or after 7/1/1997",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.11ur": {
+    "description": "Upper reflex reflectors retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(a)": {
+    "description": "Retroreflective tape not affixed; Trailer manufactured before 12//1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(b)": {
+    "description": "No retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(c)(1)": {
+    "description": "Side retroreflective sheeting/reflex reflectors manufactured on or before 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(c)(2)": {
+    "description": "Lower retroreflective sheeting/reflex reflectors manufactured on or before 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(c)(3)": {
+    "description": "Upper retroreflective sheeting/reflex reflectors manufactured on or before 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(d)(1)": {
+    "description": "Side retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(d)(2)": {
+    "description": "Lower rear retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.13(d)(3)": {
+    "description": "Upper rear retroreflective sheeting/reflex reflectors manufactured on or after 12/1/1993",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.17": {
+    "description": "No/defective lamp/reflector-tow-away operation",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.17(a)": {
+    "description": "No/defective lamps-towing unit-tow-away operation",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.17(b)": {
+    "description": "No/defective tow-away lamps on rear unit",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.19": {
+    "description": "Inoperative/defective hazard warning lamp",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.23": {
+    "description": "Required lamp not powered by vehicle electricity",
+    "group": "Clearance Identification Lamps/Other",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.24(a)": {
+    "description": "Non-compliance with headlamp requirements",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.24(b)": {
+    "description": "Non-compliant fog/driving lamps",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.24br": {
+    "description": "Non-compliant fog or driving lamps",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.24(c)": {
+    "description": "Improper headlamp mounting",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.24(d)": {
+    "description": "Improper head / auxiliary / fog lamp aiming",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.25(a)": {
+    "description": "Improper lamp mounting",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.25(b)": {
+    "description": "Lamps are not visible as required",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.25(e)": {
+    "description": "Lamp not steady burning",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.25(f)": {
+    "description": "Stop lamp violations",
+    "group": "Lighting",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.26": {
+    "description": "Requirements for reflectors",
+    "group": "Reflective Sheeting",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.28": {
+    "description": "Improper or no wiring protection as required",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.30": {
+    "description": "Improper battery installation",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.40": {
+    "description": "Inadequate brake system on a CMV",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.41": {
+    "description": "No or defective parking brake system on CMV",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.42": {
+    "description": "No brakes as required",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.43": {
+    "description": "No/improper breakaway or emergency braking",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.43(a)": {
+    "description": "No/improper tractor protection valve",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.43(d)": {
+    "description": "No or defective automatic trailer brake",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.44": {
+    "description": "No/defective bus front brake line protection",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.45": {
+    "description": "Brake tubing and hose adequacy",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.45(a)(4)": {
+    "description": "Failing to secure brake hose/tubing against mechanical damage",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.45(b)(2)": {
+    "description": "Failing to secure brake hose/tubing against mechanical damage",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.45(b)(3)": {
+    "description": "Failing to secure brake hose/tubing against high temperatures",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.45(d)": {
+    "description": "Brake connections with leaks/constrictions",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47": {
+    "description": "Inadequate/contaminated brake linings",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(a)": {
+    "description": "Inadequate brakes for safe stopping",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(b)": {
+    "description": "Mismatched brake chambers on same axle",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(c)": {
+    "description": "Mismatched slack adjuster effective length",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(d)": {
+    "description": "Insufficient brake linings",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(e)": {
+    "description": "Clamp/Roto-Chamber type brake(s) out of adjustment",
+    "group": "Brakes Out of Adjustment",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(f)": {
+    "description": "Wedge type brake(s) out of adjustment",
+    "group": "Brakes Out of Adjustment",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.47(g)": {
+    "description": "Insufficient drum/rotor thickness",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.48(a)": {
+    "description": "Inoperative/defective brakes",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.48(b)(1)": {
+    "description": "Defective brake limiting device",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.50": {
+    "description": "Inadequate reservoir for air/vacuum brakes",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.50(a)": {
+    "description": "Failing to have sufficient air/vacuum reserve",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.50(b)": {
+    "description": "Failing to equip vehicle-prevent reservoir air/vacuum leak",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.50(c)": {
+    "description": "No means to ensure operable check valve",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.50(d)": {
+    "description": "No or defective air reservoir drain valve",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.51": {
+    "description": "No or defective brake warning device",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.52(a)(1)": {
+    "description": "Insufficient braking force as percent of GVW or GCW",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.53(a)": {
+    "description": "Automatic brake adjuster CMV manufactured on or after 10/20/1993- hydraulic brake",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.53(b)": {
+    "description": "Automatic brake adjuster CMV manufactured on or after 10/20/1994- air brake",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.53(c)": {
+    "description": "Brake adjustment indicator CMV manufactured on or after 10/20/1994- external automatic adjustment",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(a)": {
+    "description": "ABS- all CMVs manufactured on or after 3/1/1999 with hydraulic brakes",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(b)": {
+    "description": "ABS- malfunction indicators for hydraulic brake system",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(c)(1)": {
+    "description": "ABS- all tractors manufactured on or after 3/1/1997 air brake system",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(c)(2)": {
+    "description": "ABS- all other CMVs manufactured on or after 3/1/1998 air brake system",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(d)(1)": {
+    "description": "ABS- malfunctioning circuit/signal manufactured on or after 3/1/1997, single-unit CMV manufactured on or after 3/1/1998",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(d)(2)": {
+    "description": "ABS- malfunctioning indicator to cab of towing CMV manufactured on or after 3/1/2001",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(d)(3)": {
+    "description": "ABS- malfunctioning indicator connection from towed CMV manufactured on or after 3/1/2001",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.55(e)": {
+    "description": "ABS- malfunctioning lamps towed CMV manufactured on or after 3/1/1998, manufactured before 3/1/2009",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.60(b)": {
+    "description": "Windshields required",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.60(c)": {
+    "description": "Damaged or discolored windshield",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.60(d)": {
+    "description": "Glazing permits less than 70 percent of light",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.60ews": {
+    "description": "Windshield - Obstructed",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.61": {
+    "description": "Inadequate or missing truck side windows",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.61(a)": {
+    "description": "Inadequate or missing truck side windows",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.61(b)(2)": {
+    "description": "Emergency exit window handle broken †",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.62(a)": {
+    "description": "No or defective bus emergency exits, manufactured on or after 9/1/1994",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.62(b)": {
+    "description": "No or defective bus emergency exits, manufactured on or after 9/1/1973 but before 9/1/1994",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.62(c)": {
+    "description": "No or defective bus emergency exit windows, manufactured before 9/1/1973",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.62(d)": {
+    "description": "No / defective Safety glass/push-out window",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.62(e)": {
+    "description": "No or inadequate bus emergency exit marking",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.65": {
+    "description": "Fuel system requirements",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.65(b)": {
+    "description": "Improper location of fuel system",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.65(c)": {
+    "description": "Improper securement of fuel tank",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.65(f)": {
+    "description": "Improper fuel line protection",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.67": {
+    "description": "Fuel tank requirement violations",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.67(c)(7)": {
+    "description": "Fuel tank fill pipe cap missing",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.67(c)(8)": {
+    "description": "Improper fuel tank safety vent",
+    "group": "Fuel Systems",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.68": {
+    "description": "Compressed Natural Gas (CNG) Fuel Container does not conform to regulations",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70": {
+    "description": "Fifth wheel",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(a)": {
+    "description": "Defective coupling device-improper tracking",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(b)": {
+    "description": "Defective/improper fifth wheel assemblies",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(b)(2)": {
+    "description": "Defective fifth wheel locking mechanism",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(c)": {
+    "description": "Defective coupling devices for full trailer",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(d)": {
+    "description": "No/improper safety chains/cables for full trailer",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.70(d)(8)": {
+    "description": "Improper safety chain attachment",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.71": {
+    "description": "Improper coupling driveaway/tow-away operation",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.71(g)": {
+    "description": "Prohibited towing connection / device",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.71(h)": {
+    "description": "Towbar requirement violations",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.71(h)(10)": {
+    "description": "No/improper safety chains/cables for towbar",
+    "group": "Coupling Devices",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.75": {
+    "description": "Tires/tubes (general)",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(a)": {
+    "description": "Flat tire or fabric exposed",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(a)(1)": {
+    "description": "Tire-ply or belt material exposed",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(a)(2)": {
+    "description": "Tire-tread and/or sidewall separation",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(a)(3)": {
+    "description": "Tire-flat and/or audible air leak",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(a)(4)": {
+    "description": "Tire-cut exposing ply and/or belt material",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(b)": {
+    "description": "Tire-front tread depth less than 4/32 of inch",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(c)": {
+    "description": "Tire-other tread depth less than 2/32 of inch",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(d)": {
+    "description": "Tire-bus regrooved/recap on front wheel",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.75(e)": {
+    "description": "Tire-regrooved on front of truck/truck-tractor",
+    "group": "Tire vs. Load",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.75(f)": {
+    "description": "Tire-load weight rating/under inflated",
+    "group": "Tire vs. Load",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.75(f)(1)": {
+    "description": "Weight carried exceeds tire load limit †",
+    "group": "Tire vs. Load",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.75(f)(2)": {
+    "description": "Tire under-inflated †",
+    "group": "Tire vs. Load",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.75(h)": {
+    "description": "Tire under-inflated",
+    "group": "Tire vs. Load",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.76": {
+    "description": "Sleeper berth requirement violations",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.77": {
+    "description": "Defective and/or prohibited heaters",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.77(b)(5)": {
+    "description": "Protection of operating controls from tampering",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.77(b)(11)": {
+    "description": "Bus heater fuel tank location",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.78": {
+    "description": "Windshield wipers inoperative/defective",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.79": {
+    "description": "Defroster / Defogger inoperative",
+    "group": "Windshield/ Glass/ Markings",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.80": {
+    "description": "Failing to equip vehicle with two rear vision mirrors",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.81": {
+    "description": "Horn inoperative",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.82": {
+    "description": "Speedometer inoperative / inadequate",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "393.83(a)": {
+    "description": "Exhaust system location",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(b)": {
+    "description": "Exhaust discharge fuel tank/filler tube",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(c)": {
+    "description": "Improper exhaust-bus (gasoline)",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(d)": {
+    "description": "Improper exhaust-bus (diesel)",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(e)": {
+    "description": "Improper exhaust discharge (not rear of cab)",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(f)": {
+    "description": "Improper exhaust system repair (patch/wrap)",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(g)": {
+    "description": "Exhaust leak under truck cab and/or sleeper",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.83(h)": {
+    "description": "Exhaust system not securely fastened",
+    "group": "Exhaust Discharge",
+    "category": "Vehicle Maint",
+    "severity": 1,
+    "weight": 3
+  },
+  "393.84": {
+    "description": "Inadequate floor condition",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86": {
+    "description": "No or improper rearend protection",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(a)(1)": {
+    "description": "Rear impact guards-all trailers/semitrailers manufactured on or after 1/26/98",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(a)(2)": {
+    "description": "Impact guard width- all trailers/semitrailers manufactured on or after 1/26/98",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(a)(3)": {
+    "description": "Impact guard height- all trailers/semitrailers manufactured on or after 1/26/98",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(a)(4)": {
+    "description": "Impact guard rear- all trailers/semitrailers manufactured on or after 1/26/98",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(a)(5)": {
+    "description": "Cross-sectional vertical height- all trailers/semitrailers manufactured on or after 1/26/98",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.86(b)(1)": {
+    "description": "Rear Impact Guards- motor vehicle manufactured on or after 12/31/52, see exceptions",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.88": {
+    "description": "Improperly located television receiver",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.89": {
+    "description": "Bus driveshaft not properly protected",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.90": {
+    "description": "Bus-no or obscure standee line",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.91": {
+    "description": "Bus-improper aisle seats",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.93(a)": {
+    "description": "Bus-not equipped with seat belt",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.93(a)(3)": {
+    "description": "Seats not secured in conformance with FMVSS",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.93(b)": {
+    "description": "Truck not equipped with seat belt",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(a)": {
+    "description": "No/discharged/unsecured fire extinguisher",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(a)(1)(i)": {
+    "description": "No/discharged/unsecured fire extinguisher",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(b)": {
+    "description": "No spare fuses as required",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(c)": {
+    "description": "No spare fuses as required",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(f)": {
+    "description": "No / insufficient warning devices",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.95(g)": {
+    "description": "HM-restricted emergency warning device",
+    "group": "Emergency Equipment",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.201(a)": {
+    "description": "Frame cracked / loose / sagging / broken",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.201(b)": {
+    "description": "Bolts securing cab broken/loose/missing",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.201(c)": {
+    "description": "Frame rail flange improperly bent/cut/notched",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.201(d)": {
+    "description": "Frame accessories improperly attached",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.201(e)": {
+    "description": "Prohibited holes drilled in frame rail flange",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203": {
+    "description": "Cab/body parts requirements violations",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203(a)": {
+    "description": "Cab door missing/broken",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203(b)": {
+    "description": "Cab/body improperly secured to frame",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203(c)": {
+    "description": "Hood not securely fastened",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203(d)": {
+    "description": "Cab seats not securely mounted",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.203(e)": {
+    "description": "Cab front bumper missing/ unsecured/ protrude",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.205(a)": {
+    "description": "Wheel/rim cracked or broken",
+    "group": "Wheels, Studs, Clamps, Etc.",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.205(b)": {
+    "description": "Stud/bolt holes elongated on wheels",
+    "group": "Wheels, Studs, Clamps, Etc.",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.205(c)": {
+    "description": "Wheel fasteners loose and/or missing",
+    "group": "Wheels, Studs, Clamps, Etc.",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "393.207(a)": {
+    "description": "Axle positioning parts defective/missing",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(b)": {
+    "description": "Adjustable axle locking pin missing/disengaged",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(c)": {
+    "description": "Leaf spring assembly defective/missing",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(d)": {
+    "description": "Coil spring cracked and/or broken",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(e)": {
+    "description": "Torsion bar cracked and/or broken",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(f)": {
+    "description": "Air suspension pressure loss",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.207(g)": {
+    "description": "No/defective air suspension exhaust control",
+    "group": "Suspension",
+    "category": "Vehicle Maint",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.209(a)": {
+    "description": "Steering wheel not secured/broken",
+    "group": "Steering Mechanism",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.209(b)": {
+    "description": "Excessive steering wheel lash",
+    "group": "Steering Mechanism",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.209(c)": {
+    "description": "Loose steering column",
+    "group": "Steering Mechanism",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.209(d)": {
+    "description": "Steering system components worn/welded/missing",
+    "group": "Steering Mechanism",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "393.209(e)": {
+    "description": "Power steering violations",
+    "group": "Steering Mechanism",
+    "category": "Vehicle Maint",
+    "severity": 6,
+    "weight": 3
+  },
+  "396.1": {
+    "description": "Must have knowledge of and comply with regulations",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3(a)(1)": {
+    "description": "Inspection/repair and maintenance parts and accessories",
+    "group": "Wheels, Studs, Clamps, Etc.",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "396.3a1b": {
+    "description": "Brakes (general)",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3a1ba": {
+    "description": "Brake out of adjustment",
+    "group": "Brakes Out of Adjustment",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3a1bc": {
+    "description": "Brake-air compressor violation",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3a1bd": {
+    "description": "Brake-defective brake drum",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3a1bl": {
+    "description": "Brake-reserve system pressure loss",
+    "group": "Brakes, All Others",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.3a1t": {
+    "description": "Tires (general)",
+    "group": "Tires",
+    "category": "Vehicle Maint",
+    "severity": 8,
+    "weight": 3
+  },
+  "396.5": {
+    "description": "Excessive oil leaks†",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "396.5(a)": {
+    "description": "Failing to ensure that vehicle is properly lubricated",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "396.5(b)": {
+    "description": "Oil and/or grease leak",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "396.7": {
+    "description": "Unsafe operations forbidden",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "396.9(c)(2)": {
+    "description": "Operating an OOS vehicle",
+    "group": "Vehicle Jumping OOS",
+    "category": "Vehicle Maint",
+    "severity": 10,
+    "weight": 3
+  },
+  "396.9(d)(2)": {
+    "description": "Failure to correct defects noted on inspection report",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.11": {
+    "description": "No or inadequate driver vehicle inspection report",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.13(c)": {
+    "description": "No reviewing driver's signature on Driver Vehicle Inspection Report (DVIR)",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "396.17(c)": {
+    "description": "Operating a CMV without periodic inspection",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "398.5": {
+    "description": "Parts/access-migrant workers",
+    "group": "Other Vehicle Defect",
+    "category": "Vehicle Maint",
+    "severity": 3,
+    "weight": 3
+  },
+  "398.7": {
+    "description": "Inspect/maintain motor vehicle-migrant workers",
+    "group": "Inspection Reports",
+    "category": "Vehicle Maint",
+    "severity": 4,
+    "weight": 3
+  },
+  "399.207": {
+    "description": "Vehicle access requirements violations",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "399.211": {
+    "description": "Inadequate maintenance of driver access",
+    "group": "Cab, Body, Frame",
+    "category": "Vehicle Maint",
+    "severity": 2,
+    "weight": 3
+  },
+  "171.2(a)": {
+    "description": "Failure to comply with HM regulations",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "171.2(b)": {
+    "description": "Failure to comply with the requirements for HM transportation (including labeling and handling)",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "171.2(c)": {
+    "description": "Representing a package./container for HM not meeting specs",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "171.2(d)": {
+    "description": "Accepting HM without registering with PHMSA",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "171.2(f)": {
+    "description": "Transporting HM not in accordance with this part",
+    "group": "Fraudulent Behavior – HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "171.2(g)": {
+    "description": "Cargo tank does not comply with HM Regulations",
+    "group": "Fraudulent Behavior – HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "171.2(k)": {
+    "description": "Representing vehicle with HM, none present",
+    "group": "Fraudulent Behavior – HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.301(a)": {
+    "description": "No ID number on side/ends of non-bulk package — large quantity of single HM",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.301(a)(1)": {
+    "description": "No proper shipping name and/or ID# marking on non-bulk",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.301(b)": {
+    "description": "No technical name on non-bulk",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.301(c)": {
+    "description": "No special permit number on non-bulk package",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.301(d)": {
+    "description": "No consignee/consignor on non-bulk",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.302(a)": {
+    "description": "No ID number (portable and cargo tank)",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.302(b)": {
+    "description": "Bulk package marking incorrect size",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.302(c)": {
+    "description": "No special permit number on bulk package",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.303(a)": {
+    "description": "Prohibited HM marking on package",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.304(a)(1)": {
+    "description": "Package marking not durable, English, or print",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.304(a)(2)": {
+    "description": "Marking not on sharply contrasting color",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.304(a)(3)": {
+    "description": "Marking obscured by label or attachments",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.304(a)(4)": {
+    "description": "Marking not away from other marking",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.310(a)": {
+    "description": "No gross weight on radioactive materials package greater than 50 KG",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.310(b)": {
+    "description": "Radioactive materials package not marked \"Type A or B\"",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.312(a)": {
+    "description": "No package orientation arrows",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "172.312(a)(2)": {
+    "description": "No package orientation arrows",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "172.312(b)": {
+    "description": "Prohibited use of orientation arrows",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "172.313(a)": {
+    "description": "No \"inhalation hazard\" on package",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.313(b)": {
+    "description": "No \"poison\" on non-bulk plastic package",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.316(a)": {
+    "description": "“Other regulated material” non-bulk package not marked",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.320(a)": {
+    "description": "Class 1 package not marked with ex-number",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.322(b)": {
+    "description": "No marine pollutant marking on bulk packaging",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.324": {
+    "description": "Non-bulk hazardous substance not marked",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.325(a)": {
+    "description": "Elevated temperature not marked \"Hot\"",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.325(b)": {
+    "description": "Improperly marked molten aluminum/sulphur",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.326(b)": {
+    "description": "No portable tank owner or lessee marking",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.326(c)(1)": {
+    "description": "No ID number marking on vehicle carrying portable tank",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.326(c)(2)": {
+    "description": "Shipper failed to provide ID number to carrier",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.328(a)": {
+    "description": "Shipper failed to provide or affix ID number for cargo tank",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.328(b)": {
+    "description": "Cargo tank not marked for class 2",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.328(c)": {
+    "description": "No quenched and tempered steel (QT)/other than quenched and tempered steel (NQT) marked on cargo tank (MC 330/331)",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.328(d)": {
+    "description": "Fail to mark manual remote shutoff device",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.330(a)(2)": {
+    "description": "Tank car tank (non cylinder) not marked as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.330(b)": {
+    "description": "Motor vehicle with tank not marked",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.332": {
+    "description": "Required ID markings displayed",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.334": {
+    "description": "Prohibited ID number marking",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.334(a)": {
+    "description": "ID # displayed on Class 7/Class 1/Dangerous or Subsidiary placard",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.336(b)": {
+    "description": "ID numbers not properly displayed",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.336(c)(1)": {
+    "description": "Failing to display ID numbers on compartment cargo tank in sequence",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.338": {
+    "description": "Carrier failed to replace missing ID number",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.400(a)": {
+    "description": "Package/containment not labeled as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.401": {
+    "description": "Prohibited labeling",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.402(a)": {
+    "description": "No label for subsidiary hazard",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.402(b)": {
+    "description": "Display of class number on label",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.402(d)": {
+    "description": "Subsidiary labeling for radioactive materials",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.402(e)": {
+    "description": "Subsidiary labeling for class 1(explosive) materials",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.403(a)": {
+    "description": "Radioactive material label requirement",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.403(f)": {
+    "description": "Radioactive material package—2 labels on opposite sides",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.403(g)": {
+    "description": "Failed to label radioactive material properly",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.403(g)(2)": {
+    "description": "Class 7 label – no activity/activity not in SI units",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.404(a)": {
+    "description": "Mixed package not properly labeled",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.404(b)": {
+    "description": "Failed to properly label consolidated package",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.406(a)(1)": {
+    "description": "Label placement not as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.406(c)": {
+    "description": "Multiple label placement not as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.406(d)": {
+    "description": "Label not on contrasting background or no border",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.406(e)": {
+    "description": "Failed to display duplicate label as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.406(f)": {
+    "description": "Label obscured by marking or attachment",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.504(a)": {
+    "description": "Vehicle not placarded as required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.506(a)(1)": {
+    "description": "Placards not affixed to vehicle",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(a)": {
+    "description": "Placard not visible from direction it faces",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(1)": {
+    "description": "Placard not securely affixed or attached",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(2)": {
+    "description": "Placard not clear of appurtenance",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(4)": {
+    "description": "Placard improper location",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(5)": {
+    "description": "Placard not reading horizontally",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(6)": {
+    "description": "Placard damaged, deteriorated, or obscured",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.516(c)(7)": {
+    "description": "Placard not on contrasting background or border",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "172.600(c)": {
+    "description": "Emergency Response (ER) information not available",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.602(a)": {
+    "description": "Emergency response information missing",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.602(b)": {
+    "description": "Form and manner of emergency response information",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "172.602(c)(1)": {
+    "description": "Maintenance/accessibility of emergency response information",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "173.24(b)(1)": {
+    "description": "Release of HM from package",
+    "group": "Load Securement – HM",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "173.25(c)": {
+    "description": "Failure to label and package poison properly, when transported with edible material",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "173.29(a)": {
+    "description": "Empty package improper transportation",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.30": {
+    "description": "Loading/ unloading transport vehicles",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.33(a)": {
+    "description": "Cargo tank general requirements",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.33(b)": {
+    "description": "HM in cargo tank which had dangerous reaction with cargo tank",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.33(c)(2)": {
+    "description": "Cargo tank not marked with design or maximum allowable working pressure (MAWP)",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.35(a)": {
+    "description": "Intermediate bulk container requirements",
+    "group": "Package Integrity – HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "173.35(f)(2)": {
+    "description": "Intermediate bulk container (IBC) not secured to or within vehicle",
+    "group": "Load Securement – HM",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "173.54": {
+    "description": "Forbidden explosives, offering or transporting",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "173.315(j)(3)": {
+    "description": "Residential gas tank not secure in transport",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "173.315(j)(4)": {
+    "description": "Liquefied Petroleum Gas (LPG) storage tank overfilled for transport",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "173.421(a)": {
+    "description": "Transporting limited quantity—radioactive material exceeds 0.5 millirem/hour",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.427(a)(iv)": {
+    "description": "No instructions for exclusive use packaging—low specific activity",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.427(a)(vi)": {
+    "description": "Exclusive use low specific activity (LSA) radioactive material not marked \"Radioactive-LSA\"",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "173.427(a)(6)(iv)": {
+    "description": "No instructions for exclusive use packaging—low specific activity",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.427(a)(6)(vi)": {
+    "description": "Exclusive use low specific activity (LSA) radioactive material not marked \"Radioactive-LSA\"",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "173.427(d)": {
+    "description": "Not packaged in accordance with 10 CFR, part 71",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "173.441(a)": {
+    "description": "Exceeding radiation level limitations allowed for transport",
+    "group": "Cargo Protection – HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.801": {
+    "description": "Accepting/transporting HM not prepared properly",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "177.817(a)": {
+    "description": "No shipping papers (carrier)",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "177.817(b)": {
+    "description": "Shipper certification missing (when required)",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "177.817(e)": {
+    "description": "Shipping paper accessibility",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "177.823(a)": {
+    "description": "No placards/markings when required",
+    "group": "Markings - HM",
+    "category": "Cargo-Related",
+    "severity": 5,
+    "weight": 3
+  },
+  "177.834(a)": {
+    "description": "Package not secure in vehicle",
+    "group": "Load Securement – HM",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "177.834(c)": {
+    "description": "Smoking while loading or unloading",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.834(f)": {
+    "description": "Using a tool likely to cause damage to the closure of any package or container",
+    "group": "Load Securement – HM",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "177.834(i)": {
+    "description": "Attendance of cargo tank— (load or unload)",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.834(j)": {
+    "description": "Manholes and valves not closed or leak free",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.834(m)(1)": {
+    "description": "Securing specification 106a or 110a tanks",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.834(n)": {
+    "description": "Improper loading—specification 56, 57, IM101, and IM102",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.835(a)": {
+    "description": "Loading/Unloading Class 1 with engine running",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.835(c)": {
+    "description": "Transporting Class 1 in combination vehicles",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.835(j)": {
+    "description": "Transfer of Class 1 materials en route",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.837(c)": {
+    "description": "Cargo tanks not properly bonded/grounded",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.837(d)": {
+    "description": "Improper unloading of combustible liquids",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.838": {
+    "description": "Improper transport of class 4, 5, or division 4.2",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.840": {
+    "description": "Improper transport of class 2",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.840(g)": {
+    "description": "Discharge valve not closed in transit class 2",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.840(o)": {
+    "description": "Fail to test off-truck remote shutoff device",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.840(s)": {
+    "description": "Fail to possess remote shutoff when unloading",
+    "group": "Cargo Protection - HM",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "177.841(e)": {
+    "description": "Poison label loaded with foodstuffs",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "177.842(a)": {
+    "description": "Total transport index exceeds 50—non-exclusive use",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "177.842(b)": {
+    "description": "Distance from package to person—radioactive material",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "177.842(d)": {
+    "description": "Blocking and bracing of radioactive material packages",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "177.848(d)": {
+    "description": "Prohibited load/transport/storage combination",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "177.848(f)": {
+    "description": "Class 1 load separation or segregation",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "178.245-4": {
+    "description": "DOT51 integrity and securement",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.245-5": {
+    "description": "DOT51 valve protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.245-6(a)": {
+    "description": "DOT51 name plate Markings - HM",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.245-6(b)": {
+    "description": "Tank outlets not marked",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.251-4": {
+    "description": "DOT 56/57 integrity and securement",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.251-7(b)": {
+    "description": "DOT 56/57 spec Markings - HM",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.255-4": {
+    "description": "DOT 60 manhole",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.255-7": {
+    "description": "DOT 60 valve protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.255-14": {
+    "description": "DOT 60 ID plate",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-1": {
+    "description": "IM101/102 general design",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-11(d)(1)": {
+    "description": "IM101/102 pressure relief",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-4": {
+    "description": "Structural integrity",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-6": {
+    "description": "IM 101/102 frames",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-8": {
+    "description": "IM101/102 valve protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-9": {
+    "description": "IM101/102 manholes",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.270-14": {
+    "description": "IM101/102 spec plate",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-9(a)": {
+    "description": "Safety relief devices MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-9(c)": {
+    "description": "Marking of inlets/outlets MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-10": {
+    "description": "Protecting of fittings MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-13": {
+    "description": "Anchoring of tank MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-17": {
+    "description": "Metal ID plate marking MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.336-17(a)": {
+    "description": "Certification plate MC330",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-8(a)": {
+    "description": "Outlets general requirements MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-8(a)(2)": {
+    "description": "Outlets MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-8(a)(3)": {
+    "description": "Internal or back flow valve MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-8(a)(4)(i)": {
+    "description": "Remote closure device greater than 3500 gallons MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-8(a)(4)(ii)": {
+    "description": "Remote closure device less than 3500 gallons MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-9(c)": {
+    "description": "Marking inlets/outlets MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-10(a)": {
+    "description": "Protection of fittings MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-10(d)": {
+    "description": "Rear end protection MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-11(b)": {
+    "description": "Shut off valves MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-13": {
+    "description": "MC331 supports and anchoring",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.337-17(a)": {
+    "description": "Metal ID plate missing MC331",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-6": {
+    "description": "Manhole MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-8": {
+    "description": "Pressure relief devices MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-10(a)": {
+    "description": "Protection of fittings MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-10(c)": {
+    "description": "Rear end protection MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-11(b)": {
+    "description": "Manual shutoff valve MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-12": {
+    "description": "Shear section MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-13": {
+    "description": "Supports and anchoring MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-18(a)": {
+    "description": "Name plate/Specification plate missing MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.338-18(b)": {
+    "description": "Specification plate missing MC338",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-6": {
+    "description": "MC306/307/312 supports and anchoring",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-7(a)": {
+    "description": "MC306/307/312 ring stiffeners",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-7(c)": {
+    "description": "MC306/307/312 double bulkhead drain",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-7(d)(2)": {
+    "description": "MC306/307/312 ring stiffener drain hole",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(a)": {
+    "description": "MC306/307/312 appurtenances attachment",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(b)": {
+    "description": "MC306/307/312 rearend protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(c)": {
+    "description": "MC306/307/312 overturn protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(d)": {
+    "description": "MC306/307/312 piping protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(d)(1)": {
+    "description": "MC306/307/312 piping protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-8(d)(2)": {
+    "description": "MC306/307/312 minimum road clearance",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.340-10(b)": {
+    "description": "MC306/307/312 metal certification plate missing",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-3(a)": {
+    "description": "MC306 no manhole closure",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-4": {
+    "description": "MC306 venting",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-4(d)(1)": {
+    "description": "MC306 inadequate emergency venting",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-4(d)(2)": {
+    "description": "MC306 pressure activated vents",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-4(d)(3)": {
+    "description": "MC306 no fusible venting",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-5(a)": {
+    "description": "MC306 internal valves",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-5(a)(1)": {
+    "description": "MC306 heat actuated safety",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.341-5(a)(2)": {
+    "description": "MC306 remote control shutoff",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-3": {
+    "description": "MC307 manhole closure",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-4": {
+    "description": "MC307 venting",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-4(b)": {
+    "description": "Inadequate venting capacity",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-5(a)": {
+    "description": "MC307 internal valve",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-5(a)(1)": {
+    "description": "MC307 heat actuated safety",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.342-5(a)(2)": {
+    "description": "MC307 remote control shutoff",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.343-3": {
+    "description": "Manhole closure MC312",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.343-4": {
+    "description": "Venting MC312 (show calculations)",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.343-5(a)": {
+    "description": "MC312 top outlet and valve",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.343-5(b)(1)": {
+    "description": "MC312 bottom valve/piping protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-1(i)(2)": {
+    "description": "DOT 406, 407, 412 Obstructed double bulkhead drain/vent",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-5(d)": {
+    "description": "DOT406/407/412 manhole securement",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-5(e)": {
+    "description": "DOT406/407/412 manhole marking",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-6": {
+    "description": "DOT406/407/412 supports and anchoring",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-7(d)(4)": {
+    "description": "DOT406/407/412 ring stiffener drain",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-8(a)": {
+    "description": "DOT406/407/412 accident protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-8(a)(5)": {
+    "description": "DOT406/407/412 minimum road clearance",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-8(b)": {
+    "description": "DOT406/407/412 bottom damage protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-8(c)": {
+    "description": "DOT406/407/412 rollover damage protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-8(d)": {
+    "description": "DOT406/407/412 rear end protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-10": {
+    "description": "DOT406/407/412 pressure relief",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-11(b)": {
+    "description": "DOT406/407/412 tank valves",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-11(b)(1)": {
+    "description": "DOT406/407/412 remote control",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-11(b)(1)(i)": {
+    "description": "DOT406/407/412 remote control",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-14(b)": {
+    "description": "DOT406/407/412 name plate",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.345-14(c)": {
+    "description": "DOT406/407/412 specification plate",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.703(a)": {
+    "description": "Intermediate bulk container (IBC) manufacturer Markings - HM",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.703(b)": {
+    "description": "Intermediate bulk container additional Markings - HM",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "178.704(e)": {
+    "description": "Intermediate bulk container bottom discharge valve protection",
+    "group": "Package Integrity - HM",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "180.205(c)": {
+    "description": "Periodic re-qualification of cylinders",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.213(d)": {
+    "description": "Re-qualification Markings - HM",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.352(b)": {
+    "description": "Intermediate bulk container retest or inspection",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.405(b)": {
+    "description": "Cargo tank specifications",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.405(j)": {
+    "description": "Certification withdrawal (failed to remove/cover/obliterate spec plate)",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.407(a)(1)": {
+    "description": "Cargo tank periodic test and inspection",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.407(c)": {
+    "description": "Failing to periodically test and inspect cargo tank",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.415(b)": {
+    "description": "Cargo tank test or inspection Markings - HM",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "180.605(k)": {
+    "description": "Test date marking",
+    "group": "Package Testing - HM",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "385.403": {
+    "description": "No HM Safety Permit",
+    "group": "Documentation – HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "392.9": {
+    "description": "Failing to secure load",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.9(a)": {
+    "description": "Failing to secure load",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.9(a)(1)": {
+    "description": "Failing to secure cargo/§§ 393.100-393.136",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.9(a)(2)": {
+    "description": "Failing to secure vehicle equipment",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.9(a)(3)": {
+    "description": "Driver's view/movement is obstructed",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.62(c)(1)": {
+    "description": "Bus — baggage/freight restricts driver operation",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.62(c)(2)": {
+    "description": "Bus — Exit(s) obstructed by baggage/freight",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.62(c)(3)": {
+    "description": "Passengers not protected from falling baggage",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.63": {
+    "description": "Pushing/towing a loaded bus",
+    "group": "Passenger",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.87": {
+    "description": "Warning flag required on projecting load",
+    "group": "Warning Flags",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.87(a)": {
+    "description": "Warning flag required on projecting load",
+    "group": "Warning Flags",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.87(b)": {
+    "description": "Improper warning flag placement",
+    "group": "Warning Flags",
+    "category": "Cargo-Related",
+    "severity": 4,
+    "weight": 3
+  },
+  "393.100": {
+    "description": "Failure to prevent cargo shifting",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.100(a)": {
+    "description": "Failure to prevent cargo shifting",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.100(b)": {
+    "description": "Leaking/spilling/blowing/falling cargo",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.100(c)": {
+    "description": "Failure to prevent cargo shifting",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.102(a)": {
+    "description": "Improper securement system (tiedown assemblies)",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(1)": {
+    "description": "Insufficient means to prevent forward movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(1)(i)": {
+    "description": "Insufficient means to prevent forward movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(1)(ii)": {
+    "description": "Insufficient means to prevent rearward movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(1)(iii)": {
+    "description": "Insufficient means to prevent lateral movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(2)": {
+    "description": "Tiedown assembly with inadequate working load limit",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(a)(3)": {
+    "description": "Insufficient means to prevent lateral movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(b)": {
+    "description": "Insufficient means to prevent vertical movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.102(c)": {
+    "description": "No equivalent means of securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.104(a)": {
+    "description": "Inadequate/damaged securement device/system",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.104(b)": {
+    "description": "Damaged securement system/tiedowns",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.104(c)": {
+    "description": "Damaged vehicle structures/anchor points",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.104(d)": {
+    "description": "Damaged Dunnage/bars/blocking-bracing",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.104(f)(1)": {
+    "description": "Knotted tiedown",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.104(f)(2)": {
+    "description": "Use of tiedown with improper repair.",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.104(f)(3)": {
+    "description": "Loose/unfastened tiedown.",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.104(f)(4)": {
+    "description": "No edge protection for tiedowns",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.104f4r": {
+    "description": "No edge protection for tiedowns",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.104(f)(5)": {
+    "description": "No edge protection for tiedowns",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.106(a)": {
+    "description": "No/improper front end structure/headerboard",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.106(b)": {
+    "description": "Cargo not immobilized or secured",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.106(c)(1)": {
+    "description": "No means to prevent cargo from rolling",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.106(c)(2)": {
+    "description": "Cargo without direct contact/prevention from shifting",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.106(d)": {
+    "description": "Insufficient aggregate working load limit",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.110": {
+    "description": "Failing to meet minimum tiedown requirements (",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.110(b)": {
+    "description": "Insufficient tiedowns; without headerboard/blocking",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.110(c)": {
+    "description": "Insufficient tiedowns; with headerboard/blocking",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.110(d)": {
+    "description": "Large/odd-shaped cargo not adequately secured",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.112": {
+    "description": "Tiedown not adjustable by driver",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.114": {
+    "description": "No/improper front end structure",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.114(b)(1)": {
+    "description": "Insufficient height for front-end structure",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.114(b)(2)": {
+    "description": "Insufficient width for front-end structure",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.114(d)": {
+    "description": "Front-end structure with large opening(s)",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.116": {
+    "description": "No/improper securement of logs",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.116(d)(1)": {
+    "description": "Short; over 1/3 length past structure",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.116(d)(2)": {
+    "description": "Short, insufficient/no tiedowns",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.116(d)(3)": {
+    "description": "Short, tiedowns improperly positioned",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.116(d)(4)": {
+    "description": "Short, no center stakes/high log not secured",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.116(e)": {
+    "description": "Short, length; improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.118": {
+    "description": "No/improper lumber/building materials. securement",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.118(b)": {
+    "description": "Improper placement of bundles",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.118(d)": {
+    "description": "Insufficient protection against lateral movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.118(d)(3)": {
+    "description": "Insufficient/improper arrangement of tiedowns",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.120": {
+    "description": "No/improper securement of metal coils",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.120(b)(1)": {
+    "description": "Coil/vertical improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(b)(2)": {
+    "description": "Coils, rows, eyes vertical; improper secure.",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(c)(1)": {
+    "description": "Coil/eye crosswise improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(c)(2)": {
+    "description": "X-pattern on coil(s) with eyes crosswise",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(d)(1)": {
+    "description": "Coil with eye lengthwise—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(d)(4)": {
+    "description": "Coils, rows, eyes length—improper securement.",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.120(e)": {
+    "description": "No protection against shifting/tipping",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.122": {
+    "description": "No/improper securement of paper rolls",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.122(b)": {
+    "description": "Rolls vertical—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(c)": {
+    "description": "Rolls vertical /split—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(d)": {
+    "description": "Rolls vertical /stacked—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(e)": {
+    "description": "Rolls crosswise—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(f)": {
+    "description": "Rolls crosswise/stacked load—improperly secured",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(g)": {
+    "description": "Rolls length—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(h)": {
+    "description": "Rolls lengthwise/stacked—improper securement",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.122(i)": {
+    "description": "Improper securement—rolls on flatbed/curb-side",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.124": {
+    "description": "No/improper securement of concrete pipe",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.124(b)": {
+    "description": "Insufficient working load limit—concrete pipes",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.124(c)": {
+    "description": "Improper blocking of concrete pipe",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.124(d)": {
+    "description": "Improper arrangement of concrete pipe",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.124(e)": {
+    "description": "Improper securement, up to 45 in. diameter",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.124(f)": {
+    "description": "Improper securement, greater than 45 inch diameter",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.126": {
+    "description": "Fail to ensure intermodal container secured",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.126(b)": {
+    "description": "Damaged/missing tiedown/securement device",
+    "group": "-Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.126(c)(1)": {
+    "description": "Lower corners not on vehicle/structure",
+    "group": "-Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.126(c)(2)": {
+    "description": "All corners of chassis not secured",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.126(c)(3)": {
+    "description": "Front and rear not secured independently",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.126(d)(1)": {
+    "description": "Empty container not properly positioned",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.126(d)(2)": {
+    "description": "Empty container, more than 5 foot overhang",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.126(d)(4)": {
+    "description": "Empty container—not properly secured",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.128": {
+    "description": "No/improper securement of vehicles",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.128(b)(1)": {
+    "description": "Vehicle not secured—front and rear",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.128(b)(2)": {
+    "description": "Tiedown(s) not affixed to mounting points.",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.128(b)(3)": {
+    "description": "Tiedown(s) not over/around wheels.",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.130": {
+    "description": "No/improper heavy vehicle/machine securement",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.130(b)": {
+    "description": "Item not properly prepared for transport",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.130(c)": {
+    "description": "Improper restraint/securement of item",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.132": {
+    "description": "No/improper securement of crushed vehicles",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.132(b)": {
+    "description": "Prohibited use of synthetic webbing.",
+    "group": "Equipment",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.132(c)": {
+    "description": "Insufficient tiedowns per stack cars",
+    "group": "Tiedown",
+    "category": "Cargo-Related",
+    "severity": 8,
+    "weight": 3
+  },
+  "393.132(c)(5)": {
+    "description": "Insufficient means to retain loose parts",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.134": {
+    "description": "No/improper securement of roll/hook container",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.134(b)(1)": {
+    "description": "No blocking against forward movement",
+    "group": "Failure to Prevent Movement",
+    "category": "Cargo-Related",
+    "severity": 0,
+    "weight": 3
+  },
+  "393.134(b)(2)": {
+    "description": "Container not secured to front of vehicle",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.134(b)(3)": {
+    "description": "Rear of container not properly secured",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.136": {
+    "description": "No/improper securement of large boulders",
+    "group": "General Securement",
+    "category": "Cargo-Related",
+    "severity": 7,
+    "weight": 3
+  },
+  "393.136(b)": {
+    "description": "Improper placement/positioning for boulder",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.136(c)(1)": {
+    "description": "Boulder not secured with chain",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.136(d)": {
+    "description": "Improper securement—cubic boulder",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.136(e)": {
+    "description": "Improper securement—non‑cubic boulder with base",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "393.136(f)": {
+    "description": "Improper securement—non‑cubic boulder without base",
+    "group": "Improper Securement",
+    "category": "Cargo-Related",
+    "severity": 10,
+    "weight": 3
+  },
+  "397.1(a)": {
+    "description": "Driver/carrier must obey part 397",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "397.1(b)": {
+    "description": "Failing to require employees to know/obey part 397",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "397.2": {
+    "description": "Must comply with rules in parts 390-397—transporting HM",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "397.7(a)": {
+    "description": "Improperly parked explosives vehicle",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "397.7(b)": {
+    "description": "Improperly parked HM vehicle",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "397.11(a)": {
+    "description": "HM vehicle operated near open fire",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "397.11(b)": {
+    "description": "HM vehicle parked within 300 feet of fire",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "397.15": {
+    "description": "HM vehicle fueling violation",
+    "group": "Fire Hazard - HM",
+    "category": "Cargo-Related",
+    "severity": 6,
+    "weight": 3
+  },
+  "397.17": {
+    "description": "No tire examination on HM vehicle",
+    "group": "HM Other",
+    "category": "Cargo-Related",
+    "severity": 2,
+    "weight": 3
+  },
+  "397.19": {
+    "description": "No instructions/documents when transporting Division 1.1/1.2/1.3 (explosive) materials",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "397.19(c)": {
+    "description": "Required documents not in possession—explosive materials",
+    "group": "Documentation - HM",
+    "category": "Cargo-Related",
+    "severity": 3,
+    "weight": 3
+  },
+  "397.67": {
+    "description": "HM vehicle routing violation (non-radioactive materials)",
+    "group": "HM Route",
+    "category": "Cargo-Related",
+    "severity": 1,
+    "weight": 3
+  },
+  "397.101(b)": {
+    "description": "Radioactive materials vehicle not on preferred route",
+    "group": "HM Route",
+    "category": "Cargo-Related",
+    "severity": 1,
+    "weight": 3
+  },
+  "397.101(d)": {
+    "description": "No or incomplete route plan—radioactive materials",
+    "group": "HM Route",
+    "category": "Cargo-Related",
+    "severity": 1,
+    "weight": 3
+  },
+  "397.101(e)(2)": {
+    "description": "Driver not in possession of training certificate",
+    "group": "HM Route",
+    "category": "Cargo-Related",
+    "severity": 1,
+    "weight": 3
+  },
+  "397.101(e)(3)": {
+    "description": "Driver not in possession of written route plan",
+    "group": "HM Route",
+    "category": "Cargo-Related",
+    "severity": 1,
+    "weight": 3
+  },
+  "392.2h": {
+    "description": "State/Local Hours of Service (HOS)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.3": {
+    "description": "Operating a CMV while ill/fatigued",
+    "group": "Jumping OOS/Driving Fatigued",
+    "category": "Fatigued Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "395.1(h)(1)": {
+    "description": "15, 20, 70/80 HOS violations (Alaska-Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.1(h)(2)": {
+    "description": "15, 20, 70/80 HOS violations (Alaska-Passenger)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.1(h)(3)": {
+    "description": "Adverse driving conditions violations (Alaska)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.1(o)": {
+    "description": "16 hour rule violation (Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3(a)(1)": {
+    "description": "Requiring or permitting driver to drive more than 11 hours",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3a1r": {
+    "description": "11 hour rule violation (Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3(a)(2)": {
+    "description": "Requiring or permitting driver to drive after 14 hours on duty",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3a2r": {
+    "description": "14 hour rule violation (Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3(b)": {
+    "description": "60/70- hour rule violation",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3br": {
+    "description": "60/70 hour rule violation (Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.3(c)": {
+    "description": "34- hour restart violation (Property)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.5(a)(1)": {
+    "description": "10- hour rule violation (Passenger)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.5(a)(2)": {
+    "description": "15- hour rule violation (Passenger)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.5(b)": {
+    "description": "60/70- hour rule violation (Passenger)",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.8": {
+    "description": "Log violation (general/form and manner)",
+    "group": "Other Log/Form & Manner",
+    "category": "Fatigued Driving",
+    "severity": 2,
+    "weight": 3
+  },
+  "395.8(a)": {
+    "description": "No drivers record of duty status",
+    "group": "Incomplete/Wrong Log",
+    "category": "Fatigued Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "395.8(e)": {
+    "description": "False report of drivers record of duty status",
+    "group": "False Log",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "395.8(f)(1)": {
+    "description": "Drivers record of duty status not current",
+    "group": "Incomplete/Wrong Log",
+    "category": "Fatigued Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "395.8(k)(2)": {
+    "description": "Driver failing to retain previous 7 days’ logs",
+    "group": "Incomplete/Wrong Log",
+    "category": "Fatigued Driving",
+    "severity": 5,
+    "weight": 3
+  },
+  "395.13(d)": {
+    "description": "Driving after being declared out-of-service",
+    "group": "Jumping OOS/Driving Fatigued",
+    "category": "Fatigued Driving",
+    "severity": 10,
+    "weight": 3
+  },
+  "395.15(b)": {
+    "description": "Onboard recording device information requirements not met",
+    "group": "EOBR Related",
+    "category": "Fatigued Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "395.15(c)": {
+    "description": "Onboard recording device improper form and manner",
+    "group": "EOBR Related",
+    "category": "Fatigued Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "395.15(f)": {
+    "description": "Onboard recording device failure and driver failure to reconstruct duty status",
+    "group": "EOBR Related",
+    "category": "Fatigued Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "395.15(g)": {
+    "description": "On-board recording device information not available",
+    "group": "EOBR Related",
+    "category": "Fatigued Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "395.15(i)(5)": {
+    "description": "Onboard recording device does not display required information.",
+    "group": "EOBR Related",
+    "category": "Fatigued Driving",
+    "severity": 1,
+    "weight": 3
+  },
+  "398.6": {
+    "description": "Violation of hours of service regulations—migrant workers",
+    "group": "Hours",
+    "category": "Fatigued Driving",
+    "severity": 7,
+    "weight": 3
+  },
+  "392.5(c)(2)": {
+    "description": "Violating OOS order pursuant to 392.5(a)/(b)",
+    "group": "Alcohol Jumping OOS",
+    "category": "Controlled Substances",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.4(a)": {
+    "description": "Driver uses or is in possession of drugs",
+    "group": "Drugs",
+    "category": "Controlled Substances",
+    "severity": 10,
+    "weight": 3
+  },
+  "392.5(a)": {
+    "description": "Possession/use/under influence alcohol-4hrs prior to duty",
+    "group": "Alcohol",
+    "category": "Controlled Substances",
+    "severity": 5,
+    "weight": 3
+  }
+}
