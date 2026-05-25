@@ -6,6 +6,7 @@ import {
   formatCurrency,
   highlightMatch,
   getRepeatedViolationCount,
+  formatDisplayText,
 } from "../utils/helpers";
 import {
   Edit2,
@@ -200,7 +201,7 @@ export const IncidentCard: React.FC<IncidentCardProps> = ({
                       <div className="font-mono text-cyan-400 font-bold">
                         {v.code}
                       </div>
-                      <div className="text-slate-300">{v.description}</div>
+                      <div className="text-slate-300">{formatDisplayText(v.description)}</div>
                       <div
                         className={`text-xs mt-1 ${
                           v.severity === "High"

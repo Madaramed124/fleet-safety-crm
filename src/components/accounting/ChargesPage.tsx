@@ -2,9 +2,36 @@ import React, { useEffect, useMemo, useState } from "react";
 import { supabase } from "../../services/supabaseClient";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import csaPointsLookup from "../../data/csaPoints.json";
+import { formatDisplayText } from "../../utils/helpers";
 import { error as notifyError, success as notifySuccess } from "../../utils/notify";
 
 // ...existing code...
+
+type CsaLookupEntry = {
+  description: string;
+  group: string;
+  category: string;
+  severity: number;
+  weight: number;
+};
+
+type CsaLookup = Record<string, CsaLookupEntry>;
+
+const lookup = csaPointsLookup as CsaLookup;
+
+const normalizeViolationCode = (value: string | null | undefined) =>
+  (value || "").trim().toLowerCase();
+
+const getCsaEntry = (code: string | null | undefined) => {
+  const normalized = normalizeViolationCode(code);
+
+  if (!normalized) {
+    return null;
+  }
+
+  return lookup[normalized] || null;
+};
 
 type ChargeRow = {
   id: string;
@@ -109,9 +136,14 @@ const ChargesPage: React.FC = () => {
     const driverName = selectedCharge.drivers?.name || 'Unknown';
     const violationCode = selectedCharge.violations?.code || 'N/A';
     const violationDate = selectedCharge.violations?.date ? new Date(selectedCharge.violations.date).toLocaleDateString() : 'N/A';
-    const reasonText = selectedCharge.description || selectedCharge.violations?.description || 'No reason provided.';
+    const reasonText = formatDisplayText(selectedCharge.description || selectedCharge.violations?.description || 'No reason provided.');
     const amountValue = selectedCharge.amount != null ? Number(selectedCharge.amount) : 0;
-    const csaPoints = Math.max(0, Math.round(amountValue / 40));
+    const csaEntry = getCsaEntry(selectedCharge.violations?.code || null);
+    const violationGroup = csaEntry?.group || '-';
+    const displayViolationGroup = formatDisplayText(violationGroup);
+    const violationSeverity = csaEntry?.severity != null ? String(csaEntry.severity) : '-';
+    const violationWeight = csaEntry?.weight != null ? String(csaEntry.weight) : '-';
+    const csaPoints = csaEntry ? csaEntry.severity * csaEntry.weight : Math.max(0, Math.round(amountValue / 40));
 
     doc.setTextColor(darkBlue);
     doc.setFontSize(22);
@@ -176,11 +208,11 @@ const ChargesPage: React.FC = () => {
       ]],
       body: [[
         violationCode,
-        selectedCharge.violations?.description || '',
+        formatDisplayText(selectedCharge.violations?.description || ''),
+        displayViolationGroup,
         '-',
-        '-',
-        '-',
-        '-',
+        violationSeverity,
+        violationWeight,
         `${csaPoints}`
       ]],
       styles: { font: 'helvetica', fontSize: 10, overflow: 'linebreak' },
@@ -230,29 +262,25 @@ const ChargesPage: React.FC = () => {
     doc.setFont('helvetica', 'bold');
     doc.text('CALCULATIONS', margin, pageY);
 
-    pageY += lineHeight;
-    doc.setFont('helvetica', 'normal');
-    doc.setTextColor(20, 20, 20);
-    doc.text(`Non-OOS: ${csaPoints} x $40 = $${(csaPoints * 40).toFixed(2)}`, margin, pageY);
+  pageY += lineHeight;
+  doc.setFont('helvetica', 'normal');
+  doc.setTextColor(20, 20, 20);
+  doc.text(`Non-OOS: ${csaPoints} x $40 = $${(csaPoints * 40).toFixed(2)}`, margin, pageY);
 
-    pageY += lineHeight * 2;
-    doc.setFont('helvetica', 'bold');
-    doc.setTextColor(darkBlue);
-    doc.text(`TOTAL PENALTY AMOUNT: $${(csaPoints * 40).toFixed(2)}`, margin, pageY);
+  pageY += lineHeight * 2;
+  doc.setFont('helvetica', 'bold');
+  doc.setTextColor(darkBlue);
+  doc.text(`TOTAL PENALTY AMOUNT: $${(csaPoints * 40).toFixed(2)}`, margin, pageY);
 
     pageY += lineHeight * 4;
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(20, 20, 20);
     const rightColumnStart = pageWidth / 2 + 20;
-    const rightLineEnd = pageWidth - margin;
     doc.text('Employee Signature:', margin, pageY);
-    doc.line(margin + 115, pageY + 2, margin + 365, pageY + 2);
     doc.text('Manager Signature: Rustam Kencheshaov', rightColumnStart, pageY);
-    doc.line(rightColumnStart + 170, pageY + 2, rightLineEnd, pageY + 2);
 
     pageY += lineHeight * 2;
     doc.text('Date:', margin, pageY);
-    doc.line(margin + 35, pageY + 2, margin + 200, pageY + 2);
     doc.text(`Date: ${today}`, rightColumnStart, pageY);
 
     if (generatedPreviewUrl) {

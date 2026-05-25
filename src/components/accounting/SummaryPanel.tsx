@@ -4,6 +4,33 @@ import notify from '../../utils/notify';
 import logError from '../../utils/logger';
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
+import csaPointsLookup from "../../data/csaPoints.json";
+import { formatDisplayText } from "../../utils/helpers";
+
+type CsaLookupEntry = {
+  description: string;
+  group: string;
+  category: string;
+  severity: number;
+  weight: number;
+};
+
+type CsaLookup = Record<string, CsaLookupEntry>;
+
+const lookup = csaPointsLookup as CsaLookup;
+
+const normalizeViolationCode = (value: string | null | undefined) =>
+  (value || "").trim().toLowerCase();
+
+const getCsaEntry = (code: string | null | undefined) => {
+  const normalized = normalizeViolationCode(code);
+
+  if (!normalized) {
+    return null;
+  }
+
+  return lookup[normalized] || null;
+};
 
 const SummaryPanel: React.FC<{
   driverId: string | null;
@@ -182,13 +209,15 @@ const SummaryPanel: React.FC<{
     const headX = margin;
     const rightX = pageWidth / 2 + 10;
 
-    const violationGroup = (selectedViolation as any).group || '';
-    const violationOos = (selectedViolation as any).oos != null ? ((selectedViolation as any).oos ? 'Yes' : 'No') : '';
-    const numericSeverity = typeof severity === 'number' ? severity : Number(severity);
-    const numericWeight = typeof weight === 'number' ? weight : Number(weight);
-    const violationSeverity = numericSeverity > 0 ? String(numericSeverity) : String(selectedViolation.severity || '');
-    const violationWeight = numericWeight > 0 ? String(numericWeight) : ((selectedViolation as any).weight != null ? String((selectedViolation as any).weight) : '');
-    const violationCsaPoints = String(csaPoints);
+    const csaEntry = getCsaEntry(selectedViolation.code);
+    const violationGroup = csaEntry?.group || (selectedViolation as any).group || '';
+    const displayViolationDescription = formatDisplayText(selectedViolation.description || '');
+    const displayViolationGroup = formatDisplayText(violationGroup);
+    let violationOos = (selectedViolation as any).oos != null ? ((selectedViolation as any).oos ? 'Yes' : 'No') : '';
+    const violationSeverity = csaEntry?.severity != null ? String(csaEntry.severity) : String(selectedViolation.severity || '');
+    const violationWeight = csaEntry?.weight != null ? String(csaEntry.weight) : ((selectedViolation as any).weight != null ? String((selectedViolation as any).weight) : '');
+    const csaPointsValue = csaEntry ? csaEntry.severity * csaEntry.weight : csaPoints;
+    const violationCsaPoints = csaEntry ? String(csaPointsValue) : String(csaPointsValue || '');
 
     doc.setTextColor(darkBlue);
     doc.setFontSize(22);
@@ -253,8 +282,8 @@ const SummaryPanel: React.FC<{
       ]],
       body: [[
         selectedViolation.code || '',
-        selectedViolation.description || '',
-        violationGroup,
+        displayViolationDescription,
+        displayViolationGroup,
         violationOos,
         violationSeverity,
         violationWeight,
@@ -313,7 +342,7 @@ const SummaryPanel: React.FC<{
     const hasOos = violationOos === 'Yes';
     const oosCount = hasOos ? 1 : 0;
     const oosAmount = oosCount * 400;
-    const nonOosAmount = csaPoints * 40;
+    const nonOosAmount = csaPointsValue * 40;
     const totalPenalty = oosAmount + nonOosAmount;
 
     pageY += lineHeight;
@@ -323,7 +352,7 @@ const SummaryPanel: React.FC<{
       doc.text(`OOS: ${oosCount} x $400 = $${oosAmount.toFixed(2)}`, headX, pageY);
       pageY += lineHeight;
     }
-    doc.text(`Non-OOS: ${csaPoints} x $40 = $${nonOosAmount.toFixed(2)}`, headX, pageY);
+    doc.text(`Non-OOS: ${csaPointsValue} x $40 = $${nonOosAmount.toFixed(2)}`, headX, pageY);
 
     pageY += lineHeight * 2;
     doc.setFont('helvetica', 'bold');
@@ -334,13 +363,10 @@ const SummaryPanel: React.FC<{
     doc.setFont('helvetica', 'normal');
     doc.setTextColor(20, 20, 20);
     doc.text('Employee Signature:', headX, pageY);
-    doc.line(headX + 130, pageY + 2, headX + 330, pageY + 2);
     doc.text('Manager Signature: Rustam Kencheshaov', rightX, pageY);
-    doc.line(rightX + 190, pageY + 2, rightX + 390, pageY + 2);
 
     pageY += lineHeight * 2;
     doc.text('Date:', headX, pageY);
-    doc.line(headX + 40, pageY + 2, headX + 200, pageY + 2);
     doc.text(`Date: ${today}`, rightX, pageY);
 
     const blob = doc.output('blob');

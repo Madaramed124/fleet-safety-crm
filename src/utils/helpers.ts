@@ -113,3 +113,7 @@ export const groupByCarrier = (records: any[]): Map<string, any[]> => {
 
   return grouped;
 };
+
+export const formatDisplayText = (value: string | null | undefined): string => {
+  return (value || "").replace(/_/g, " ");
+};

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useRef } from "react";
 import csaPointsLookup from "../../data/csaPoints.json";
+import { formatDisplayText } from "../../utils/helpers";
 
 interface ChargeRowProps {
   idx: number;
@@ -24,6 +25,14 @@ const lookup = csaPointsLookup as CsaLookup;
 
 const normalizeSection = (value: string) => value.trim().toLowerCase();
 
+const getAutoAmount = (entry: CsaLookupEntry | null) => {
+  if (!entry) {
+    return "";
+  }
+
+  return String(entry.severity * entry.weight * 40);
+};
+
 const buildLookupState = (sectionValue: string) => {
   const normalized = normalizeSection(sectionValue);
 
@@ -40,13 +49,30 @@ const buildLookupState = (sectionValue: string) => {
   return { status: 'found' as const, entry };
 };
 
+
+
 const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, validationErrors, disabled }) => {
   const sectionValue = row.section || "";
   const lookupState = buildLookupState(sectionValue);
+  const formattedDescription = formatDisplayText(row.description || "");
+  const formattedViolationGroup = formatDisplayText(row.violation_group || "");
+  const formattedLookupGroup = formatDisplayText(lookupState.entry?.group || "");
 
+  // Track if user has manually overridden the amount
+  const userOverridden = useRef(false);
+
+  // Helper to compute CSA points
+  const computeCsaPoints = (sev: string, wt: string) => {
+    const s = Number(sev);
+    const w = Number(wt);
+    return Number.isFinite(s) && Number.isFinite(w) ? s * w : 0;
+  };
+
+  // When section changes, always update all violation fields
   const handleSectionChange = (nextSection: string) => {
     const trimmed = nextSection.trim();
     const normalized = normalizeSection(trimmed);
+    userOverridden.current = false;
 
     if (!normalized) {
       onChange(idx, {
@@ -56,7 +82,8 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
         violation_group: "",
         severity: "",
         weight: "",
-        total_csa_points: ""
+        total_csa_points: "",
+        amount: ""
       });
       return;
     }
@@ -71,11 +98,13 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
         violation_group: "",
         severity: "",
         weight: "",
-        total_csa_points: ""
+        total_csa_points: "",
+        amount: ""
       });
       return;
     }
 
+    const csaPoints = entry.severity * entry.weight;
     onChange(idx, {
       ...row,
       section: trimmed,
@@ -83,9 +112,25 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
       violation_group: entry.group,
       severity: String(entry.severity),
       weight: String(entry.weight),
-      total_csa_points: String(entry.severity * entry.weight)
+      total_csa_points: String(csaPoints),
+      amount: String(csaPoints * 40)
     });
   };
+
+  // When severity or weight changes (should be read-only, but if ever editable), update CSA points and amount if not overridden
+  React.useEffect(() => {
+    if (!userOverridden.current && row.severity && row.weight) {
+      const csaPoints = computeCsaPoints(row.severity, row.weight);
+      if (String(csaPoints) !== row.total_csa_points || String(csaPoints * 40) !== row.amount) {
+        onChange(idx, {
+          ...row,
+          total_csa_points: String(csaPoints),
+          amount: String(csaPoints * 40)
+        });
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [row.severity, row.weight]);
 
   const totalPoints = row.total_csa_points || "";
 
@@ -118,7 +163,7 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
           />
           {lookupState.status === 'found' && (
             <div className="mt-2 text-xs text-emerald-300">
-              {lookupState.entry?.group} • {totalPoints} CSA points
+              {formattedLookupGroup} • {totalPoints} CSA points
             </div>
           )}
           {lookupState.status === 'not_found' && sectionValue.length > 3 && (
@@ -131,7 +176,7 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
             <label className="mb-1 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Violation Description</label>
             <input
               readOnly
-              value={row.description || ""}
+              value={formattedDescription}
               className={`h-12 w-full rounded-2xl border px-4 text-sm text-slate-100 outline-none ${validationErrors?.description ? 'border-red-500' : 'border-slate-800'} bg-slate-900`}
             />
             {validationErrors?.description && <div className="text-red-400 text-xs mt-1">{validationErrors.description}</div>}
@@ -141,7 +186,7 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
             <label className="mb-1 block text-xs font-semibold uppercase tracking-[0.2em] text-slate-500">Violation Group</label>
             <input
               readOnly
-              value={row.violation_group || ""}
+              value={formattedViolationGroup}
               className="h-12 w-full rounded-2xl border border-slate-800 bg-slate-900 px-4 text-sm text-slate-100 outline-none"
             />
           </div>
@@ -192,7 +237,10 @@ const ChargeRow: React.FC<ChargeRowProps> = ({ idx, row, onChange, onRemove, val
                     onChange(idx, { ...row, amount: "0" });
                   }
                 }}
-                onChange={(e) => onChange(idx, { ...row, amount: e.target.value })}
+                onChange={(e) => {
+                  userOverridden.current = true;
+                  onChange(idx, { ...row, amount: e.target.value });
+                }}
                 placeholder="0"
                 className={`h-12 w-full rounded-2xl border border-slate-800 bg-slate-900 pl-10 pr-4 text-sm text-slate-100 outline-none focus:border-cyan-500 ${validationErrors?.amount ? 'border-red-500' : ''} ${disabled ? 'opacity-60' : ''}`}
               />

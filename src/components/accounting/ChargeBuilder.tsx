@@ -21,7 +21,9 @@ const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setR
     if (onDirty) {
       onDirty(false);
     }
-  }, [record, onDirty, setRows]);
+    // Only run when record changes
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [record]);
 
   const updateRow = (idx: number, row: any) => {
     const copy = [...rows];
