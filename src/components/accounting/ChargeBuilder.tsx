@@ -2,7 +2,17 @@ import React, { useEffect } from "react";
 import ChargeRow from "./ChargeRow";
 import { IncidentRecord } from "../../types";
 
-const emptyRow = () => ({ charge_type: "Warning Letter", description: "", amount: "", document_url: null });
+const emptyRow = () => ({
+  charge_type: "Warning Letter",
+  section: "",
+  description: "",
+  violation_group: "",
+  severity: "",
+  weight: "",
+  total_csa_points: "",
+  amount: "",
+  document_url: null
+});
 
 const ChargeBuilder: React.FC<{ record: IncidentRecord | null; rows: any[]; setRows: (r: any[]) => void; onDirty?: (d: boolean) => void; validationErrors?: Record<number, { description?: string; amount?: string }>; disabled?: boolean; notes?: string; setNotes?: (s: string) => void }> = ({ record, rows, setRows, onDirty, validationErrors, disabled, notes, setNotes }) => {
   useEffect(() => {
