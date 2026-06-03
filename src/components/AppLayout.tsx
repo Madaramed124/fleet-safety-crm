@@ -6,6 +6,7 @@ import AccountingPage from "./accounting/AccountingPage";
 import AccountingLedger from "./accounting/AccountingLedger";
 import ChargesPage from "./accounting/ChargesPage";
 import ReminderCalendar from "./calendar/ReminderCalendar";
+import Courts from "../pages/Courts";
 // Inline DriversView to avoid cross-module resolution issues in this environment
 const InlineDriversView: React.FC<{ onClose?: () => void }> = () => {
   const { records, openEditModal } = useApp();
@@ -108,13 +109,14 @@ import { Plus } from "lucide-react";
 
 export const AppLayout: React.FC = () => {
   const { selectedMonthId, openAddModal, isLoading, months } = useApp();
-  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "calendar" | "accounting" | "accountingLedger" | "charges">(() => {
+  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "calendar" | "courts" | "accounting" | "accountingLedger" | "charges">(() => {
     const hash = window.location.hash.slice(1);
     if (
       hash === "dashboard" ||
       hash === "incidents" ||
       hash === "drivers" ||
       hash === "calendar" ||
+      hash === "courts" ||
       hash === "accounting" ||
       hash === "accountingLedger" ||
       hash === "charges"
@@ -133,6 +135,7 @@ export const AppLayout: React.FC = () => {
         hash === "incidents" ||
         hash === "drivers" ||
         hash === "calendar" ||
+        hash === "courts" ||
         hash === "accounting" ||
         hash === "accountingLedger" ||
         hash === "charges"
@@ -206,6 +209,12 @@ export const AppLayout: React.FC = () => {
           >
             Calendar
           </button>
+          <button
+            onClick={() => setTab("courts")}
+            className={`px-3 py-2 rounded text-sm font-semibold ${tab === "courts" ? "bg-cyan-600 text-white" : "text-slate-300"}`}
+          >
+            Courts
+          </button>
         </div>
 
         {/* KPI Dashboard */}
@@ -243,6 +252,7 @@ export const AppLayout: React.FC = () => {
           {tab === "incidents" && <IncidentListView />}
           {tab === "drivers" && <InlineDriversView />}
           {tab === "calendar" && <ReminderCalendar />}
+          {tab === "courts" && <Courts />}
           {tab === "accounting" && <AccountingPage />}
           {tab === "accountingLedger" && <AccountingLedger />}
           {tab === "charges" && <ChargesPage />}
