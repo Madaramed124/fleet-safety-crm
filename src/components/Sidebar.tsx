@@ -15,7 +15,7 @@ type ReminderRow = {
   notes: string | null;
 };
 
-export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "calendar" | "accounting" | "charges" }> = ({ activeTab = "dashboard" }) => {
+export const Sidebar: React.FC<{ activeTab?: "dashboard" | "incidents" | "drivers" | "calendar" | "courts" | "accounting" | "charges" }> = ({ activeTab = "dashboard" }) => {
   const {
     months,
     selectedMonthId,
