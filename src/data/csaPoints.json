@@ -4688,5 +4688,26 @@
     "category": "Controlled Substances",
     "severity": 5,
     "weight": 3
+  },
+  "35551(a)": {
+    "description": "State/Local Traffic Law Violation (California VC)",
+    "group": "State/Local Laws",
+    "category": "Unsafe Driving",
+    "severity": 2,
+    "weight": 3
+  },
+  "395.24(c)(2)(ii)": {
+    "description": "ELD - Failure to transfer ELD data to officer upon request",
+    "group": "ELD Compliance",
+    "category": "Hours of Service",
+    "severity": 5,
+    "weight": 3
+  },
+  "395.24(c)(2)(iii)": {
+    "description": "ELD - Driver unable to display/produce ELD records during inspection",
+    "group": "ELD Compliance",
+    "category": "Hours of Service",
+    "severity": 5,
+    "weight": 3
   }
 }
