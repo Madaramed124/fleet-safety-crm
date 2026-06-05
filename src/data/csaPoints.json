@@ -4690,21 +4690,21 @@
     "weight": 3
   },
   "35551(a)": {
-    "description": "State/Local Traffic Law Violation (California VC)",
-    "group": "State/Local Laws",
+    "description": "Overweight axle groups/gross 2501-5000 lbs over legal limit",
+    "group": "Size/Weight",
     "category": "Unsafe Driving",
     "severity": 2,
     "weight": 3
   },
   "395.24(c)(2)(ii)": {
-    "description": "ELD - Failure to transfer ELD data to officer upon request",
+    "description": "ELD - Driver failing to manually input or verify CMV trailer number",
     "group": "ELD Compliance",
     "category": "Hours of Service",
     "severity": 5,
     "weight": 3
   },
   "395.24(c)(2)(iii)": {
-    "description": "ELD - Driver unable to display/produce ELD records during inspection",
+    "description": "ELD - Driver failing to manually input or verify shipping document number",
     "group": "ELD Compliance",
     "category": "Hours of Service",
     "severity": 5,
