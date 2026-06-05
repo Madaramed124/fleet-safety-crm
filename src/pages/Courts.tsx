@@ -110,9 +110,26 @@ const Courts: React.FC = () => {
   const [isSaving, setIsSaving] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [form, setForm] = useState({ ...defaultForm });
+  const [deleteConfirmId, setDeleteConfirmId] = useState<string | null>(null);
   const [activeVerdictCaseId, setActiveVerdictCaseId] = useState<string | null>(null);
   const [activeCloseCaseId, setActiveCloseCaseId] = useState<string | null>(null);
   const [verdictDraft, setVerdictDraft] = useState("");
+
+  const deleteCase = async (caseId: string) => {
+    setError(null);
+    setIsSaving(true);
+    try {
+      const { error: deleteError } = await supabase.from("records").delete().eq("id", caseId);
+      if (deleteError) throw deleteError;
+      setCases((prev) => prev.filter((c) => c.id !== caseId));
+      setDeleteConfirmId(null);
+    } catch (err) {
+      console.error(err);
+      setError("Failed to delete case. Please try again.");
+    } finally {
+      setIsSaving(false);
+    }
+  };
 
   const createAttorneyFeeCharge = async (courtCase: CourtRecord) => {
     if (!courtCase.driverId || courtCase.attorneyFee <= 0) return null;
@@ -247,19 +264,32 @@ const Courts: React.FC = () => {
     setActiveVerdictCaseId(null);
   };
 
+  const parseNumberField = (value: unknown): number => {
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  };
+
   const fetchCases = async () => {
     try {
       const { data, error } = await supabase.from("records").select("id, monthId, payload");
       if (error) throw error;
       const rows = (data ?? []) as Array<{ id: string; monthId: string; payload: any }>;
       const loaded = rows
-        .map((row) => ({
-          ...row.payload,
-          id: row.id,
-          monthId: row.monthId,
-          attorneyFee: row.payload?.attorneyFee ?? 0,
-          linkedChargeId: row.payload?.linkedChargeId ?? null,
-        }))
+        .map((row) => {
+          const attorneyFee = parseNumberField(row.payload?.attorneyFee);
+          const totalFee = parseNumberField(row.payload?.totalFee);
+          const amountPaid = parseNumberField(row.payload?.amountPaid);
+
+          return {
+            ...row.payload,
+            id: row.id,
+            monthId: row.monthId,
+            attorneyFee,
+            totalFee,
+            amountPaid,
+            linkedChargeId: row.payload?.linkedChargeId ?? null,
+          };
+        })
         .filter((item) => item.type === "courtCase") as CourtRecord[];
       setCases(loaded);
     } catch (fetchError) {
@@ -427,6 +457,7 @@ const Courts: React.FC = () => {
 
       <div className="space-y-4">
         {filtered.map((c) => {
+          const displayAttorneyFee = c.attorneyFee > 0 ? c.attorneyFee : c.totalFee;
           const pct = c.totalFee === 0 ? 0 : Math.round((c.amountPaid / c.totalFee) * 100);
           const isExpanded = expanded === c.id;
           const statusMeta = statusColors[c.status] || { bg: "bg-slate-600", dot: "bg-slate-400" };
@@ -437,13 +468,17 @@ const Courts: React.FC = () => {
                   <div className="text-lg font-bold">{c.driverName}</div>
                   <div className="text-xs text-slate-400 font-mono">{c.caseNumber}</div>
                   <div className="text-sm text-slate-300 mt-2">{c.violation}</div>
+                  <div className="text-xs text-slate-400 mt-2">Attorney fee: {formatCurrency(displayAttorneyFee)}</div>
                 </div>
                 <div className="flex flex-col items-end gap-3">
                   <div className={`px-3 py-1 rounded-full text-xs font-semibold flex items-center gap-2 ${statusMeta.bg}`}>
                     <span className={`w-2 h-2 rounded-full ${statusMeta.dot} ${c.status === "Verdict Pending" ? "verdict-pulse" : ""}`}></span>
                     <span>{c.status}</span>
                   </div>
-                  <button onClick={() => setExpanded(isExpanded ? null : c.id)} className="text-cyan-400 text-sm">{isExpanded ? "Collapse" : "Expand"}</button>
+                  <div className="flex gap-2">
+                    <button onClick={() => setExpanded(isExpanded ? null : c.id)} className="text-cyan-400 text-sm">{isExpanded ? "Collapse" : "Expand"}</button>
+                    <button onClick={() => setDeleteConfirmId(c.id)} className="text-rose-400 text-sm hover:text-rose-300">Remove</button>
+                  </div>
                 </div>
               </div>
 
@@ -463,7 +498,7 @@ const Courts: React.FC = () => {
                   </div>
                   <div>
                     <div className="text-xs text-slate-400 uppercase">Attorney fee</div>
-                    <div className="font-bold">{formatCurrency(c.attorneyFee)}</div>
+                    <div className="font-bold">{formatCurrency(displayAttorneyFee)}</div>
                   </div>
                   <div>
                     <div className="text-xs text-slate-400 uppercase">Case #</div>
@@ -486,34 +521,33 @@ const Courts: React.FC = () => {
                 )}
 
                 <div className="mt-4 p-4 bg-slate-900 rounded">
-                  <div className="relative px-2 py-4">
+                  <div className="relative px-12 py-10 overflow-x-auto">
                     <div className="absolute inset-x-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-slate-800"></div>
                     <div
                       className="absolute left-0 top-1/2 h-1 -translate-y-1/2 rounded-full bg-cyan-400 timeline-line-fill"
                       style={{ width: `${Math.max(0, ((c.timeline.filter((step) => step.done).length - 1) / (c.timeline.length - 1)) * 100)}%` }}
                     />
-                    <div className="relative flex items-center justify-between gap-2 overflow-x-auto">
+                    <div className="relative grid w-full grid-cols-6 gap-2 min-w-[720px]">
                       {c.timeline.map((t, idx) => {
                         const complete = Boolean(t.done);
                         return (
-                          <button
-                            key={idx}
-                            type="button"
-                            disabled={complete || isSaving}
-                            onClick={() => !complete && handleTimelineStepClick(c, t.label)}
-                            className={`timeline-step flex-1 min-w-[96px] flex flex-col items-center text-center ${complete ? "timeline-step-complete" : "cursor-pointer hover:text-white"}`}
-                          >
-                            <div className={`w-8 h-8 rounded-full -mt-2 flex items-center justify-center transition ${complete ? "bg-cyan-400 shadow-[0_0_16px_rgba(56,189,248,0.24)] text-white" : "bg-slate-800 text-slate-500 hover:bg-slate-700"}`}>
+                          <div key={idx} className="relative flex h-32 w-full flex-col items-center">
+                            <button
+                              type="button"
+                              disabled={complete || isSaving}
+                              onClick={() => !complete && handleTimelineStepClick(c, t.label)}
+                              className={`timeline-step flex h-12 w-12 flex-none items-center justify-center rounded-full border transition ${complete ? "bg-cyan-400 border-cyan-300 text-slate-950 shadow-[0_0_16px_rgba(56,189,248,0.24)]" : "bg-slate-800 border-slate-700 text-slate-500 hover:bg-slate-700"}`}
+                            >
                               {complete ? (
-                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 6L9 17l-5-5" stroke="white" strokeLinecap="round" strokeLinejoin="round"/></svg>
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><path d="M20 6L9 17l-5-5" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round"/></svg>
                               ) : (
-                                <div className="w-2 h-2 rounded-full bg-slate-600" />
+                                <div className="w-3 h-3 rounded-full bg-slate-600" />
                               )}
-                            </div>
-                            <div className="text-xs text-slate-400 mt-2">{t.label}</div>
-                            <div className="text-xs text-slate-500">{t.date || ""}</div>
-                            {!complete && <div className="text-[10px] text-cyan-300 mt-1">Click to advance</div>}
-                          </button>
+                            </button>
+                            <div className="mt-16 px-1 text-center text-[11px] leading-tight text-slate-400">{t.label}</div>
+                            <div className="mt-0.5 text-[11px] text-slate-500">{t.date || ""}</div>
+                            {!complete && <div className="mt-1 text-[10px] text-cyan-300">Click to advance</div>}
+                          </div>
                         );
                       })}
                     </div>
@@ -568,6 +602,23 @@ const Courts: React.FC = () => {
           );
         })}
       </div>
+
+      {deleteConfirmId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6">
+          <div className="rounded-3xl bg-slate-900 border border-slate-800 p-6 shadow-2xl shadow-cyan-500/10 max-w-sm">
+            <div className="mb-4">
+              <h3 className="text-lg font-bold text-rose-400">Delete Court Case</h3>
+              <p className="text-sm text-slate-400 mt-2">Are you sure you want to permanently remove this court case from the database? This action cannot be undone.</p>
+            </div>
+            <div className="flex gap-3">
+              <button onClick={() => setDeleteConfirmId(null)} className="flex-1 px-4 py-2 rounded-lg bg-slate-800 text-slate-300 hover:bg-slate-700">Cancel</button>
+              <button onClick={() => deleteCase(deleteConfirmId)} disabled={isSaving} className="flex-1 px-4 py-2 rounded-lg bg-rose-500 text-slate-950 font-semibold hover:bg-rose-600 disabled:opacity-60">
+                {isSaving ? "Deleting..." : "Delete"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/80 px-4 py-6">

@@ -107,40 +107,57 @@ import { IncidentListView } from "./IncidentListView";
 import { IncidentFormModal } from "./IncidentFormModal";
 import { Plus } from "lucide-react";
 
+const validTabs = [
+  "dashboard",
+  "incidents",
+  "drivers",
+  "calendar",
+  "courts",
+  "accounting",
+  "accountingLedger",
+  "charges",
+] as const;
+
+type AppTab = (typeof validTabs)[number];
+
+const getTabFromPathname = (pathname: string): AppTab | null => {
+  const cleanPath = pathname.replace(/^\/+|\/+$/g, "");
+  if (validTabs.includes(cleanPath as AppTab)) {
+    return cleanPath as AppTab;
+  }
+  return null;
+};
+
+const getInitialTab = (): AppTab => {
+  const hash = window.location.hash.slice(1);
+  if (validTabs.includes(hash as AppTab)) {
+    return hash as AppTab;
+  }
+
+  const pathTab = getTabFromPathname(window.location.pathname);
+  if (pathTab) {
+    return pathTab;
+  }
+
+  return "dashboard";
+};
+
 export const AppLayout: React.FC = () => {
   const { selectedMonthId, openAddModal, isLoading, months } = useApp();
-  const [tab, setTab] = React.useState<"dashboard" | "incidents" | "drivers" | "calendar" | "courts" | "accounting" | "accountingLedger" | "charges">(() => {
-    const hash = window.location.hash.slice(1);
-    if (
-      hash === "dashboard" ||
-      hash === "incidents" ||
-      hash === "drivers" ||
-      hash === "calendar" ||
-      hash === "courts" ||
-      hash === "accounting" ||
-      hash === "accountingLedger" ||
-      hash === "charges"
-    ) {
-      return hash;
-    }
-    return "dashboard";
-  });
+  const [tab, setTab] = React.useState<AppTab>(getInitialTab);
   const canAddIncident = months.length > 0;
 
   React.useEffect(() => {
     const onHashChange = () => {
       const hash = window.location.hash.slice(1);
-      if (
-        hash === "dashboard" ||
-        hash === "incidents" ||
-        hash === "drivers" ||
-        hash === "calendar" ||
-        hash === "courts" ||
-        hash === "accounting" ||
-        hash === "accountingLedger" ||
-        hash === "charges"
-      ) {
-        setTab(hash);
+      if (validTabs.includes(hash as AppTab)) {
+        setTab(hash as AppTab);
+        return;
+      }
+
+      const pathTab = getTabFromPathname(window.location.pathname);
+      if (pathTab) {
+        setTab(pathTab);
       }
     };
     window.addEventListener("hashchange", onHashChange);
@@ -148,7 +165,10 @@ export const AppLayout: React.FC = () => {
   }, []);
 
   React.useEffect(() => {
-    window.history.replaceState(null, "", `#${tab}`);
+    const newUrl = `#${tab}`;
+    if (window.location.hash !== newUrl) {
+      window.history.replaceState(null, "", newUrl);
+    }
   }, [tab]);
 
   const showSidebar = tab !== "accounting";

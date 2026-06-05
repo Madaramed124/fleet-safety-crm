@@ -1,4 +1,14 @@
 {
+  "redirects": [
+    { "source": "/dashboard", "destination": "/#dashboard", "permanent": false },
+    { "source": "/incidents", "destination": "/#incidents", "permanent": false },
+    { "source": "/drivers", "destination": "/#drivers", "permanent": false },
+    { "source": "/calendar", "destination": "/#calendar", "permanent": false },
+    { "source": "/courts", "destination": "/#courts", "permanent": false },
+    { "source": "/charges", "destination": "/#charges", "permanent": false },
+    { "source": "/accounting", "destination": "/#accounting", "permanent": false },
+    { "source": "/accountingLedger", "destination": "/#accountingLedger", "permanent": false }
+  ],
   "rewrites": [
     { "source": "/(.*)", "destination": "/" }
   ]
